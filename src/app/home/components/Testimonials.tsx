@@ -123,7 +123,7 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
 
 const Testimonial: FC = () => (
     <CenterSection aria-label="Testimonials Section">
-        <div className="py-10 sm:py-20">
+        <div className="py-10 sm:py-16">
             <div>
                 <Heading level={4} className="text-(--dark-blue) text-center">Our Testimonials</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
