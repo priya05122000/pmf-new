@@ -14,8 +14,8 @@ const HomePage = () => {
             <HomeBanner />
             <AboutUs />
             <LogoSlider />
-            <WeSupport />
             <Services />
+            <WeSupport />
             <Products />
             <RecentBlog />
             <Testimonial />

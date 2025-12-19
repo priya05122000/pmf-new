@@ -89,7 +89,7 @@ const ProductSlider: FC<{ products: Product[] }> = ({ products }) => (
 );
 
 const Products: FC = () => (
-    <div aria-label="Our Products" className="overflow-x-hidden w-full py-10 ">
+    <div aria-label="Our Products" className="overflow-x-hidden w-full py-10 sm:py-20 ">
         <Heading level={4} className="text-(--dark-blue) text-center">Our Products</Heading>
         <div className="w-full relative mt-10 " role="list" aria-label="Product list">
             <ProductSlider products={LOCAL_PRODUCTS} />
