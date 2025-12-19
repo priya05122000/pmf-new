@@ -15,16 +15,22 @@ interface Logo {
 
 // Static local logos (move to a separate file if needed)
 const LOCAL_LOGOS: Logo[] = [
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    { src: "/logo/pmf-logo.webp", name: "PMF" },
-    // ...add as many as needed, ensure unique names for accessibility
+    { src: "/clientlogos/c1.webp", name: "PMF" },
+    { src: "/clientlogos/c2.webp", name: "PMF" },
+    { src: "/clientlogos/c3.webp", name: "PMF" },
+    { src: "/clientlogos/c4.webp", name: "PMF" },
+    { src: "/clientlogos/c5.webp", name: "PMF" },
+    { src: "/clientlogos/c6.webp", name: "PMF" },
+    { src: "/clientlogos/c7.webp", name: "PMF" },
+    { src: "/clientlogos/c8.webp", name: "PMF" },
+    { src: "/clientlogos/c9.webp", name: "PMF" },
+    { src: "/clientlogos/c10.webp", name: "PMF" },
+    { src: "/clientlogos/c11.webp", name: "PMF" },
+    { src: "/clientlogos/c12.webp", name: "PMF" },
+    { src: "/clientlogos/c13.webp", name: "PMF" },
+    { src: "/clientlogos/c14.webp", name: "PMF" },
+    { src: "/clientlogos/c15.webp", name: "PMF" },
+    { src: "/clientlogos/c16.webp", name: "PMF" },
 ];
 
 // Reusable LogoItem component
@@ -35,7 +41,7 @@ const LogoItem: FC<Logo> = ({ src, name }) => (
             alt={`${name} Logo`}
             width={120}
             height={80}
-            className="h-16 lg:h-20 object-contain w-full filter grayscale hover:grayscale-0 p-4 transition-all"
+            className="h-16 lg:h-20 object-contain w-full filter grayscale hover:grayscale-0 p-4 transition-all cursor-pointer"
             loading="lazy"
             draggable={false}
             priority={false}
@@ -63,9 +69,10 @@ const swiperSettings = {
 };
 
 const LogoSlider: FC = () => (
-    <Section aria-label="Our Partners">
+    <Section aria-label="Our Partners" className="bg-(--light-blue)/10 ">
         <div className="w-full relative py-10">
-            <Swiper {...swiperSettings} className="cursor-grab active:cursor-grabbing">
+            <Swiper {...swiperSettings} >
+            {/* <Swiper {...swiperSettings} className="cursor-grab active:cursor-grabbing"> */}
                 {LOCAL_LOGOS.map((logo, idx) => (
                     <SwiperSlide key={logo.name + idx} className="flex justify-center items-center">
                         <LogoItem {...logo} />

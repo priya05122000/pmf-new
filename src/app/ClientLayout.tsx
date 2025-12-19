@@ -1,4 +1,5 @@
 "use client";
+import { Footer } from "@/components/layout/Footer";
 import Navbar from "@/components/layout/Navbar";
 import React, {
   ReactNode,
@@ -14,6 +15,8 @@ const ClientLayout: React.FC<ClientLayoutProps> = ({ children }) => {
       <Navbar />
       {/* Main content */}
       <main className="relative z-10">{children}</main>
+
+      <Footer />
     </>
   );
 };
