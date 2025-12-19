@@ -56,7 +56,7 @@ const AboutUs: FC = () => (
             {/* Left: Dot and About Us */}
             <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
                 <GoDotFill aria-hidden="true" />
-                <Paragraph size="base" className="font-medium capitalize" id="about-us-heading">ABOUT US</Paragraph>
+                <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">ABOUT US</Paragraph>
             </div>
             {/* Right: Main content */}
             <div className="flex-1">

@@ -6,6 +6,7 @@ import RecentBlog from './components/RecentBlog'
 import Testimonial from './components/Testimonials'
 import Products from './components/Products';
 import Services from './components/Services';
+import WeSupport from './components/WeSupport';
 
 const HomePage = () => {
     return (
@@ -13,6 +14,7 @@ const HomePage = () => {
             <HomeBanner />
             <AboutUs />
             <LogoSlider />
+            <WeSupport />
             <Services />
             <Products />
             <RecentBlog />
