@@ -42,7 +42,7 @@ export const Footer = () => {
                 <div>
                     <RightSpaceGridSection>
                         <div className="col-span-2  ">
-                            <div className="w-full  h-full flex flex-col-reverse   md:flex-row justify-between relative sm:gap-20 lg:gap-10">
+                            <div className="w-full  h-full flex flex-col-reverse   md:flex-row justify-between relative sm:gap-10 ">
                                 <div className=" h-full -ml-6 sm:ml-0 mt-10 sm:mt-0">
                                     <Image
                                         src="/logo/pmf-1.png"
@@ -50,14 +50,14 @@ export const Footer = () => {
                                         height={1000}
                                         width={1000}
                                         quality={100}
-                                        className="object-contain h-full w-xl lg:w-3xl xl:w-6xl "
+                                        className="object-contain h-full w-xl sm:w-5xl xl:w-6xl "
                                     />
                                 </div>
 
                                 <div className="h-full  block">
                                     <Heading
                                         level={6}
-                                        className={` gradient-animation-one bg-clip-text text-(--dark-blue)`}
+                                        className={`leading-none text-(--dark-blue) `}
                                     >
                                         Explore
                                     </Heading>

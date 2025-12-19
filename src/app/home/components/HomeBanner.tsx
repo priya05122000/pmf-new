@@ -59,7 +59,7 @@ const HomeBanner: FC<HomeBannerProps> = ({
         aria-label="Steel Quality Banner"
     >
         <Section
-            className="w-full mb-10 h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
+            className="w-full mb-10 h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
         >
             <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
