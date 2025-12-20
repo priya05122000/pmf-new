@@ -86,7 +86,7 @@ export const products = [
         id: 1,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        imageSrc: '/products/products1.webp',
         imageAlt: "Front of men's Basic Tee in black.",
         price: '$35',
         color: 'Black',
@@ -95,7 +95,7 @@ export const products = [
         id: 2,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-02.jpg',
+        imageSrc: '/products/products2.webp',
         imageAlt: "Front of men's Basic Tee in white.",
         price: '$35',
         color: 'Aspen White',
@@ -104,7 +104,7 @@ export const products = [
         id: 3,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-03.jpg',
+        imageSrc: '/products/products3.webp',
         imageAlt: "Front of men's Basic Tee in dark gray.",
         price: '$35',
         color: 'Charcoal',
@@ -113,7 +113,7 @@ export const products = [
         id: 4,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products4.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -122,7 +122,7 @@ export const products = [
         id: 5,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-03.jpg',
+        imageSrc: '/products/products5.webp',
         imageAlt: "Front of men's Basic Tee in dark gray.",
         price: '$35',
         color: 'Charcoal',
@@ -131,7 +131,7 @@ export const products = [
         id: 6,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products6.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -140,7 +140,7 @@ export const products = [
         id: 7,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products7.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -149,7 +149,7 @@ export const products = [
         id: 8,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products8.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -158,11 +158,17 @@ export const products = [
 
 const ProductCard = ({ product }: { product: typeof products[0] }) => (
     <div key={product.id} className="group relative">
-        <img
-            alt={product.imageAlt}
-            src={product.imageSrc}
-            className="aspect-square w-full rounded-md  object-cover  lg:aspect-auto lg:h-72"
-        />
+        <div
+            className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)]  lg:h-72 "
+        >
+            <img
+                alt={product.imageAlt}
+                src={product.imageSrc}
+                className="aspect-square w-full rounded-md  object-cover  lg:aspect-auto"
+            />
+
+        </div>
+
         <div className="mt-4 flex justify-between">
             <div>
                 <Paragraph size='lg' className="font-medium">
