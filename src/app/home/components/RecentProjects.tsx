@@ -4,9 +4,10 @@ import Paragraph from "@/components/common/Paragraph";
 import Heading from "@/components/common/Heading";
 import Span from '@/components/common/Span';
 import Section from '@/components/common/Section';
+import { GoDotFill } from 'react-icons/go';
 
-// BlogCardProps type for reusability
-export interface BlogCardProps {
+// ProjectCardProps type for reusability
+export interface ProjectCardProps {
     image: string;
     tags: string[];
     title: string;
@@ -15,7 +16,7 @@ export interface BlogCardProps {
 }
 
 // Static blog data (move to a separate file if needed)
-export const BLOGS: BlogCardProps[] = [
+export const PROJECTS: ProjectCardProps[] = [
     {
         image: "/home/banner.webp",
         tags: ["Travel", "Life style"],
@@ -39,20 +40,20 @@ export const BLOGS: BlogCardProps[] = [
     },
 ];
 
-// Reusable BlogCard component
-const BlogCard: React.FC<BlogCardProps> = ({ image, tags, title, description, date }) => (
+// Reusable ProjectCard component
+const ProjectCard: React.FC<ProjectCardProps> = ({ image, tags, title, description, date }) => (
     <article className=" rounded-lg shadow-none flex flex-col" aria-label={title}>
         <div className="overflow-hidden rounded-lg">
             <Image
                 src={image}
-                alt={`Blog image for ${title}`}
+                alt={`Project image for ${title}`}
                 width={350}
                 height={200}
                 className="w-full h-64 object-cover rounded-lg"
                 loading="lazy"
             />
         </div>
-        <div className="mt-4 flex gap-1" aria-label="Blog tags">
+        <div className="mt-4 flex gap-1" aria-label="Project tags">
             {tags.map((tag) => (
                 <Span
                     key={tag}
@@ -69,27 +70,33 @@ const BlogCard: React.FC<BlogCardProps> = ({ image, tags, title, description, da
     </article>
 );
 
-// Reusable BlogGrid component
-const BlogGrid: React.FC<{ blogs: BlogCardProps[] }> = ({ blogs }) => (
+// Reusable ProjectGrid component
+const ProjectGrid: React.FC<{ blogs: ProjectCardProps[] }> = ({ blogs }) => (
     <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-10" role="list" aria-label="Recent blog posts">
         {blogs.map((blog, idx) => (
-            <BlogCard key={blog.title + idx} {...blog} />
+            <ProjectCard key={blog.title + idx} {...blog} />
         ))}
     </div>
 );
 
-const RecentBlog: React.FC = () => (
-    <Section aria-label="Recent Blogs">
-        <div className="py-10 sm:py-16 ">
+const RecentProject: React.FC = () => (
+    <Section aria-label="Recent Projects">
+        <div className="py-10 sm:py-20 ">
             <div>
-                <Heading level={4} className="text-(--dark-blue) text-center">Our Recent Blogs</Heading>
-                <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
+                <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+                    <GoDotFill aria-hidden="true" />
+                    <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Products</Paragraph>
+                </div>
+                <Heading level={4} className="text-(--dark-blue)">Our Recent Projects</Heading>
+                <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
                 </Paragraph>
+
+
             </div>
-            <BlogGrid blogs={BLOGS} />
+            <ProjectGrid blogs={PROJECTS} />
         </div>
     </Section>
 );
 
-export default RecentBlog;
+export default RecentProject;

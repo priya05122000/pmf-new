@@ -11,6 +11,7 @@ import Section from "@/components/common/Section";
 import CenterSection from "@/components/common/CenterSection";
 import Heading from "@/components/common/Heading";
 import Paragraph from "@/components/common/Paragraph";
+import { GoDotFill } from "react-icons/go";
 
 const slides = [
     {
@@ -48,11 +49,23 @@ export default function HeroSwiper() {
 
     return (
         <CenterSection>
-            <div className="py-10 sm:py-16">
-                <Heading level={4} className="text-(--dark-blue) text-center">Our Services</Heading>
+            <div className="py-10 sm:py-20">
+                {/* <Heading level={4} className="text-(--dark-blue) text-center">Our Services</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
-                </Paragraph>
+                </Paragraph> */}
+                <div>
+                    <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+                        <GoDotFill aria-hidden="true" />
+                        <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Services</Paragraph>
+                    </div>
+                    <Heading level={4} className="text-(--dark-blue)">Our Services</Heading>
+                    <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
+                        Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
+                    </Paragraph>
+
+
+                </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 h-[60vh] lg:h-[70vh] w-full overflow-hidden gap-4 mt-10">
                     {/* Main Slider */}
 

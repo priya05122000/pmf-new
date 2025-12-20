@@ -43,7 +43,7 @@ const CONTACTS = [
 const ContactDetails = () => {
     return (
         <CenterSection>
-            <div className="flex flex-col md:flex-row gap-8 w-full py-10 sm:py-16">
+            <div className="flex flex-col md:flex-row gap-8 w-full py-10 sm:py-20">
                 {/* Left: Contact Info & Map */}
                 <div className="flex-1 flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
@@ -71,29 +71,29 @@ const ContactDetails = () => {
                 {/* Right: Contact Form */}
                 <div className="flex-1  px-8 flex flex-col justify-between text-(--dark-blue)">
                     <div>
-                        <Heading level={4} className="text-(--dark-blue) mb-4">Get In Touch</Heading>
+                        <Heading level={4} className="text-(--dark-blue) mb-2">Get In Touch</Heading>
                         <Paragraph size="base" className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</Paragraph>
                     </div>
 
                     <form>
-                        <div className="mb-4">
+                        <div className="mb-3">
                             <label className="block  mb-1" htmlFor="name"> Name</label>
                             <input className="w-full px-4 py-2 bg-(--light-blue)/10 rounded-md focus:outline-none  transition duration-300" placeholder="Enter your name" type="text" />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-3">
                             <label className="block  mb-1" htmlFor="email"> Email</label>
                             <input className="w-full px-4 py-2 bg-(--light-blue)/10 rounded-md focus:outline-none  transition duration-300" placeholder="Enter your email" name="email" id="email" type="email" />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-3">
                             <label className="block  mb-1" htmlFor="email"> Subject</label>
                             <input className="w-full px-4 py-2 bg-(--light-blue)/10 rounded-md focus:outline-none  transition duration-300" placeholder="Enter your email" name="email" id="email" type="email" />
                         </div>
-                        <div className="mb-4">
+                        <div className="mb-3">
                             <label className="block mb-1" htmlFor="message">Your Message</label>
                             <textarea className="w-full px-4 py-2 bg-(--light-blue)/10 rounded-md focus:outline-none  transition duration-300" rows={4} placeholder="Enter your message" name="message" id="message" defaultValue={""} />
                         </div>
                         <button className="w-full bg-(--orange) text-white py-2 px-4 rounded-md hover:bg-(--orange)/90 transition duration-300" type="submit">
-                            Send Message
+                            <Paragraph size='base'>Send Message</Paragraph>
                         </button>
                     </form>
                 </div>

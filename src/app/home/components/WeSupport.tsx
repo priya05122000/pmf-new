@@ -15,7 +15,7 @@ const SUPPORT_LOGOS = [
 
 const WeSupport: FC = () => (
     <Section aria-labelledby="about-us-heading">
-        <div className="pt-10 sm:pt-16 flex flex-col lg:flex-row md:items-start lg:gap-12 text-(--dark-blue)">
+        <div className="py-10 sm:py-20 flex flex-col lg:flex-row md:items-start lg:gap-12 text-(--dark-blue)">
             {/* Left: Dot and About Us */}
             <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
                 <GoDotFill aria-hidden="true" />
@@ -23,7 +23,7 @@ const WeSupport: FC = () => (
             </div>
             {/* Right: Main content */}
             <div className="flex-1">
-                <div className="grid grid-cols-4 gap-6 mb-8" role="list">
+                <div className="grid grid-cols-4 gap-6 " role="list">
                     {SUPPORT_LOGOS.map((src, i) => (
                         <div key={i} className="flex flex-col justify-center items-start">
                             <img src={src} alt={`Support logo ${i + 1}`} className="h-16 object-contain" />

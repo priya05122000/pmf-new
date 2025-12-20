@@ -13,6 +13,7 @@ import Span from "@/components/common/Span";
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from "react-icons/md";
 import Heading from "@/components/common/Heading";
 import CenterSection from "@/components/common/CenterSection";
+import { GoDotFill } from "react-icons/go";
 
 // Testimonial data type for reusability
 export interface TestimonialData {
@@ -102,7 +103,7 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
             <div className="flex mt-8 gap-2 px-6 max-w-3xl xl:max-w-4xl mx-auto">
                 <button
                     ref={prevRef}
-                    className="bg-white hover:bg-(--light-blue) hover:text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                    className="bg-white hover:bg-(--orange) hover:text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
                     aria-label="Previous testimonial"
                     type="button"
                 >
@@ -110,7 +111,7 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
                 </button>
                 <button
                     ref={nextRef}
-                    className="bg-white hover:bg-(--light-blue) hover:text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                    className="bg-white hover:bg-(--orange) hover:text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
                     aria-label="Next testimonial"
                     type="button"
                 >
@@ -123,12 +124,24 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
 
 const Testimonial: FC = () => (
     <CenterSection aria-label="Testimonials Section">
-        <div className="py-10 sm:py-16">
-            <div>
+        <div className="py-10 sm:py-20">
+            {/* <div>
                 <Heading level={4} className="text-(--dark-blue) text-center">Our Testimonials</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
                 </Paragraph>
+            </div> */}
+            <div>
+                <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+                    <GoDotFill aria-hidden="true" />
+                    <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Testimonials</Paragraph>
+                </div>
+                <Heading level={4} className="text-(--dark-blue)">Our Testimonials</Heading>
+                <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
+                    Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
+                </Paragraph>
+
+
             </div>
             <TestimonialSlider testimonials={testimonials} />
         </div>

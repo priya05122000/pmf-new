@@ -8,49 +8,156 @@ import Image from "next/image";
 import Section from "@/components/common/Section";
 import type { FC } from "react";
 import Heading from "@/components/common/Heading";
+import Paragraph from "@/components/common/Paragraph";
+import { GoDotFill } from "react-icons/go";
 
 // Product type for type safety
 export interface Product {
-    src: string;
+    id: number;
     name: string;
+    href: string;
+    imageSrc: string;
+    imageAlt: string;
+    price: string;
+    color: string;
 }
 
-// Static local products (move to a separate file if needed)
 export const LOCAL_PRODUCTS: Product[] = [
-    { src: "/products/products1.webp", name: "PMF 1" },
-    { src: "/products/products2.webp", name: "PMF 2" },
-    { src: "/products/products3.webp", name: "PMF 3" },
-    { src: "/products/products4.webp", name: "PMF 4" },
-    { src: "/products/products5.webp", name: "PMF 5" },
-    { src: "/products/products6.webp", name: "PMF 6" },
-    { src: "/products/products7.webp", name: "PMF 7" },
-    { src: "/products/products8.webp", name: "PMF 8" },
-    { src: "/products/products9.webp", name: "PMF 9" },
+    {
+        id: 1,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products1.webp',
+        imageAlt: "Front of men's Basic Tee in black.",
+        price: '$35',
+        color: 'Black',
+    },
+    {
+        id: 2,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products2.webp',
+        imageAlt: "Front of men's Basic Tee in white.",
+        price: '$35',
+        color: 'Aspen White',
+    },
+    {
+        id: 3,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products3.webp',
+        imageAlt: "Front of men's Basic Tee in dark gray.",
+        price: '$35',
+        color: 'Charcoal',
+    },
+    {
+        id: 4,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products4.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 5,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products5.webp',
+        imageAlt: "Front of men's Basic Tee in dark gray.",
+        price: '$35',
+        color: 'Charcoal',
+    },
+    {
+        id: 6,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products6.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 7,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products7.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 8,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products8.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 9,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products9.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 10,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products10.png',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 11,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products11.png',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 12,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products12.png',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
 ];
 
 // Reusable ProductItem component
-const ProductItem: FC<Product> = ({ src, name }) => (
+const ProductItem: FC<Product> = ({ imageSrc, imageAlt, name, href }) => (
     <div
-        className="flex justify-center items-center h-full w-full px-6 sm:px-4"
+        className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4"
         role="listitem"
     >
-        <div
-            className="h-72 xl:h-80 w-full   flex items-center justify-center transition-all"
-        >
-            <div
-                className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] "
-            >
-                <Image
-                    src={src}
-                    alt={`${name} Product`}
-                    width={320}
-                    height={180}
-                    className="object-contain cursor-pointer h-full   transition-all bg-transparent"
-                    loading="lazy"
-                    draggable={false}
-                    priority={false}
-
-                />
+        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
+            <Image
+                alt={imageAlt}
+                src={imageSrc}
+                className="w-full h-full rounded-md object-contain"
+                loading="lazy"
+                width={300}
+                height={300}
+                priority={false}
+            />
+        </div>
+        <div className="w-full border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+            <div>
+                <Paragraph size='base' className="font-medium">
+                    <a href={href} tabIndex={-1}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {name}
+                    </a>
+                </Paragraph>
             </div>
 
         </div>
@@ -89,12 +196,22 @@ const ProductSlider: FC<{ products: Product[] }> = ({ products }) => (
 );
 
 const Products: FC = () => (
-    <div aria-label="Our Products" className="overflow-x-hidden w-full py-10 sm:py-16 ">
-        <Heading level={4} className="text-(--dark-blue) text-center">Our Products</Heading>
+    <div aria-label="Our Products" className="overflow-x-hidden w-full py-10 sm:py-20 ">
+        <Section>
+            <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+                <GoDotFill aria-hidden="true" />
+                <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Products</Paragraph>
+            </div>
+            <Heading level={4} className="text-(--dark-blue)">Our Products</Heading>
+        </Section>
         <div className="w-full relative mt-10 " role="list" aria-label="Product list">
             <ProductSlider products={LOCAL_PRODUCTS} />
         </div>
-
+        <div className="flex justify-end mt-10  px-6 sm:px-4">
+            <a href="/products" className="inline-block rounded-md bg-(--dark-blue) text-white font-semibold px-8 py-2 text-base shadow  transition-colors focus:outline-none ">
+                <Paragraph size="base">View More</Paragraph>
+            </a>
+        </div>
     </div>
 );
 
