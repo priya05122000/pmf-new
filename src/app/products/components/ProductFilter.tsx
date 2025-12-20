@@ -169,7 +169,7 @@ const ProductCard = ({ product }: { product: typeof products[0] }) => (
 
         </div>
 
-        <div className="mt-4 flex justify-between">
+        <div className="mt-2 flex justify-between">
             <div>
                 <Paragraph size='lg' className="font-medium">
                     <a href={product.href}>
@@ -179,11 +179,11 @@ const ProductCard = ({ product }: { product: typeof products[0] }) => (
                 </Paragraph>
                 <Paragraph size='base' className="mt-1 text-sm text-gray-500">{product.color}</Paragraph>
             </div>
-            <p className="text-sm font-medium text-gray-900">{product.price}</p>
+            <p className="text-sm font-medium text-(--dark-blue)">{product.price}</p>
         </div>
         <div className='flex justify-between mt-2'>
-            <button className='rounded-md border  py-1 px-2'>Add to Cart</button>
-            <button className='rounded-md border  py-1 px-2'>Buy Now</button>
+            <button className='rounded-md border border-(--light-blue)/20 bg-(--light-blue)/20   py-1 px-4'>Add to Cart</button>
+            <button className='rounded-md  bg-(--dark-blue)  text-white py-1 px-4'>Buy Now</button>
         </div>
     </div>
 );
@@ -214,7 +214,7 @@ const ProductFilter = () => {
                             className="relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto bg-white pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full"
                         >
                             <div className="flex items-center justify-between px-4">
-                                <h2 className="text-lg font-medium text-gray-900">Filters</h2>
+                                <h2 className="text-lg font-medium text-(--dark-blue)">Filters</h2>
                                 <button
                                     type="button"
                                     onClick={() => setMobileFiltersOpen(false)}
@@ -234,7 +234,7 @@ const ProductFilter = () => {
                                     <Disclosure key={section.id} as="div" className=" px-4 py-6">
                                         <h3 className="-mx-2 -my-3 flow-root">
                                             <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
-                                                <span className="font-medium text-gray-900">{section.name}</span>
+                                                <span className="font-medium text-(--dark-blue)">{section.name}</span>
                                                 <span className="ml-6 flex items-center">
                                                     <MdOutlineKeyboardArrowDown aria-hidden="true" className="size-5 group-data-open:hidden" />
                                                     <MdOutlineKeyboardArrowUp aria-hidden="true" className="size-5 group-not-data-open:hidden" />
@@ -276,7 +276,7 @@ const ProductFilter = () => {
                     <div className="flex items-center justify-between py-4 ">
                         <Heading level={4} className=" font-bold tracking-tight text-(--dark-blue)">Give All You Need</Heading>
 
-                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-full border border-(--light-blue)/10  pl-2 ">
+                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-md border border-(--light-blue)/10  pl-2 ">
                             <BiSearch className="size-5 text-(--light-blue)/20 " />
                             <input
                                 type="text"
@@ -288,7 +288,7 @@ const ProductFilter = () => {
                             />
                             <button
                                 type="button"
-                                className="rounded-full bg-(--dark-blue) px-5 py-2 text-sm font-semibold text-white cursor-pointer "
+                                className="rounded-md bg-(--dark-blue) px-5 py-2 text-sm font-semibold text-white cursor-pointer "
                                 aria-label="Search"
                             >
                                 Search
@@ -309,7 +309,7 @@ const ProductFilter = () => {
                     <section aria-labelledby="products-heading" className=" py-10">
 
 
-                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4 ">
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5 ">
                             {/* Filters */}
                             <form className="hidden lg:block">
                                 <h3 className="sr-only">Categories</h3>
@@ -318,7 +318,7 @@ const ProductFilter = () => {
                                     <Disclosure key={section.id} as="div" className=" py-4">
                                         <h3 className="-my-3 flow-root">
                                             <DisclosureButton className="group flex w-full items-center justify-between  py-3 text-sm text-gray-400 hover:text-gray-500">
-                                                <span className="font-medium text-gray-900">{section.name}</span>
+                                                <span className="font-medium text-(--dark-blue)">{section.name}</span>
                                                 <span className="ml-6 flex items-center">
                                                     <MdOutlineKeyboardArrowDown aria-hidden="true" className="size-5 group-data-open:hidden" />
                                                     <MdOutlineKeyboardArrowUp aria-hidden="true" className="size-5 group-not-data-open:hidden" />
@@ -351,7 +351,7 @@ const ProductFilter = () => {
                             </form>
 
                             {/* Product grid */}
-                            <div className="lg:col-span-3">
+                            <div className="lg:col-span-4">
                                 <div >
                                     <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                         {products.map(product => (
