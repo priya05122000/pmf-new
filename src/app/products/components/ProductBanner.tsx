@@ -20,19 +20,6 @@ const BannerOverlay: FC = () => (
     />
 );
 
-// Large decorative text component
-const BannerDecorText: FC<{ text: string }> = ({ text }) => (
-    <div
-        className="absolute bottom-0 left-1/2 -translate-x-1/2 leading-tight text-(--gray) font-bold select-none pointer-events-none text-9xl sm:text-[256px] lg:text-[384px] xl:text-[512px]"
-        aria-hidden="true"
-        style={{
-            lineHeight: 1,
-            whiteSpace: 'nowrap',
-        }}
-    >
-        {text}
-    </div>
-);
 
 const ProductBanner: FC<ProductBannerProps> = ({
     backgroundImageUrl = DEFAULT_BG,
@@ -51,7 +38,6 @@ const ProductBanner: FC<ProductBannerProps> = ({
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
         >
             <BannerOverlay />
-            <BannerDecorText text="Shop" />
         </Section>
     </section>
 );

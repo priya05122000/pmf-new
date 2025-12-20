@@ -268,21 +268,21 @@ const ProductFilter = () => {
 
                 <main className="">
                     <div className="flex items-center justify-between py-4 ">
-                        <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals</h1>
+                        <Heading level={4} className=" font-bold tracking-tight text-(--dark-blue)">Give All You Need</Heading>
 
-                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-full border shadow-sm pl-2 ">
-                            <BiSearch className="size-5 text-gray-400 " />
+                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-full border border-(--light-blue)/10  pl-2 ">
+                            <BiSearch className="size-5 text-(--light-blue)/20 " />
                             <input
                                 type="text"
                                 value={search}
                                 onChange={e => setSearch(e.target.value)}
-                                placeholder="Search on Stuffsus"
-                                className="flex-1 bg-transparent border-none outline-none  py-2 text-sm text-gray-700"
+                                placeholder="Search"
+                                className="flex-1 bg-transparent  outline-none  py-2 text-sm text-(--light-blue)"
                                 aria-label="Search products"
                             />
                             <button
                                 type="button"
-                                className="rounded-full bg-black px-5 py-2 text-sm font-semibold text-white "
+                                className="rounded-full bg-(--dark-blue) px-5 py-2 text-sm font-semibold text-white cursor-pointer "
                                 aria-label="Search"
                             >
                                 Search
