@@ -112,7 +112,7 @@ export const products: Product[] = [
 // ProductCard component (reusable, accessible, optimized)
 const ProductCard: React.FC<{ product: Product }> = React.memo(({ product }) => (
     <article className="group relative" aria-label={product.name} tabIndex={0}>
-        <div className="flex justify-around items-center w-full h-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] lg:h-72">
+        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
             <Image
                 alt={product.imageAlt}
                 src={product.imageSrc}
@@ -123,13 +123,15 @@ const ProductCard: React.FC<{ product: Product }> = React.memo(({ product }) => 
                 priority={false}
             />
         </div>
-        <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
-            <Paragraph size="lg" className="font-medium">
-                <a href={product.href} tabIndex={-1} aria-label={product.name}>
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    {product.name}
-                </a>
-            </Paragraph>
+        <div className=" border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+            <div>
+                <Paragraph size='lg' className="font-medium">
+                    <a href={product.href} tabIndex={-1}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {product.name}
+                    </a>
+                </Paragraph>
+            </div>
         </div>
     </article>
 ));
@@ -158,7 +160,7 @@ const Explore: React.FC = () => {
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         breakpoints={{
                             0: { slidesPerView: 1, spaceBetween: 16 },
-                            640: { slidesPerView: 2, spaceBetween: 24 },
+                            640: { slidesPerView: 3, spaceBetween: 24 },
                             1024: { slidesPerView: 3, spaceBetween: 32 },
                             1280: { slidesPerView: 4, spaceBetween: 32 },
                         }}

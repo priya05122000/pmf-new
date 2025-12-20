@@ -6,6 +6,7 @@ import Section from '@/components/common/Section';
 import Paragraph from '@/components/common/Paragraph';
 import Heading from '@/components/common/Heading';
 import { Pagination } from '../subcomponents/Pagination';
+import Image from 'next/image';
 
 interface SortOption {
     name: string;
@@ -150,14 +151,15 @@ export interface Product {
 // Reusable ProductCard
 const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
     <article className="group relative" aria-label={product.name} tabIndex={0}>
-        <div className="flex justify-around items-center w-full h-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] lg:h-72">
-            <img
+        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
+            <Image
                 alt={product.imageAlt}
                 src={product.imageSrc}
-                className=" w-full h-full  rounded-md object-contain "
+                className="w-full h-full rounded-md object-contain"
                 loading="lazy"
                 width={300}
                 height={300}
+                priority={false}
             />
         </div>
         <div className=" border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
@@ -171,7 +173,6 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
             </div>
 
         </div>
-        {/* Removed Add to Cart and Buy Now buttons */}
     </article>
 ));
 
@@ -251,12 +252,12 @@ const ProductFilter: FC = () => {
                         </form>
                     </div>
                     <section aria-labelledby="products-heading" className="py-10">
-                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-5">
                             <div>
                                 <CategoryList selected={category} onSelect={setCategory} />
                             </div>
                             {/* Product grid */}
-                            <div className="lg:col-span-4">
+                            <div className="sm:col-span-2 lg:col-span-4">
                                 <div>
                                     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                         {filteredProducts.length > 0 ? (
