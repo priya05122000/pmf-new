@@ -9,16 +9,21 @@ import {
     DisclosureButton,
     DisclosurePanel,
 } from '@headlessui/react';
-import { XMarkIcon } from '@heroicons/react/24/outline';
-import { PlusIcon, MinusIcon } from '@heroicons/react/20/solid';
+import { XMarkIcon, ChevronLeftIcon, ChevronRightIcon } from '@heroicons/react/24/outline';
+import { FunnelIcon } from '@heroicons/react/20/solid';
 import Section from '@/components/common/Section';
+import { MdOutlineKeyboardArrowDown, MdOutlineKeyboardArrowUp } from 'react-icons/md';
+import { BiSearch } from 'react-icons/bi';
+import Paragraph from '@/components/common/Paragraph';
+import Heading from '@/components/common/Heading';
+import { Pagination } from '../subcomponents/Pagination';
 
-// --- Types ---
 interface SortOption {
     name: string;
     href: string;
     current: boolean;
 }
+
 interface FilterOption {
     value: string;
     label: string;
@@ -30,7 +35,6 @@ interface FilterSection {
     options: FilterOption[];
 }
 
-// --- Data ---
 const sortOptions: SortOption[] = [
     { name: 'Most Popular', href: '#', current: true },
     { name: 'Best Rating', href: '#', current: false },
@@ -38,6 +42,7 @@ const sortOptions: SortOption[] = [
     { name: 'Price: Low to High', href: '#', current: false },
     { name: 'Price: High to Low', href: '#', current: false },
 ];
+
 const filters: FilterSection[] = [
     {
         id: 'color',
@@ -76,207 +81,286 @@ const filters: FilterSection[] = [
     },
 ];
 
-const categories = [
-    { name: 'Totes', href: '#' },
-    { name: 'Backpacks', href: '#' },
-    { name: 'Travel Bags', href: '#' },
-    { name: 'Hip Bags', href: '#' },
-    { name: 'Laptop Sleeves', href: '#' },
+export const products = [
+    {
+        id: 1,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products1.webp',
+        imageAlt: "Front of men's Basic Tee in black.",
+        price: '$35',
+        color: 'Black',
+    },
+    {
+        id: 2,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products2.webp',
+        imageAlt: "Front of men's Basic Tee in white.",
+        price: '$35',
+        color: 'Aspen White',
+    },
+    {
+        id: 3,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products3.webp',
+        imageAlt: "Front of men's Basic Tee in dark gray.",
+        price: '$35',
+        color: 'Charcoal',
+    },
+    {
+        id: 4,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products4.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 5,
+        name: 'Basic Tee',
+        href: '#',
+        imageSrc: '/products/products5.webp',
+        imageAlt: "Front of men's Basic Tee in dark gray.",
+        price: '$35',
+        color: 'Charcoal',
+    },
+    {
+        id: 6,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products6.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 7,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products7.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
+    {
+        id: 8,
+        name: 'Artwork Tee',
+        href: '#',
+        imageSrc: '/products/products8.webp',
+        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
+        price: '$35',
+        color: 'Iso Dots',
+    },
 ];
 
-// --- Utility ---
+const ProductCard = ({ product }: { product: typeof products[0] }) => (
+    <div key={product.id} className="group relative">
+        <div
+            className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)]  lg:h-72 "
+        >
+            <img
+                alt={product.imageAlt}
+                src={product.imageSrc}
+                className="aspect-square w-full rounded-md  object-cover  lg:aspect-auto"
+            />
+
+        </div>
+
+        <div className="mt-2 flex justify-between">
+            <div>
+                <Paragraph size='lg' className="font-medium">
+                    <a href={product.href}>
+                        <span aria-hidden="true" className="absolute inset-0" />
+                        {product.name}
+                    </a>
+                </Paragraph>
+                <Paragraph size='base' className="mt-1 text-sm text-gray-500">{product.color}</Paragraph>
+            </div>
+            <p className="text-sm font-medium text-(--dark-blue)">{product.price}</p>
+        </div>
+        <div className='flex justify-between mt-2'>
+            <button className='rounded-md border border-(--light-blue)/20 bg-(--light-blue)/20   py-1 px-4'>Add to Cart</button>
+            <button className='rounded-md  bg-(--dark-blue)  text-white py-1 px-4'>Buy Now</button>
+        </div>
+    </div>
+);
+
 function classNames(...classes: (string | false | null | undefined)[]): string {
     return classes.filter(Boolean).join(' ');
 }
 
-// --- Reusable Components ---
-interface FilterCheckboxProps {
-    id: string;
-    name: string;
-    value: string;
-    label: string;
-    checked?: boolean;
-    onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
-}
-const FilterCheckbox: React.FC<FilterCheckboxProps> = ({ id, name, value, label, checked, onChange }) => (
-    <div className="flex items-center gap-2">
-        <div className="flex h-5 shrink-0 items-center">
-            <div className="group grid size-4 grid-cols-1">
-                <input
-                    id={id}
-                    name={name}
-                    type="checkbox"
-                    value={value}
-                    defaultChecked={checked}
-                    aria-checked={checked}
-                    aria-label={label}
-                    className="col-start-1 row-start-1 appearance-none rounded-sm border border-(--light-blue) bg-(--white) checked:border-(--orange) checked:bg-(--orange) indeterminate:border-(--orange) indeterminate:bg-(--orange) focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-(--light-blue) disabled:border-(--light-blue) disabled:bg-(--background) disabled:checked:bg-(--background) forced-colors:appearance-auto"
-                    onChange={onChange}
-                />
-                <svg
-                    fill="none"
-                    viewBox="0 0 14 14"
-                    className="pointer-events-none col-start-1 row-start-1 size-3.5 self-center justify-self-center stroke-(--white) group-has-disabled:stroke-(--dark-blue)/25"
-                    aria-hidden="true"
-                >
-                    <path
-                        d="M3 8L6 11L11 3.5"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="opacity-0 group-has-checked:opacity-100"
-                    />
-                    <path
-                        d="M3 7H11"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                        className="opacity-0 group-has-indeterminate:opacity-100"
-                    />
-                </svg>
-            </div>
-        </div>
-        <label htmlFor={id} className="min-w-0 flex-1 text-(--light-blue) text-sm">
-            {label}
-        </label>
-    </div>
-);
 
-interface FilterSectionPanelProps {
-    section: FilterSection;
-    mobile?: boolean;
-}
-const FilterSectionPanel: React.FC<FilterSectionPanelProps> = ({ section, mobile }) => (
-    <Disclosure as="div" className={mobile ? 'border-t border-(--light-blue) px-4 py-4' : 'border-b border-(--light-blue) py-4'}>
-        <h3 className={mobile ? '-mx-2 -my-2 flow-root' : '-my-2 flow-root'}>
-            <DisclosureButton className={mobile ? 'group flex w-full items-center justify-between bg-(--white) px-2 py-2 text-(--light-blue) hover:text-(--orange)' : 'group flex w-full items-center justify-between bg-(--white) py-2 text-sm text-(--light-blue) hover:text-(--orange)'}>
-                <span className="font-medium text-(--dark-blue)">{section.name}</span>
-                <span className="ml-6 flex items-center">
-                    <PlusIcon aria-hidden="true" className="size-5 group-data-open:hidden" />
-                    <MinusIcon aria-hidden="true" className="size-5 group-not-data-open:hidden" />
-                </span>
-            </DisclosureButton>
-        </h3>
-        <DisclosurePanel className="pt-3">
-            <div className={mobile ? 'flex flex-col gap-3' : 'flex flex-col gap-3'}>
-                {section.options.map((option, idx) => (
-                    <FilterCheckbox
-                        key={option.value}
-                        id={`${mobile ? 'filter-mobile' : 'filter'}-${section.id}-${idx}`}
-                        name={`${section.id}[]`}
-                        value={option.value}
-                        label={option.label}
-                        checked={option.checked}
-                    />
-                ))}
-            </div>
-        </DisclosurePanel>
-    </Disclosure>
-);
 
-interface CategoryListProps {
-    categories: { name: string; href: string }[];
-    mobile?: boolean;
-}
-const CategoryList: React.FC<CategoryListProps> = ({ categories, mobile }) => (
-    <ul
-        role="list"
-        className={
-            mobile
-                ? 'flex flex-col gap-2 px-2 py-3 font-medium text-(--dark-blue)'
-                : 'flex flex-col gap-3 border-b border-(--light-blue) pb-6 text-sm font-medium text-(--dark-blue)'
-        }
-    >
-        {categories.map((category) => (
-            <li key={category.name} className="">
-                <a
-                    href={category.href}
-                    className={
-                        mobile
-                            ? 'block px-2 py-2 rounded hover:bg-background transition-colors'
-                            : 'block px-2 py-2 rounded hover:bg-background transition-colors'
-                    }
-                    tabIndex={0}
-                    aria-label={category.name}
-                >
-                    {category.name}
-                </a>
-            </li>
-        ))}
-    </ul>
-);
-
-// --- Main Component ---
-const ProductFilter: React.FC = () => {
+const ProductFilter = () => {
     const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
+    const [search, setSearch] = useState("");
+
     return (
-        <Section>
-            <div>
+        <Section >
+            <div className='bg-(--gray) -mt-20 px-4 rounded-md'>
                 {/* Mobile filter dialog */}
                 <Dialog open={mobileFiltersOpen} onClose={setMobileFiltersOpen} className="relative z-40 lg:hidden">
                     <DialogBackdrop
                         transition
-                        className="fixed inset-0 bg-(--dark-blue)/25 transition-opacity duration-300 ease-linear data-closed:opacity-0"
+                        className="fixed inset-0 bg-black/25 transition-opacity duration-300 ease-linear data-closed:opacity-0"
                     />
+
                     <div className="fixed inset-0 z-40 flex">
                         <DialogPanel
                             transition
-                            className="relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full"
+                            className="relative ml-auto flex size-full max-w-xs transform flex-col overflow-y-auto bg-white pt-4 pb-6 shadow-xl transition duration-300 ease-in-out data-closed:translate-x-full"
                         >
                             <div className="flex items-center justify-between px-4">
                                 <h2 className="text-lg font-medium text-(--dark-blue)">Filters</h2>
                                 <button
                                     type="button"
                                     onClick={() => setMobileFiltersOpen(false)}
-                                    className="relative -mr-2 flex size-10 items-center justify-center rounded-md p-2 text-(--light-blue) hover:bg-(--background) focus:ring-2 focus:ring-(--light-blue) focus:outline-hidden"
+                                    className="relative -mr-2 flex size-10 items-center justify-center rounded-md bg-white p-2 text-gray-400 hover:bg-gray-50"
                                     aria-label="Close menu"
                                 >
                                     <span className="absolute -inset-0.5" />
                                     <XMarkIcon aria-hidden="true" className="size-6" />
                                 </button>
                             </div>
+
                             {/* Filters */}
-                            <form className="mt-4 border-t border-(--light-blue)">
+                            <form className="mt-4">
                                 <h3 className="sr-only">Categories</h3>
-                                <CategoryList categories={categories} mobile />
+                                {/* Category list removed */}
                                 {filters.map((section) => (
-                                    <FilterSectionPanel key={section.id} section={section} mobile />
+                                    <Disclosure key={section.id} as="div" className=" px-4 py-6">
+                                        <h3 className="-mx-2 -my-3 flow-root">
+                                            <DisclosureButton className="group flex w-full items-center justify-between bg-white px-2 py-3 text-gray-400 hover:text-gray-500">
+                                                <span className="font-medium text-(--dark-blue)">{section.name}</span>
+                                                <span className="ml-6 flex items-center">
+                                                    <MdOutlineKeyboardArrowDown aria-hidden="true" className="size-5 group-data-open:hidden" />
+                                                    <MdOutlineKeyboardArrowUp aria-hidden="true" className="size-5 group-not-data-open:hidden" />
+                                                </span>
+                                            </DisclosureButton>
+                                        </h3>
+                                        <DisclosurePanel className="pt-6">
+                                            <div className="space-y-6">
+                                                {section.options.map((option, optionIdx) => (
+                                                    <div key={option.value} className="flex gap-3">
+                                                        <div className="flex h-5 shrink-0 items-center">
+                                                            <input
+                                                                defaultValue={option.value}
+                                                                id={`filter-mobile-${section.id}-${optionIdx}`}
+                                                                name={`${section.id}[]`}
+                                                                type="checkbox"
+                                                                defaultChecked={option.checked}
+                                                                className="size-4 rounded-sm  text-indigo-600"
+                                                            />
+                                                        </div>
+                                                        <label
+                                                            htmlFor={`filter-mobile-${section.id}-${optionIdx}`}
+                                                            className="min-w-0 flex-1 text-gray-500"
+                                                        >
+                                                            {option.label}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </DisclosurePanel>
+                                    </Disclosure>
                                 ))}
                             </form>
                         </DialogPanel>
                     </div>
                 </Dialog>
-                <main>
-                    <div className="flex flex-col md:flex-row md:items-center md:justify-between border-b border-(--light-blue) pt-12 md:pt-24 pb-4 md:pb-6 gap-4 md:gap-0">
-                        <h1 className="text-2xl md:text-4xl font-bold tracking-tight text-(--dark-blue)">New Arrivals</h1>
-                        <div className="flex items-center w-full md:w-auto">
-                            <div className="flex items-center justify-center w-full md:w-auto p-2 md:p-5">
-                                <div className="flex w-full md:w-auto">
-                                    <div className="flex w-10 items-center justify-center rounded-tl-lg bg-(--white) rounded-bl-lg border-r border-(--light-blue) p-2 md:p-5">
-                                        <svg viewBox="0 0 20 20" aria-hidden="true" className="pointer-events-none absolute w-5 fill-(--light-blue) transition">
-                                            <path d="M16.72 17.78a.75.75 0 1 0 1.06-1.06l-1.06 1.06ZM9 14.5A5.5 5.5 0 0 1 3.5 9H2a7 7 0 0 0 7 7v-1.5ZM3.5 9A5.5 5.5 0 0 1 9 3.5V2a7 7 0 0 0-7 7h1.5ZM9 3.5A5.5 5.5 0 0 1 14.5 9H16a7 7 0 0 0-7-7v1.5Zm3.89 10.45 3.83 3.83 1.06-1.06-3.83-3.83-1.06 1.06ZM14.5 9a5.48 5.48 0 0 1-1.61 3.89l1.06 1.06A6.98 6.98 0 0 0 16 9h-1.5Zm-1.61 3.89A5.48 5.48 0 0 1 9 14.5V16a6.98 6.98 0 0 0 4.95-2.05l-1.06-1.06Z" />
-                                        </svg>
-                                    </div>
-                                    <input type="text" className="w-full bg-(--white) max-w-40 pl-2 text-base font-semibold outline-0" placeholder="Search..." />
-                                    <input type="button" defaultValue="Search" className="bg-(--orange) p-2 rounded-tr-lg rounded-br-lg text-(--white) font-semibold hover:bg-(--light-blue) transition-colors" />
-                                </div>
-                            </div>
+
+                <main className="">
+                    <div className="flex items-center justify-between py-4 ">
+                        <Heading level={4} className=" font-bold tracking-tight text-(--dark-blue)">Give All You Need</Heading>
+
+                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-md border border-(--light-blue)/10  pl-2 ">
+                            <BiSearch className="size-5 text-(--light-blue)/20 " />
+                            <input
+                                type="text"
+                                value={search}
+                                onChange={e => setSearch(e.target.value)}
+                                placeholder="Search"
+                                className="flex-1 bg-transparent  outline-none  py-2 text-sm text-(--light-blue)"
+                                aria-label="Search products"
+                            />
+                            <button
+                                type="button"
+                                className="rounded-md bg-(--dark-blue) px-5 py-2 text-sm font-semibold text-white cursor-pointer "
+                                aria-label="Search"
+                            >
+                                Search
+                            </button>
+
+
                         </div>
+                        <button
+                            type="button"
+                            onClick={() => setMobileFiltersOpen(true)}
+                            className="-m-2 ml-4 p-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
+                            aria-label="Filters"
+                        >
+                            <FunnelIcon aria-hidden="true" className="size-5" />
+                        </button>
                     </div>
-                    <section aria-labelledby="products-heading" className="pt-4 md:pt-6 pb-12 md:pb-24">
-                        <h2 id="products-heading" className="sr-only">
-                            Products
-                        </h2>
-                        <div className="grid grid-cols-1 gap-x-4 md:gap-x-8 gap-y-6 md:gap-y-10 lg:grid-cols-4">
+
+                    <section aria-labelledby="products-heading" className=" py-10">
+
+
+                        <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-5 ">
                             {/* Filters */}
                             <form className="hidden lg:block">
                                 <h3 className="sr-only">Categories</h3>
+                                {/* Category list removed */}
                                 {filters.map((section) => (
-                                    <FilterSectionPanel key={section.id} section={section} />
+                                    <Disclosure key={section.id} as="div" className=" py-4">
+                                        <h3 className="-my-3 flow-root">
+                                            <DisclosureButton className="group flex w-full items-center justify-between  py-3 text-sm text-gray-400 hover:text-gray-500">
+                                                <span className="font-medium text-(--dark-blue)">{section.name}</span>
+                                                <span className="ml-6 flex items-center">
+                                                    <MdOutlineKeyboardArrowDown aria-hidden="true" className="size-5 group-data-open:hidden" />
+                                                    <MdOutlineKeyboardArrowUp aria-hidden="true" className="size-5 group-not-data-open:hidden" />
+                                                </span>
+                                            </DisclosureButton>
+                                        </h3>
+                                        <DisclosurePanel className="pt-6">
+                                            <div className="space-y-4">
+                                                {section.options.map((option, optionIdx) => (
+                                                    <div key={option.value} className="flex gap-3">
+                                                        <div className="flex h-5 shrink-0 items-center">
+                                                            <input
+                                                                defaultValue={option.value}
+                                                                defaultChecked={option.checked}
+                                                                id={`filter-${section.id}-${optionIdx}`}
+                                                                name={`${section.id}[]`}
+                                                                type="checkbox"
+                                                                className="size-4 rounded-sm  text-indigo-600"
+                                                            />
+                                                        </div>
+                                                        <label htmlFor={`filter-${section.id}-${optionIdx}`} className="text-sm text-gray-600">
+                                                            {option.label}
+                                                        </label>
+                                                    </div>
+                                                ))}
+                                            </div>
+                                        </DisclosurePanel>
+                                    </Disclosure>
                                 ))}
                             </form>
+
                             {/* Product grid */}
-                            <div className="lg:col-span-3">{/* Your content */}</div>
+                            <div className="lg:col-span-4">
+                                <div >
+                                    <div className=" grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                                        {products.map(product => (
+                                            <ProductCard key={product.id} product={product} />
+                                        ))}
+                                    </div>
+                                    <Pagination />
+                                </div>
+                            </div>
                         </div>
                     </section>
                 </main>
