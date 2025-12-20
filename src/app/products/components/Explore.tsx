@@ -1,14 +1,12 @@
 "use client";
 import Heading from '@/components/common/Heading';
 import Paragraph from '@/components/common/Paragraph';
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Autoplay } from "swiper/modules";
 import Image from 'next/image';
 import Span from '@/components/common/Span';
 import { CgArrowLongLeft, CgArrowLongRight } from 'react-icons/cg';
-import { useRouter } from 'next/navigation';
-import LeftSpaceGridSection from '@/components/common/LeftSpaceGridSection';
 import 'swiper/css';
 import 'swiper/css/navigation';
 import 'swiper/css/autoplay';
@@ -24,7 +22,18 @@ export type Blog = {
     created_at: string;
 };
 
-export const products = [
+// Product type (reusable)
+export type Product = {
+    id: number;
+    name: string;
+    href: string;
+    imageSrc: string;
+    imageAlt: string;
+    price: string;
+    color: string;
+};
+
+export const products: Product[] = [
     {
         id: 1,
         name: 'Basic Tee',
@@ -99,105 +108,52 @@ export const products = [
     },
 ];
 
-// Helper: Preload images and videos (reusable)
-const preloadMedia = (blogs: Blog[]) => {
-    const base = `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/`;
-    const imagePromises = blogs.map((p) => {
-        const img = new window.Image();
-        img.src = `${base}${p.image_url}`;
-        return new Promise<void>((resolve) => {
-            img.onload = () => resolve();
-            img.onerror = () => resolve();
-        });
-    });
-    const videoPromises = blogs
-        .filter((p) => p.video_url)
-        .map((p) => {
-            const video = document.createElement('video');
-            video.preload = 'auto';
-            video.src = p.video_url.includes('videos/') ? `${base}${p.video_url}` : `${base}videos/${p.video_url}`;
-            return new Promise<void>((resolve) => {
-                video.oncanplaythrough = () => resolve();
-                video.onerror = () => resolve();
-            });
-        });
-    return Promise.all([...imagePromises, ...videoPromises]);
-};
 
-// Helper: Get video sources (reusable)
-const getVideoSources = (videoUrl: string) => {
-    const base = `${process.env.NEXT_PUBLIC_API_BASE_URL}/files/`;
-    const src = videoUrl.includes("videos/") ? `${base}${videoUrl}` : `${base}videos/${videoUrl}`;
-    const sources = [
-        { ext: ".mp4", type: "video/mp4" },
-        { ext: ".webm", type: "video/webm" },
-        { ext: ".ogg", type: "video/ogg" },
-    ];
-    const matched = sources.find(({ ext }) => videoUrl.endsWith(ext));
-    if (matched) {
-        return [<source key={matched.ext} src={src} type={matched.type} />];
-    }
-    return [<source key="default" src={src} />];
-};
-
-const ProductCard = ({ product }: { product: typeof products[0] }) => (
-    <div key={product.id} className="group relative">
-        <div
-            className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)]  lg:h-72 "
-        >
-            <img
+// ProductCard component (reusable, accessible, optimized)
+const ProductCard: React.FC<{ product: Product }> = React.memo(({ product }) => (
+    <article className="group relative" aria-label={product.name} tabIndex={0}>
+        <div className="flex justify-around items-center w-full h-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] lg:h-72">
+            <Image
                 alt={product.imageAlt}
                 src={product.imageSrc}
-                className="aspect-square w-full rounded-md  object-cover  lg:aspect-auto"
+                className="w-full h-full rounded-md object-contain"
+                loading="lazy"
+                width={300}
+                height={300}
+                priority={false}
             />
-
         </div>
-
-        <div className="mt-2 flex justify-between">
-            <div>
-                <Paragraph size='lg' className="font-medium">
-                    <a href={product.href}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                    </a>
-                </Paragraph>
-                <Paragraph size='base' className="mt-1 text-sm text-gray-500">{product.color}</Paragraph>
-            </div>
-            <p className="text-sm font-medium text-(--dark-blue)">{product.price}</p>
+        <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+            <Paragraph size="lg" className="font-medium">
+                <a href={product.href} tabIndex={-1} aria-label={product.name}>
+                    <span aria-hidden="true" className="absolute inset-0" />
+                    {product.name}
+                </a>
+            </Paragraph>
         </div>
-        <div className='flex justify-between mt-2'>
-            <button className='rounded-md border border-(--light-blue)/20 bg-(--light-blue)/20   py-1 px-4'>Add to Cart</button>
-            <button className='rounded-md  bg-(--dark-blue)  text-white py-1 px-4'>Buy Now</button>
-        </div>
-    </div>
-);
+    </article>
+));
 
 const Explore: React.FC = () => {
     const [navigation, setNavigation] = useState<{ prevEl: null | HTMLElement; nextEl: null | HTMLElement; }>({ prevEl: null, nextEl: null });
-    const router = useRouter();
-
-    // SplitText animation refs
     const eventsRef = React.useRef<HTMLDivElement | null>(null);
     const headingRef = React.useRef<HTMLHeadingElement | null>(null);
-    const paragraphRef = React.useRef<HTMLParagraphElement | null>(null);
-
 
     return (
         <div ref={eventsRef}>
             <Section>
                 <div className="py-10 sm:py-20">
                     <div className="mb-8">
-
                         <Heading ref={headingRef} level={4} className="text-(--dark-blue) mt-1 leading-tight uppercase latest-title">
                             Explore Our Products
                         </Heading>
                     </div>
                     <Swiper
                         modules={[Navigation, Autoplay]}
-                        spaceBetween={32} // Increased gap between slides
+                        spaceBetween={32}
                         slidesPerView={4}
                         loop
-                        grabCursor={true}
+                        grabCursor
                         navigation={navigation}
                         autoplay={{ delay: 3000, disableOnInteraction: false }}
                         breakpoints={{
@@ -242,7 +198,6 @@ const Explore: React.FC = () => {
                     </div>
                 </div>
             </Section>
-
         </div>
     );
 };
