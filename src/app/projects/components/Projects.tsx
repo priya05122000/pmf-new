@@ -182,11 +182,11 @@ const Projects: React.FC = () => {
 
   return (
     <Section aria-label="Recent Projects">
-      <div className="py-10">
+      <div className="py-10 sm:py-16">
         <div className="flex flex-col md:flex-row gap-8">
           {/* Sidebar */}
           <aside className="w-full md:w-1/4 mb-3 lg:mb-0">
-            <div className="bg-white rounded-lg shadow p-4 sticky top-24">
+            <div className="bg-white rounded-lg shadow p-4 sticky top-28">
               <Heading
                 level={6}
                 className="mb-4 text-(--dark-blue) uppercase tracking-wide"

@@ -12,7 +12,7 @@ interface ContactBannerProps {
     style?: CSSProperties;
 }
 
-const DEFAULT_HEADING = 'Our Projects';
+const DEFAULT_HEADING = 'Contact Us';
 const DEFAULT_DESCRIPTION =
     'Discover premium refractory solutions designed to enhance steel production efficiency and quality.';
 const DEFAULT_BG = "/home/banner.webp";

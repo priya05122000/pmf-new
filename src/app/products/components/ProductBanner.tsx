@@ -34,7 +34,7 @@ const ProductBanner: FC<ProductBannerProps> = ({
         style={{ outline: 'none' }}
     >
         <Section
-            className="w-full h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
+            className="w-full h-[60vh] bg-cover bg-center rounded-xl bg-fixed relative"
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
         >
             <BannerOverlay />

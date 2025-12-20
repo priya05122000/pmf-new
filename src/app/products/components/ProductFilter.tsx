@@ -184,7 +184,7 @@ const categories = [
     'Retail Displays',
 ];
 const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void }> = ({ selected, onSelect }) => (
-    <nav aria-label="Product categories" className="flex flex-col gap-1 mb-4">
+    <nav aria-label="Product categories" className="flex flex-col gap-1 mb-4 sticky top-28">
         {categories.map(cat => (
             <button
                 key={cat}
