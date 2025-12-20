@@ -1,6 +1,6 @@
 import React from 'react'
-import Blogs from './components/Blogs'
-import BlogBanner from './components/BlogBanner'
+import Blogs from './components/Projects'
+import BlogBanner from './components/ProjectBanner'
 
 const page = () => {
   return (

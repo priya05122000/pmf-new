@@ -4,7 +4,7 @@ import Section from '@/components/common/Section';
 import Image from 'next/image';
 import type { FC, CSSProperties } from 'react';
 
-interface BlogBannerProps {
+interface ProjectBannerProps {
     heading?: string;
     description?: string;
     backgroundImageUrl?: string;
@@ -12,12 +12,12 @@ interface BlogBannerProps {
     style?: CSSProperties;
 }
 
-const DEFAULT_HEADING = 'Our Blogs';
+const DEFAULT_HEADING = 'Our Projects';
 const DEFAULT_DESCRIPTION =
     'Discover premium refractory solutions designed to enhance steel production efficiency and quality.';
 const DEFAULT_BG = "/home/banner.webp";
 
-const BlogBanner: FC<BlogBannerProps> = ({
+const ProjectBanner: FC<ProjectBannerProps> = ({
     heading = DEFAULT_HEADING,
     description = DEFAULT_DESCRIPTION,
     backgroundImageUrl = DEFAULT_BG,
@@ -45,4 +45,4 @@ const BlogBanner: FC<BlogBannerProps> = ({
     </section>
 );
 
-export default BlogBanner;
+export default ProjectBanner;
