@@ -24,12 +24,12 @@ export type Blog = {
     created_at: string;
 };
 
-const products = [
+export const products = [
     {
         id: 1,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-01.jpg',
+        imageSrc: '/products/products1.webp',
         imageAlt: "Front of men's Basic Tee in black.",
         price: '$35',
         color: 'Black',
@@ -38,7 +38,7 @@ const products = [
         id: 2,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-02.jpg',
+        imageSrc: '/products/products2.webp',
         imageAlt: "Front of men's Basic Tee in white.",
         price: '$35',
         color: 'Aspen White',
@@ -47,7 +47,7 @@ const products = [
         id: 3,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-03.jpg',
+        imageSrc: '/products/products3.webp',
         imageAlt: "Front of men's Basic Tee in dark gray.",
         price: '$35',
         color: 'Charcoal',
@@ -56,7 +56,7 @@ const products = [
         id: 4,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products4.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -65,7 +65,7 @@ const products = [
         id: 5,
         name: 'Basic Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-03.jpg',
+        imageSrc: '/products/products5.webp',
         imageAlt: "Front of men's Basic Tee in dark gray.",
         price: '$35',
         color: 'Charcoal',
@@ -74,7 +74,7 @@ const products = [
         id: 6,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products6.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -83,7 +83,7 @@ const products = [
         id: 7,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products7.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -92,7 +92,7 @@ const products = [
         id: 8,
         name: 'Artwork Tee',
         href: '#',
-        imageSrc: 'https://tailwindcss.com/plus-assets/img/ecommerce-images/product-page-01-related-product-04.jpg',
+        imageSrc: '/products/products8.webp',
         imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
         price: '$35',
         color: 'Iso Dots',
@@ -142,12 +142,18 @@ const getVideoSources = (videoUrl: string) => {
 
 const ProductCard = ({ product }: { product: typeof products[0] }) => (
     <div key={product.id} className="group relative">
-        <img
-            alt={product.imageAlt}
-            src={product.imageSrc}
-            className="aspect-square w-full rounded-md  object-cover  lg:aspect-auto lg:h-80"
-        />
-        <div className="mt-4 flex justify-between">
+        <div
+            className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)]  lg:h-72 "
+        >
+            <img
+                alt={product.imageAlt}
+                src={product.imageSrc}
+                className="aspect-square w-full rounded-md  object-cover  lg:aspect-auto"
+            />
+
+        </div>
+
+        <div className="mt-2 flex justify-between">
             <div>
                 <Paragraph size='lg' className="font-medium">
                     <a href={product.href}>
@@ -157,11 +163,11 @@ const ProductCard = ({ product }: { product: typeof products[0] }) => (
                 </Paragraph>
                 <Paragraph size='base' className="mt-1 text-sm text-gray-500">{product.color}</Paragraph>
             </div>
-            <p className="text-sm font-medium text-gray-900">{product.price}</p>
+            <p className="text-sm font-medium text-(--dark-blue)">{product.price}</p>
         </div>
         <div className='flex justify-between mt-2'>
-            <button className='rounded-md border  py-1 px-2'>Add to Cart</button>
-            <button className='rounded-md border  py-1 px-2'>Buy Now</button>
+            <button className='rounded-md border border-(--light-blue)/20 bg-(--light-blue)/20   py-1 px-4'>Add to Cart</button>
+            <button className='rounded-md  bg-(--dark-blue)  text-white py-1 px-4'>Buy Now</button>
         </div>
     </div>
 );
@@ -182,8 +188,8 @@ const Explore: React.FC = () => {
                 <div className="py-10 sm:py-20">
                     <div className="mb-8">
 
-                        <Heading ref={headingRef} level={4} className="text-(--blue) mt-1 leading-tight uppercase latest-title">
-                            Explore Our Recommendations
+                        <Heading ref={headingRef} level={4} className="text-(--dark-blue) mt-1 leading-tight uppercase latest-title">
+                            Explore Our Products
                         </Heading>
                     </div>
                     <Swiper
