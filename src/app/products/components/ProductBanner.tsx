@@ -1,5 +1,6 @@
 import Section from '@/components/common/Section';
-import type { FC, CSSProperties, ReactNode } from 'react';
+import Image from 'next/image';
+import type { FC, CSSProperties } from 'react';
 
 interface ProductBannerProps {
     backgroundImageUrl?: string;
@@ -7,38 +8,28 @@ interface ProductBannerProps {
     style?: CSSProperties;
 }
 
-const DEFAULT_BG = "/home/banner.webp";
-
-
-
-// Overlay component for reusability
-const BannerOverlay: FC = () => (
-    <div
-        className="absolute inset-0 bg-[rgba(var(--light-blue),0.3)] rounded-xl z-0"
-        aria-hidden="true"
-        data-testid="banner-overlay"
-    />
-);
-
+const DEFAULTS = {
+    backgroundImageUrl: '/home/banner.webp',
+    className: 'h-[60vh]',
+    style: {} as CSSProperties,
+};
 
 const ProductBanner: FC<ProductBannerProps> = ({
-    backgroundImageUrl = DEFAULT_BG,
-    className = '',
-    style = {},
+    backgroundImageUrl = DEFAULTS.backgroundImageUrl,
+    className = DEFAULTS.className,
+    style = DEFAULTS.style,
 }) => (
     <section
         className={`p-3 ${className}`.trim()}
         aria-label="Steel Quality Banner"
-        tabIndex={-1}
         role="region"
-        style={{ outline: 'none' }}
     >
-        <Section
-            className="w-full h-[60vh] bg-cover bg-center rounded-xl bg-fixed relative"
+        <div
+            className="w-full h-full bg-cover bg-center rounded-xl bg-fixed relative flex items-center justify-center"
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
+            aria-hidden="true"
         >
-            <BannerOverlay />
-        </Section>
+        </div>
     </section>
 );
 

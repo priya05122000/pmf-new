@@ -20,7 +20,7 @@ const logos = [
 export default function Partners() {
   return (
     <Section
-      className="w-full py-10 lg:py-20"
+      className="w-full py-10 lg:sm:py-16 lg:py-20"
       style={{
         backgroundImage: "url('/home/banner.webp')",
       }}
@@ -41,7 +41,7 @@ export default function Partners() {
         {/* Logos Grid */}
         <div className="grid grid-cols-3 sm:gap-x-4 gap-y-4 sm:grid-cols-4 md:grid-cols-5 lg:grid-cols-4 xl:grid-cols-6">
           {logos.map((logo, index) => (
-            <div key={index} className="flex items-center justify-center bg-[#DEE3E6] w-24 sm:w-32 h-24 sm:h-30 p-4 rounded-lg">
+            <div key={index} className="flex items-center justify-center bg-[#DEE3E6] w-24 sm:w-32 h-24 sm:h-30 p-4 rounded-md">
               <Image
                 src={logo.src}
                 alt={logo.name}

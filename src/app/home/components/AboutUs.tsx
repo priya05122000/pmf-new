@@ -22,10 +22,10 @@ interface Stat {
 }
 
 const ABOUT_STATS: Stat[] = [
-    { value: '95%', label: 'Complete customer satisfaction' },
-    { value: '10+', label: 'Innovation and valuable insight' },
-    { value: '$10m', label: 'Highly efficient financial strategies' },
-    { value: '50m', label: 'Users worldwide, providing them with' },
+    { value: '30+', label: 'People' },
+    { value: '1015', label: 'Projects' },
+    { value: '13+', label: 'Years' },
+    { value: '170+', label: 'Clients' },
 ];
 
 // Reusable StatCard component
@@ -52,9 +52,9 @@ const StatCard: FC<Stat> = ({ value, label }) => {
 
 const AboutUs: FC = () => (
     <Section aria-labelledby="about-us-heading">
-        <div className="py-10 sm:py-20 flex flex-col lg:flex-row md:items-start lg:gap-12 text-(--dark-blue)">
+        <div className="py-10 sm:sm:py-16 lg:py-20 flex flex-col lg:flex-row md:items-start lg:gap-12 text-(--dark-blue)">
             {/* Left: Dot and About Us */}
-            <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+            <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-4 md:mr-4">
 
                 <GoDotFill aria-hidden="true" />
                 <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">ABOUT US</Paragraph>
@@ -62,8 +62,8 @@ const AboutUs: FC = () => (
             </div>
             {/* Right: Main content */}
             <div className="flex-1">
-                <Paragraph size="xl" className="font-medium">
-                    With over 15 years of experience, we specialize in delivering tailored solutions that drive success across industries like finance, technology, and operations. Our dedicated team is focused on accelerating growth and helping your business thrive in an ever-changing market.
+                <Paragraph size="xl" className="font-medium text-justify">
+                    PMF World is a trusted name in stainless steel fabrication, delivering precision-built solutions that balance strength, finish, and long-term use. Our expertise covers both mild steel and stainless steel, crafted with close attention to detail at every stage. We serve a wide range of sectors, including retail, construction, hospitals, and hotels. Each project reflects our commitment to quality, reliability, and skilled workmanship.
                 </Paragraph>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12" role="list">
                     {ABOUT_STATS.map((stat) => (

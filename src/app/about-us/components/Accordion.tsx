@@ -37,7 +37,7 @@ export default function Accordion() {
   };
 
   return (
-    <Section className="w-full py-10 lg:py-20">
+    <Section className="w-full py-10 lg:sm:py-16 lg:py-20">
         <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-20">
           {/* Left Content */}
           <div>

@@ -28,7 +28,7 @@ export default function Description() {
                 alt={`Project image ${blockIdx * 3 + 1}`}
                 width={500}
                 height={350}
-                className="rounded-lg w-full object-cover"
+                className="rounded-md w-full object-cover"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
@@ -38,7 +38,7 @@ export default function Description() {
                 alt={`Project image ${blockIdx * 3 + 2}`}
                 width={500}
                 height={350}
-                className="rounded-lg w-full object-cover"
+                className="rounded-md w-full object-cover"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>
@@ -51,7 +51,7 @@ export default function Description() {
                 alt={`Project image ${blockIdx * 3 + 3}`}
                 width={600}
                 height={400}
-                className="rounded-lg w-full object-cover"
+                className="rounded-md w-full object-cover"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
             </div>

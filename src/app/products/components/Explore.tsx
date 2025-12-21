@@ -144,7 +144,7 @@ const Explore: React.FC = () => {
     return (
         <div ref={eventsRef}>
             <Section>
-                <div className="py-10 sm:py-20">
+                <div className="py-10 sm:sm:py-16 lg:py-20">
                     <div className="mb-8">
                         <Heading ref={headingRef} level={4} className="text-(--dark-blue) mt-1 leading-tight uppercase latest-title">
                             Explore Our Products

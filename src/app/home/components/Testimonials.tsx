@@ -124,20 +124,20 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
 
 const Testimonial: FC = () => (
     <CenterSection aria-label="Testimonials Section">
-        <div className="py-10 sm:py-20">
+        <div className="py-10 sm:sm:py-16 lg:py-20">
             {/* <div>
                 <Heading level={4} className="text-(--dark-blue) text-center">Our Testimonials</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
                 </Paragraph>
             </div> */}
-            <div>
-                <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+            <div className="text-center ">
+                {/* <div className="flex flex-row gap-2 justify-center  items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
                     <GoDotFill aria-hidden="true" />
                     <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Testimonials</Paragraph>
-                </div>
+                </div> */}
                 <Heading level={4} className="text-(--dark-blue)">Our Testimonials</Heading>
-                <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
+                <Paragraph size="base" className="text-(--dark-blue) mx-auto mt-4 max-w-2xl">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
                 </Paragraph>
 

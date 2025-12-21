@@ -42,14 +42,14 @@ export const PROJECTS: ProjectCardProps[] = [
 
 // Reusable ProjectCard component
 const ProjectCard: React.FC<ProjectCardProps> = ({ image, tags, title, description, date }) => (
-    <article className=" rounded-lg shadow-none flex flex-col" aria-label={title}>
-        <div className="overflow-hidden rounded-lg">
+    <article className=" rounded-md shadow-none flex flex-col" aria-label={title}>
+        <div className="overflow-hidden rounded-md">
             <Image
                 src={image}
                 alt={`Project image for ${title}`}
                 width={350}
                 height={200}
-                className="w-full h-64 object-cover rounded-lg"
+                className="w-full h-64 object-cover rounded-md"
                 loading="lazy"
             />
         </div>
@@ -63,7 +63,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, tags, title, descripti
                 </Span>
             ))}
         </div>
-        <Heading level={6} className="font-bold mt-2 mb-2 uppercase text-(--dark-blue)">{title}</Heading>
+        <Paragraph size='xl' className="font-bold mt-2 mb-2 uppercase text-(--dark-blue)">{title}</Paragraph>
         <Paragraph size="base" className="mb-2 text-(--dark-blue)">{description}</Paragraph>
         <Span
             className=" font-medium text-(--dark-blue) mt-auto mb-2 block">{date}</Span>
@@ -81,9 +81,9 @@ const ProjectGrid: React.FC<{ blogs: ProjectCardProps[] }> = ({ blogs }) => (
 
 const RecentProject: React.FC = () => (
     <Section aria-label="Recent Projects">
-        <div className="py-10 sm:py-20 ">
+        <div className="py-10 sm:sm:py-16 lg:py-20 ">
             <div>
-                <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+                <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  md:mr-4">
                     <GoDotFill aria-hidden="true" />
                     <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Products</Paragraph>
                 </div>

@@ -34,7 +34,7 @@ const areas = [
 export default function PracticeAreasSection() {
   return (
     <Section
-      className="relative w-full bg-cover bg-center py-10 sm:py-20"
+      className="relative w-full bg-cover bg-center py-10 sm:sm:py-16 lg:py-20"
       style={{
         backgroundImage:
           "url('/home/banner.webp')",

@@ -5,25 +5,8 @@ import { BiSearch } from 'react-icons/bi';
 import Section from '@/components/common/Section';
 import Paragraph from '@/components/common/Paragraph';
 import Heading from '@/components/common/Heading';
-import { Pagination } from '../subcomponents/Pagination';
 import Image from 'next/image';
 
-interface SortOption {
-    name: string;
-    href: string;
-    current: boolean;
-}
-
-interface FilterOption {
-    value: string;
-    label: string;
-    checked: boolean;
-}
-interface FilterSection {
-    id: string;
-    name: string;
-    options: FilterOption[];
-}
 
 
 export const products = [
@@ -148,10 +131,10 @@ export interface Product {
     color: string;
 }
 
-// Reusable ProductCard
+// ProductCard (reusable, accessible, optimized)
 const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
     <article className="group relative" aria-label={product.name} tabIndex={0}>
-        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
+        <div className="flex justify-around items-center w-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
             <Image
                 alt={product.imageAlt}
                 src={product.imageSrc}
@@ -162,39 +145,45 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
                 priority={false}
             />
         </div>
-        <div className=" border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
-            <div>
-                <Paragraph size='lg' className="font-medium">
-                    <a href={product.href} tabIndex={-1}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {product.name}
-                    </a>
-                </Paragraph>
-            </div>
-
+        <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+            <Paragraph size='lg' className="font-medium">
+                <a href={product.href} tabIndex={-1} aria-label={product.name}>
+                    <span aria-hidden="true" className="absolute inset-0" />
+                    {product.name}
+                </a>
+            </Paragraph>
         </div>
     </article>
 ));
 
-// Reusable CategoryList
+// Category List (reusable, accessible)
 const categories = [
     'All',
     'Architectural',
     'Food Processing',
     'Retail Displays',
 ];
+
 const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void }> = ({ selected, onSelect }) => (
     <nav aria-label="Product categories" className="flex flex-col gap-1 mb-4 sticky top-28">
-        {categories.map(cat => (
-            <button
-                key={cat}
-                className={`text-left px-2 py-1 cursor-pointer rounded-md ${selected === cat ? 'bg-(--light-blue)/10 font-medium' : ''}`}
-                onClick={() => onSelect(cat)}
-                aria-current={selected === cat ? 'page' : undefined}
-            >
-                <Paragraph size='base'>{cat}</Paragraph>
-            </button>
-        ))}
+        <div className="bg-(--gray) rounded-md shadow p-4 sticky top-28">
+            <ul className="flex flex-col gap-2 lg:gap-3">
+                {categories.map((cat) => (
+                    <li key={cat}>
+                        <button
+                            className={`w-full text-left px-4 py-2 rounded font-medium transition-colors duration-300 border-none outline-none ${selected === cat
+                                ? "bg-(--orange) text-white"
+                                : "bg-(--light-blue)/10 text-(--dark-blue) hover:bg-(--orange) hover:text-white cursor-pointer"
+                                }`}
+                            onClick={() => onSelect(cat)}
+                            aria-pressed={selected === cat}
+                        >
+                            {cat}
+                        </button>
+                    </li>
+                ))}
+            </ul>
+        </div>
     </nav>
 );
 
@@ -210,16 +199,12 @@ const ProductFilter: FC = () => {
         return matchesSearch && matchesCategory;
     });
 
-    // If Architectural is selected, only show product 1, 2, 3
+    // Category-specific filtering
     if (category === 'Architectural') {
         filteredProducts = products.filter(p => [1, 2, 3].includes(p.id));
-    }
-    // If Food Processing is selected, only show product 4, 5, 6
-    else if (category === 'Food Processing') {
+    } else if (category === 'Food Processing') {
         filteredProducts = products.filter(p => [4, 5, 6, 7, 8, 9].includes(p.id));
-    }
-    // If Retail Displays is selected, only show product 10, 11, 12
-    else if (category === 'Retail Displays') {
+    } else if (category === 'Retail Displays') {
         filteredProducts = products.filter(p => [10, 11, 12].includes(p.id));
     }
 
@@ -227,9 +212,9 @@ const ProductFilter: FC = () => {
 
     return (
         <Section>
-            <div className='bg-(--gray) -mt-20 px-4 rounded-md'>
+            <div className='bg-(--gray) -mt-20  rounded-md'>
                 <main>
-                    <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4">
+                    <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4 px-4">
                         <Heading level={4} className="font-bold tracking-tight text-(--dark-blue)">Give All You Need</Heading>
                         <form className="flex items-center gap-2 w-full max-w-xs rounded-md border border-(--light-blue)/10 pl-2" role="search" aria-label="Search products" onSubmit={e => e.preventDefault()}>
                             <BiSearch className="size-5 text-(--light-blue)/20" aria-hidden="true" />
@@ -252,12 +237,12 @@ const ProductFilter: FC = () => {
                         </form>
                     </div>
                     <section aria-labelledby="products-heading" className="py-10">
-                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-5">
+                        <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-4">
                             <div>
                                 <CategoryList selected={category} onSelect={setCategory} />
                             </div>
                             {/* Product grid */}
-                            <div className="sm:col-span-2 lg:col-span-4">
+                            <div className="sm:col-span-2 lg:col-span-3">
                                 <div>
                                     <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
                                         {filteredProducts.length > 0 ? (
@@ -265,7 +250,7 @@ const ProductFilter: FC = () => {
                                                 <ProductCard key={product.id} product={product} />
                                             ))
                                         ) : (
-                                            <Paragraph size="lg" className="col-span-full text-center text-gray-500">No products found.</Paragraph>
+                                            <Paragraph size="lg" className="col-span-full text-center text-(--dark-blue)">No products found.</Paragraph>
                                         )}
                                     </div>
                                     {/* <Pagination /> */}

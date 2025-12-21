@@ -49,19 +49,19 @@ export default function HeroSwiper() {
 
     return (
         <CenterSection>
-            <div className="py-10 sm:py-20">
+            <div className="py-10 sm:sm:py-16 lg:py-20">
                 {/* <Heading level={4} className="text-(--dark-blue) text-center">Our Services</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
                 </Paragraph> */}
                 <div>
-                    <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
+                    <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  lg:mb-0 md:mr-4">
                         <GoDotFill aria-hidden="true" />
                         <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Services</Paragraph>
                     </div>
-                    <Heading level={4} className="text-(--dark-blue)">Our Services</Heading>
+                    <Heading level={4} className="text-(--dark-blue)">Our Categories </Heading>
                     <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
-                        Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
+                        We cover a wide range of fabrication needs, from custom kitchen equipment and retail displays to architectural and miscellaneous works. Each service is handled with the same focus on accuracy, durability, and practical design.
                     </Paragraph>
 
 
@@ -83,7 +83,7 @@ export default function HeroSwiper() {
                             {slides.map((slide, i) => (
                                 <SwiperSlide key={i}>
                                     <div
-                                        className="h-full rounded-md w-full bg-cover bg-center relative "
+                                        className="h-full rounded-md w-full bg-cover bg-center relative overflow-hidden"
                                         style={{ backgroundImage: `url(${slide.image})` }}
                                     >
                                         <div className="absolute bottom-0 left-1/2  -translate-x-1/2 w-full  text-white bg-(--dark-blue)/80 p-4">

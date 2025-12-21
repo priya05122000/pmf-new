@@ -1,5 +1,5 @@
 "use client";
-import React, { useState, FC, memo } from "react";
+import React, { useState } from "react";
 import Image from "next/image";
 import Paragraph from "@/components/common/Paragraph";
 import Heading from "@/components/common/Heading";
@@ -7,7 +7,7 @@ import Span from "@/components/common/Span";
 import Section from "@/components/common/Section";
 import { useRouter } from "next/navigation";
 
-// Types
+// ProjectCardProps type for reusability
 export interface ProjectCardProps {
   image: string;
   category: string;
@@ -17,7 +17,7 @@ export interface ProjectCardProps {
   date: string;
 }
 
-// Static data
+// Static blog data (move to a separate file if needed)
 export const PROJECTS: ProjectCardProps[] = [
   {
     image: "/home/banner.webp",
@@ -93,51 +93,27 @@ export const PROJECTS: ProjectCardProps[] = [
   },
 ];
 
-// Utility: Get unique categories
+// Utility: Get unique categories from projects
 const getUniqueCategories = (projects: ProjectCardProps[]): string[] => [
   "All",
   ...Array.from(new Set(projects.map((p) => p.category)))
 ];
 
-// CategoryList (reusable, accessible)
-const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void; categories: string[] }> = memo(({ selected, onSelect, categories }) => (
-  <nav aria-label="Project categories" className="flex flex-col gap-1 mb-4 sticky top-28">
-    <div className="bg-(--gray) rounded-md shadow p-4 sticky top-28">
-      <ul className="flex flex-col gap-2 lg:gap-3">
-        {categories.map((cat) => (
-          <li key={cat}>
-            <button
-              className={`w-full text-left px-4 py-2 rounded font-medium transition-colors duration-300 border-none outline-none ${selected === cat
-                ? "bg-(--orange) text-white"
-                : "bg-(--light-blue)/10 text-(--dark-blue) hover:bg-(--orange) hover:text-white cursor-pointer"
-                }`}
-              onClick={() => onSelect(cat)}
-              aria-pressed={selected === cat}
-            >
-              {cat}
-            </button>
-          </li>
-        ))}
-      </ul>
-    </div>
-  </nav>
-));
-
-// ProjectCard (reusable, accessible, optimized)
-const ProjectCard: FC<ProjectCardProps & { onClick: () => void }> = memo(({
+// Reusable ProjectCard component
+const ProjectCard: React.FC<ProjectCardProps & { onClick: () => void }> = React.memo(({
   image,
   tags,
   title,
   description,
   date,
-  onClick,
+  onClick: handleClick,
 }) => (
   <article
     className="rounded-md shadow-none flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-(--orange)"
     aria-label={title}
     tabIndex={0}
-    onClick={onClick}
-    onKeyPress={e => { if (e.key === 'Enter') onClick(); }}
+    onClick={handleClick}
+    onKeyPress={e => { if (e.key === 'Enter') handleClick(); }}
   >
     <div className="overflow-hidden rounded-md">
       <Image
@@ -159,12 +135,12 @@ const ProjectCard: FC<ProjectCardProps & { onClick: () => void }> = memo(({
         </Span>
       ))}
     </div>
-    <Paragraph
-      size="xl"
-      className="font-bold my-2 uppercase text-(--dark-blue)"
+    <Heading
+      level={6}
+      className="font-bold mt-2 mb-2 uppercase text-(--dark-blue)"
     >
       {title}
-    </Paragraph>
+    </Heading>
     <Paragraph size="base" className="mb-2 text-(--dark-blue)">
       {description}
     </Paragraph>
@@ -174,10 +150,13 @@ const ProjectCard: FC<ProjectCardProps & { onClick: () => void }> = memo(({
   </article>
 ));
 
-// ProjectGrid (reusable, accessible)
-const ProjectGrid: FC<{ projects: ProjectCardProps[]; onClick: () => void }> = memo(({ projects, onClick }) => (
+// Reusable ProjectGrid component
+const ProjectGrid: React.FC<{
+  projects: ProjectCardProps[];
+  handleClick: () => void;
+}> = React.memo(({ projects, handleClick }) => (
   <div
-    className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
+    className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-8 lg:mt-10"
     role="list"
     aria-label="Recent project posts"
   >
@@ -185,13 +164,13 @@ const ProjectGrid: FC<{ projects: ProjectCardProps[]; onClick: () => void }> = m
       <ProjectCard
         key={project.title + idx}
         {...project}
-        onClick={onClick}
+        onClick={handleClick}
       />
     ))}
   </div>
 ));
 
-const Projects: FC = () => {
+const Projects: React.FC = () => {
   const router = useRouter();
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
   const categories = getUniqueCategories(PROJECTS);
@@ -206,22 +185,46 @@ const Projects: FC = () => {
 
   return (
     <Section aria-label="Recent Projects">
-      <div className="bg-(--gray) py-10 sm:sm:py-16 lg:py-20  rounded-md">
-        <main>
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-4">
-            {/* Sidebar */}
-            <aside className="">
-              <CategoryList selected={selectedCategory} onSelect={setSelectedCategory} categories={categories} />
-            </aside>
-            {/* Main content */}
-            <main className="sm:col-span-2 lg:col-span-3">
-              <ProjectGrid
-                projects={filteredProjects}
-                onClick={handleClick}
-              />
-            </main>
-          </div>
-        </main>
+      <div className="py-10 sm:sm:py-16 lg:py-20">
+        <div className="flex flex-col md:flex-row gap-8">
+          {/* Sidebar */}
+          <aside className="w-full md:w-1/4 mb-3 lg:mb-0">
+            <div className="bg-white rounded-md shadow p-4 sticky top-28">
+              <Heading
+                level={6}
+                className="mb-4 text-(--dark-blue) uppercase tracking-wide"
+              >
+                Categories
+              </Heading>
+              <nav aria-label="Project categories">
+                <ul className="flex flex-col gap-2 lg:gap-3">
+                  {categories.map((cat) => (
+                    <li key={cat}>
+                      <button
+                        className={`w-full text-left px-4 py-2 rounded font-medium transition-colors duration-300 border-none outline-none ${
+                          selectedCategory === cat
+                            ? "bg-(--orange) text-(--dark-blue)"
+                            : "bg-gray-100 text-(--dark-blue) hover:bg-(--orange)/20"
+                        }`}
+                        onClick={() => setSelectedCategory(cat)}
+                        aria-pressed={selectedCategory === cat}
+                      >
+                        {cat}
+                      </button>
+                    </li>
+                  ))}
+                </ul>
+              </nav>
+            </div>
+          </aside>
+          {/* Main content */}
+          <main className="flex-1">
+            <ProjectGrid
+              projects={filteredProjects}
+              handleClick={handleClick}
+            />
+          </main>
+        </div>
       </div>
     </Section>
   );

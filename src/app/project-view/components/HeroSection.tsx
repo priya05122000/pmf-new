@@ -60,9 +60,9 @@ export default function HeroSection() {
           alt="Brand positioning article image"
           width={1200}
           height={700}
-          className="w-full h-60 sm:h-100 lg:h-120 xl:h-150 object-cover rounded-lg"
+          className="w-full h-60 sm:h-100 lg:h-120 xl:h-150 object-cover rounded-md"
           priority
-          
+
         />
       </div>
 

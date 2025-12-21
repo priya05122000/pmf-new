@@ -40,7 +40,7 @@ const AboutUsBanner: FC<AboutUsBannerProps> = ({
                         {description}
                     </Paragraph>
                     <button>
-                        <span className="inline-block mt-6 px-4 py-2 bg-(--dark-blue) text-white rounded-lg cursor-pointer">
+                        <span className="inline-block mt-6 px-4 py-2 bg-(--dark-blue) text-white rounded-md cursor-pointer">
                             Learn More
                         </span>
                     </button>

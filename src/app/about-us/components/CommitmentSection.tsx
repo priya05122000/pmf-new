@@ -8,7 +8,7 @@ const CommitmentSection = () => {
     <Section className="w-full pt-5 pb-10 lg:pb-20">
       <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
         {/* Image Section */}
-        <div className="relative w-full h-full overflow-hidden rounded-lg">
+        <div className="relative w-full h-full overflow-hidden rounded-md">
           <Image
             src="/home/service1.webp"
             alt="Legal consultation meeting"
