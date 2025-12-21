@@ -21,7 +21,7 @@ const AboutUsBanner: FC<AboutUsBannerProps> = ({
     heading = DEFAULT_HEADING,
     description = DEFAULT_DESCRIPTION,
     backgroundImageUrl = DEFAULT_BG,
-    className = 'h-[90vh] lg:min-h-screen',
+    className = 'h-[60vh]',
     style = {},
 }) => (
     <section
@@ -29,12 +29,12 @@ const AboutUsBanner: FC<AboutUsBannerProps> = ({
         aria-label="Steel Quality Banner"
     >
         <Section
-            className="w-full mb-10 h-[80vh] lg:h-[90vh] bg-cover bg-center rounded-xl bg-fixed relative"
+            className="w-full mb-10 h-full bg-cover bg-center rounded-xl bg-fixed relative"
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
         >
             <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
-            <div className="h-[90vh] w-full flex items-center justify-start relative z-10">
-                <div>
+            <div className="h-[60vh] w-full flex items-center justify-center relative z-10">
+                <div className='text-center'>
                     <Heading level={4} className="text-white">{heading}</Heading>
                     <Paragraph size="base" className="text-white mt-4 max-w-2xl">
                         {description}
