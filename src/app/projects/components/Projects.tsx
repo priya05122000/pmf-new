@@ -133,7 +133,7 @@ const ProjectCard: FC<ProjectCardProps & { onClick: () => void }> = memo(({
   onClick,
 }) => (
   <article
-    className="rounded-md shadow-none flex flex-col cursor-pointer focus:outline-none focus:ring-2 focus:ring-(--orange)"
+    className="rounded-md shadow-none flex flex-col cursor-pointer focus:outline-none"
     aria-label={title}
     tabIndex={0}
     onClick={onClick}

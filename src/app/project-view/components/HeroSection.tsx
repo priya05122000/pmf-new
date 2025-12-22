@@ -6,7 +6,7 @@ import Section from "@/components/common/Section";
 
 export default function HeroSection() {
   return (
-    <Section className="w-full pb-10 lg:pb-20 pt-32">
+    <Section className="w-full pb-6 lg:pb-10 pt-32">
       <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-8 text-left">
         <div>
           <div className="text-xs font-medium uppercase tracking-wide text-(--light-blue) mb-1">
