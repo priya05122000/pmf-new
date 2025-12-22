@@ -139,7 +139,7 @@ const ProductItem: FC<Product> = ({ imageSrc, imageAlt, name, href }) => (
         className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4"
         role="listitem"
     >
-        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
+        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(242,244,245,0.5)] h-56 xl:h-72">
             <Image
                 alt={imageAlt}
                 src={imageSrc}
@@ -200,7 +200,8 @@ const Products: FC = () => (
         <Section>
             <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-0 md:mr-4">
                 <GoDotFill aria-hidden="true" />
-                <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Products</Paragraph>
+                <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Everyday Commercial Use
+                </Paragraph>
             </div>
             <Heading level={4} className="text-(--dark-blue)">Our Products</Heading>
         </Section>
@@ -208,7 +209,7 @@ const Products: FC = () => (
             <ProductSlider products={LOCAL_PRODUCTS} />
         </div>
         <div className="flex justify-end mt-10  px-6 sm:px-4">
-            <a href="/products" className="inline-block rounded-md bg-(--dark-blue) text-white font-semibold px-8 py-2 text-base shadow  transition-colors focus:outline-none ">
+            <a href="/products" className="inline-block rounded-md bg-(--orange) text-white font-semibold px-8 py-2 text-base shadow  transition-colors focus:outline-none ">
                 <Paragraph size="base">View More</Paragraph>
             </a>
         </div>

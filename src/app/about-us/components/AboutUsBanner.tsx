@@ -12,16 +12,16 @@ interface AboutUsBannerProps {
     style?: CSSProperties;
 }
 
-const DEFAULT_HEADING = 'Power Up for Steel Quality';
+const DEFAULT_HEADING = 'Built to Fit. Built to Last.';
 const DEFAULT_DESCRIPTION =
-    'Discover premium refractory solutions designed to enhance steel production efficiency and quality. Our advanced materials ensure durability and optimal performance in the most demanding environments.';
+    'PMF World delivers custom fabrication solutions shaped to the changing needs of modern infrastructure and interior spaces. With advanced manufacturing, every project is finished with lasting strength, clean design, and precise detail.';
 const DEFAULT_BG = "/home/banner.webp";
 
 const AboutUsBanner: FC<AboutUsBannerProps> = ({
     heading = DEFAULT_HEADING,
     description = DEFAULT_DESCRIPTION,
     backgroundImageUrl = DEFAULT_BG,
-    className = 'h-[60vh]',
+    className = 'h-[80vh] sm:h-[70vh]',
     style = {},
 }) => (
     <section
@@ -33,7 +33,7 @@ const AboutUsBanner: FC<AboutUsBannerProps> = ({
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
         >
             <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
-            <div className="h-[60vh] w-full flex items-center justify-center relative z-10">
+            <div className="h-[80vh] sm:h-[70vh] w-full flex items-center justify-center relative z-10">
                 <div className='text-center'>
                     <Heading level={4} className="text-white">{heading}</Heading>
                     <Paragraph size="base" className="text-white mt-4 max-w-2xl">

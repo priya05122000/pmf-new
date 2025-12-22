@@ -57,7 +57,7 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ image, tags, title, descripti
             {tags.map((tag) => (
                 <Span
                     key={tag}
-                    className="bg-(--orange) text-(--dark-blue) font-medium px-3 py-1 rounded mb-2"
+                    className="bg-(--orange) text-(--white) font-medium px-3 py-1 rounded mb-2"
                 >
                     {tag}
                 </Span>
@@ -85,11 +85,11 @@ const RecentProject: React.FC = () => (
             <div>
                 <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  md:mr-4">
                     <GoDotFill aria-hidden="true" />
-                    <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Products</Paragraph>
+                    <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Reliable Solutions</Paragraph>
                 </div>
-                <Heading level={4} className="text-(--dark-blue)">Our Recent Projects</Heading>
+                <Heading level={4} className="text-(--dark-blue)">Our Projects</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
-                    Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
+                    PMF World delivers durable stainless steel solutions, from kitchen and bakery equipment to hotel systems, supermarket displays, and safety handrails, designed for demanding commercial use.
                 </Paragraph>
 
 

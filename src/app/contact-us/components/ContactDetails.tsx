@@ -48,7 +48,7 @@ const ContactDetails = () => {
                 <div className="flex-1 flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">
                         {CONTACTS.map((c) => (
-                            <div key={c.label} className=" rounded-md shadow p-6 flex flex-col items-center text-center gap-2 bg-(--light-blue)/10 text-(--dark-blue)">
+                            <div key={c.label} className=" rounded-md shadow p-6 flex flex-col items-center text-center gap-2 bg-(--orange)/10 text-(--dark-blue)">
                                 <Heading level={4} className=' '>{c.icon}</Heading>
                                 <Paragraph size="base" className="font-semibold">{c.label}</Paragraph>
                                 <Span >{c.value}</Span>

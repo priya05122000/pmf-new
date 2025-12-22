@@ -7,27 +7,27 @@ import { GoDotFill } from 'react-icons/go';
 // Add a static array for the 4 logos
 const SUPPORT_ITEMS = [
     {
-        src: '/home/welder.png',
+        src: '/home/Retail.png',
         heading: 'Retail Chains & Showrooms',
         description: 'Fabrication solutions that support attractive displays and functional retail environments.'
     },
     {
-        src: '/home/welder.png',
+        src: '/home/Commercial.png',
         heading: 'Commercial & Residential Construction',
         description: 'Reliable metalwork designed to meet structural and interior requirements across projects.'
     },
     {
-        src: '/home/welder.png',
+        src: '/home/Healthcare.png',
         heading: 'Healthcare Facilities',
         description: 'Hygienic, durable fabrication suited for hospitals, clinics, and medical spaces.'
     },
     {
-        src: '/home/welder.png',
+        src: '/home/Hospitality.png',
         heading: 'Hospitality & Hotels',
         description: 'Well-finished metal solutions that complement service areas and guest-facing spaces.'
     },
     {
-        src: '/home/welder.png',
+        src: '/home/Industrial.png',
         heading: 'Industrial & Institutional Clients',
         description: 'Robust fabrication work built to handle demanding operational and usage needs.'
     },

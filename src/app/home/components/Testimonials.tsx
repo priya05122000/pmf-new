@@ -26,17 +26,36 @@ export interface TestimonialData {
 // Static testimonials (move to a separate file if needed)
 export const testimonials: TestimonialData[] = [
     {
-        text: "Lorem ipsum dolor sit amet consectetur adipisicing elit. Illum eos debitis possimus incidunt laudantium deleniti, laboriosam commodi et unde ab qui exercitationem harum ut numquam fugit excepturi maiores a quisquam recusandae inventore vitae neque? Nihil nulla totam dignissimos minus labore nostrum voluptates animi vero natus, fugit alias delectus optio nobis.",
-        name: 'John Doe',
-        title: 'CEO, Tech Innovations',
+        text: "PMF World delivered our stainless steel kitchen equipment exactly as promised. The finish, strength, and attention to detail were excellent, and the installation team worked efficiently without disrupting our operations.",
+        name: 'Ahmed Al Maktoum',
+        title: 'Operations Manager, Dubai',
         image: '/home/avatar.jpg',
     },
     {
-        text: "Advisory has been a game-changer for our business. With its comprehensive financial management tools, we've been able to streamline our processes and make more informed decisions. The customer support team is also top-notch.",
-        name: 'John Doe',
-        title: 'CEO, Tech Innovations',
+        text: "We partnered with PMF World for supermarket display equipment, and the results were very satisfying. The layouts were practical, durable, and well suited for daily customer use. Their team understood our retail needs clearly.",
+        name: 'Fatima Noor',
+        title: 'Retail Project Lead, Deira',
         image: '/home/avatar.jpg',
     },
+    {
+        text: "The stainless steel hand rails and barriers supplied by PMF World were sturdy and well designed. Safety standards were met, and the work was completed on schedule with clean finishing throughout the site.",
+        name: 'Rashid Khan',
+        title: 'Facility Supervisor, Al Qusais',
+        image: '/home/avatar.jpg',
+    },
+    {
+        text: "PMF World provided reliable bakery equipment supplies that fit perfectly into our workspace. The equipment is easy to maintain and has held up well under constant use, which is essential for our daily production.",
+        name: 'Suresh Babu',
+        title: 'Bakery Owner, Jumeirah',
+        image: '/home/avatar.jpg',
+    },
+    {
+        text: "Our hotel kitchen equipment was custom-made by PMF World to suit high-volume service. The durability and functional design have made daily kitchen operations smoother for our staff.",
+        name: 'Latha Menon',
+        title: 'Hotel Director, Business Bay',
+        image: '/home/avatar.jpg',
+    }
+
 ];
 
 // Reusable TestimonialCard component
@@ -103,7 +122,7 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
             <div className="flex mt-8 gap-2 px-6 max-w-3xl xl:max-w-4xl mx-auto">
                 <button
                     ref={prevRef}
-                    className="bg-white hover:bg-(--orange) hover:text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                    className="bg-(--orange) text-white hover:bg-(--white) hover:text-(--dark-blue) rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
                     aria-label="Previous testimonial"
                     type="button"
                 >
@@ -111,7 +130,7 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
                 </button>
                 <button
                     ref={nextRef}
-                    className="bg-white hover:bg-(--orange) hover:text-white rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
+                    className="bg-(--orange) text-white hover:bg-(--white) hover:text-(--dark-blue) rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
                     aria-label="Next testimonial"
                     type="button"
                 >
@@ -138,7 +157,7 @@ const Testimonial: FC = () => (
                 </div> */}
                 <Heading level={4} className="text-(--dark-blue)">Our Testimonials</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) mx-auto mt-4 max-w-2xl">
-                    Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
+                    Here’s what our satisfied clients are saying about working with PMF World. From quality craftsmanship to dependable service, their feedback reflects our commitment to lasting results.
                 </Paragraph>
 
 

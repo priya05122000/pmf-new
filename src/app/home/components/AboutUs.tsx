@@ -37,7 +37,7 @@ const StatCard: FC<Stat> = ({ value, label }) => {
             role="region"
             aria-label={label}
         >
-            <Heading level={4} className="font-semibold">
+            <Heading level={4} className="font-bold text-(--orange)">
                 <AnimatedCounter
                     to={number}
                     prefix={prefix}

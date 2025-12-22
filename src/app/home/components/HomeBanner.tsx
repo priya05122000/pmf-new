@@ -42,17 +42,17 @@ const BANNERS: BannerSlide[] = [
 
 const BANNER_ITEMS = [
     {
-        src: "/home/steel.webp",
+        src: "/home/steel.png",
         alt: "Steel Products",
         label: "Products",
     },
     {
-        src: "/home/contact.webp",
+        src: "/home/contact.png",
         alt: "24/7 Support",
         label: "Contact",
     },
     {
-        src: "/home/catalogue.webp",
+        src: "/home/catalogue.png",
         alt: "Catalogue",
         label: "Catalogue",
     },
@@ -66,6 +66,7 @@ const BannerItem: FC<{ src: string; alt: string; label: string; withBorder?: boo
         aria-label={label}
     >
         <Image src={src} alt={alt} width={40} height={40} className="w-10 h-10 object-cover pointer-events-none" priority />
+
         <Paragraph size='base' className="text-center mt-2 pointer-events-none text-white" aria-hidden="true">{label}</Paragraph>
     </div>
 );
@@ -76,7 +77,7 @@ const HomeBanner: FC = () => (
             <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
             {/* Banner Items above the slider */}
             <nav className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-md z-20" aria-label="Quick links">
-                <ul className="flex justify-center sm:w-xl py-4 bg-(--dark-blue)/80 rounded-md">
+                <ul className="flex justify-center sm:w-xl py-4 bg-(--dark-blue)/80 rounded-md backdrop-blur-md bg-blend-overlay">
                     {BANNER_ITEMS.map((item, idx) => (
                         <li key={item.label} className="focus-within:ring-2 focus-within:ring-white rounded-md">
                             <BannerItem {...item} withBorder={idx === 1} />
@@ -102,7 +103,7 @@ const HomeBanner: FC = () => (
                             <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
                             <div className="h-[85vh] w-full flex items-center justify-start relative z-10">
                                 <div className="max-w-2xl">
-                                    <Heading level={4} className="text-white">{slide.heading}</Heading>
+                                    <Heading level={4} className="text-white leading-tight">{slide.heading}</Heading>
                                     <Paragraph size="base" className="text-white
                                      mt-4 ">
                                         {slide.description}

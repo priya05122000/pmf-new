@@ -13,6 +13,7 @@ const footerLinks = [
     { label: "Home", href: "/" },
     { label: "About-us", href: "/about-us" },
     { label: "Products", href: "/products" },
+    { label: "Projects", href: "/projects" },
     { label: "Contact us", href: "/contact-us" },
 ];
 

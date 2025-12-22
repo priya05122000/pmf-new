@@ -1,130 +1,183 @@
-"use client";
+"use client"
 
-import { useRef, useState } from "react";
-import { Swiper, SwiperSlide } from "swiper/react";
-import { Navigation, Controller } from "swiper/modules";
-import type { Swiper as SwiperType } from "swiper";
+import Image from "next/image"
+import { motion, LayoutGroup, AnimatePresence } from "framer-motion"
+import { useState } from "react"
+import CenterSection from "@/components/common/CenterSection"
+import { GoDotFill } from "react-icons/go"
+import Paragraph from "@/components/common/Paragraph"
+import Heading from "@/components/common/Heading"
 
-import "swiper/css";
-import "swiper/css/navigation";
-import Section from "@/components/common/Section";
-import CenterSection from "@/components/common/CenterSection";
-import Heading from "@/components/common/Heading";
-import Paragraph from "@/components/common/Paragraph";
-import { GoDotFill } from "react-icons/go";
+// Service image type
+interface ServiceImage {
+    id: string
+    src: string
+    alt: string
+    title: string
+    description: string
+}
 
-const slides = [
+const SERVICE_IMAGES: ServiceImage[] = [
     {
-        name: "Shaun Matthews",
-        image:
-            "/home/service1.webp",
-        text:
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        id: "1",
+        src: "/home/service1.webp",
+        alt: "Custom kitchen equipment",
+        title: "Custom kitchen equipment",
+        description: "Built-to-order kitchen solutions designed for efficiency, hygiene, and long-term daily use."
     },
     {
-        name: "Alexis Berry",
-        image:
-            "/home/service2.webp",
-        text:
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        id: "2",
+        src: "/home/service2.webp",
+        alt: "Retail displays",
+        title: "Retail displays",
+        description: "Well-crafted display units that enhance product visibility while fitting seamlessly into retail spaces."
     },
     {
-        name: "Billie Pierce",
-        image:
-            "/home/service3.webp",
-        text:
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        id: "3",
+        src: "/home/service3.webp",
+        alt: "Architectural",
+        title: "Architectural",
+        description: "Precision-fabricated steel components that support strong, clean, and dependable building structures."
     },
     {
-        name: "Trevor Copeland",
-        image:
-            "/home/service4.webp",
-        text:
-            "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s.",
+        id: "4",
+        src: "/home/service4.webp",
+        alt: "Miscellaneous",
+        title: "Miscellaneous",
+        description: "Specialized fabrication work tailored to unique requirements that fall outside standard categories."
     },
-];
-export default function HeroSwiper() {
-    const mainRef = useRef<SwiperType | null>(null);
-    const [activeIndex, setActiveIndex] = useState(0);
+    {
+        id: "5",
+        src: "/home/service5.webp",
+        alt: "Other services",
+        title: "Other services",
+        description: "Additional fabrication and support services delivered with the same commitment to quality and reliability."
+    },
+]
+
+
+function ServiceImageCard({ src, alt, layoutId, onClick, priority = false }: {
+    src: string
+    alt: string
+    layoutId: string
+    onClick?: () => void
+    priority?: boolean
+}) {
+    return (
+        <motion.div
+            layoutId={layoutId}
+            className="absolute inset-0"
+            whileHover={onClick ? { scale: 1.05 } : undefined}
+            transition={{ type: "spring", stiffness: 130, damping: 22 }}
+            onClick={onClick}
+            tabIndex={onClick ? 0 : -1}
+            role={onClick ? "button" : undefined}
+            aria-label={alt}
+            style={{ outline: "none" }}
+        >
+            <Image
+                src={src}
+                alt={alt}
+                fill
+                priority={priority}
+                className="object-cover rounded-md"
+                sizes="(max-width: 768px) 100vw, 50vw"
+            />
+        </motion.div>
+    )
+}
+
+export default function Services() {
+    const [images, setImages] = useState<ServiceImage[]>(SERVICE_IMAGES)
+
+    const swap = (i: number) => {
+        if (i === 0) return
+        const copy = [...images]
+            ;[copy[0], copy[i]] = [copy[i], copy[0]]
+        setImages(copy)
+    }
 
     return (
         <CenterSection>
-            <div className="py-10 sm:sm:py-16 lg:py-20">
-                {/* <Heading level={4} className="text-(--dark-blue) text-center">Our Services</Heading>
-                <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
-                    Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
-                </Paragraph> */}
-                <div>
-                    <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  lg:mb-0 md:mr-4">
-                        <GoDotFill aria-hidden="true" />
-                        <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Services</Paragraph>
+            <div className="py-10 sm:py-16 lg:py-20 ">
+                <LayoutGroup>
+                    <div>
+                        <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  lg:mb-0 md:mr-4">
+                            <GoDotFill aria-hidden="true" />
+                            <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Explore</Paragraph>
+                        </div>
+                        <Heading level={4} className="text-(--dark-blue)">Our Categories </Heading>
+                        <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
+                            We cover a wide range of fabrication needs, from custom kitchen equipment and retail displays to architectural and miscellaneous works. Each service is handled with the same focus on accuracy, durability, and practical design.
+                        </Paragraph>
+
+
                     </div>
-                    <Heading level={4} className="text-(--dark-blue)">Our Categories </Heading>
-                    <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
-                        We cover a wide range of fabrication needs, from custom kitchen equipment and retail displays to architectural and miscellaneous works. Each service is handled with the same focus on accuracy, durability, and practical design.
-                    </Paragraph>
-
-
-                </div>
-                <div className="grid grid-cols-1 sm:grid-cols-2 h-[60vh] lg:h-[70vh] w-full overflow-hidden gap-4 mt-10">
-                    {/* Main Slider */}
-
-                    <div className="relative">
-                        <Swiper
-                            modules={[Navigation, Controller]}
-                            onSwiper={(swiper) => (mainRef.current = swiper)}
-                            loop
-                            speed={1000}
-                            navigation={false}
-                            className="h-full"
-                            initialSlide={activeIndex}
-                            onSlideChange={(swiper) => setActiveIndex(swiper.realIndex)}
-                        >
-                            {slides.map((slide, i) => (
-                                <SwiperSlide key={i}>
-                                    <div
-                                        className="h-full rounded-md w-full bg-cover bg-center relative overflow-hidden"
-                                        style={{ backgroundImage: `url(${slide.image})` }}
-                                    >
-                                        <div className="absolute bottom-0 left-1/2  -translate-x-1/2 w-full  text-white bg-(--dark-blue)/80 p-4">
-                                            <Heading level={6} className="font-bold mb-2">
-                                                {slide.name}
-                                            </Heading>
-                                            <Paragraph size="base" className="leading-snug">
-                                                {slide.text}
-                                            </Paragraph>
-                                        </div>
-                                    </div>
-                                </SwiperSlide>
-                            ))}
-                        </Swiper>
-                    </div>
-
-                    {/* Thumbnail / Nav Slider */}
-                    <div className="overflow-y-auto hidden sm:block">
-                        <div className="grid grid-cols-2 gap-4  h-full">
-                            {slides.map((slide, i) => (
-                                <div
-                                    key={i}
-                                    className={`cursor-pointer flex items-center gap-3 `
-                                    }
-                                    onClick={() => {
-                                        setActiveIndex(i);
-                                        mainRef.current?.slideToLoop(i);
-                                    }}
-                                >
-                                    <div
-                                        className="h-full w-full rounded bg-cover bg-center"
-                                        style={{ backgroundImage: `url(${slide.image})` }}
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-6  sm:h-[60vh] mt-10">
+                        {/* MAIN IMAGE */}
+                        {/* MAIN IMAGE */}
+                        <div className="relative h-[50vh] sm:h-[60vh] rounded-md overflow-hidden flex flex-col ">
+                            <div className="relative flex-1 h-full">
+                                <AnimatePresence mode="popLayout">
+                                    <ServiceImageCard
+                                        key={images[0].id}
+                                        src={images[0].src}
+                                        alt={images[0].alt}
+                                        layoutId={images[0].id}
+                                        priority
                                     />
+                                </AnimatePresence>
+                            </div>
+
+                            {/* CONTENT */}
+                            <AnimatePresence mode="wait">
+                                <motion.div
+                                    key={images[0].id + "-content"}
+                                    initial={{ opacity: 0, y: 20 }}
+                                    animate={{ opacity: 1, y: 0 }}
+                                    exit={{ opacity: 0, y: -20 }}
+                                    transition={{ duration: 0.4 }}
+                                    className=" absolute bottom-0 p-4 bg-(--dark-blue)/80 backdrop-blur-md  rounded-md w-4/5 sm:w-2/3 m-4 "
+                                >
+                                    <Heading level={6} className="text-white">
+                                        {images[0].title}
+                                    </Heading>
+                                    <Paragraph size="sm" className="mt-2 text-white">
+                                        {images[0].description}
+                                    </Paragraph>
+                                </motion.div>
+                            </AnimatePresence>
+                        </div>
+
+
+                        {/* THUMB GRID */}
+                        <div className="grid grid-cols-2 gap-4 h-[25vh] sm:h-[60vh]">
+                            {images.slice(1).map((img, i) => (
+                                <div
+                                    key={img.id}
+                                    className="relative rounded-md overflow-hidden cursor-pointer h-full"
+                                    onClick={() => swap(i + 1)}
+                                    tabIndex={0}
+                                    role="button"
+                                    aria-label={`Show ${img.alt}`}
+                                    onKeyDown={e => (e.key === "Enter" || e.key === " ") && swap(i + 1)}
+                                    style={{ outline: "none" }}
+                                >
+                                    <AnimatePresence mode="popLayout">
+                                        <ServiceImageCard
+                                            key={img.id}
+                                            src={img.src}
+                                            alt={img.alt}
+                                            layoutId={img.id}
+                                        />
+                                    </AnimatePresence>
                                 </div>
                             ))}
                         </div>
                     </div>
-                </div>
+                </LayoutGroup>
             </div>
 
         </CenterSection>
-
-    );
+    )
 }

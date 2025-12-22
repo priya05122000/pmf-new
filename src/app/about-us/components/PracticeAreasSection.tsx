@@ -1,84 +1,106 @@
-import { GiScales, GiHandcuffs } from "react-icons/gi";
-import { FaBuilding, FaLandmark } from "react-icons/fa";
 import Section from "@/components/common/Section";
 import Span from "@/components/common/Span";
 import Heading from "@/components/common/Heading";
+import { GoDotFill } from "react-icons/go";
+import Paragraph from "@/components/common/Paragraph";
+import Image from "next/image";
 
 const areas = [
   {
-    title: "Family Law",
-    icon: GiScales,
+    title: "Custom Metal Fabrication",
+    src: "/about-us/metal.png",
+    alt: "Custom metal fabrication",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "Precision fabrication in mild steel and stainless steel, built to match exact client requirements.",
   },
   {
-    title: "Corporate Law",
-    icon: FaBuilding,
+    title: "Retail Fit-Outs",
+    src: "/about-us/retail.png",
+    alt: "Retail fit-outs",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "Functional metal shopfronts, display units, and interior elements that support branding and daily use.",
   },
   {
-    title: "Criminal Law",
-    icon: GiHandcuffs,
+    title: "Construction Solutions",
+    src: "/about-us/construction.png",
+    alt: "Construction solutions",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "Structural steel components including staircases, handrails, frames, and balustrades for building projects.",
   },
   {
-    title: "Immigration Law",
-    icon: FaLandmark,
+    title: "Healthcare & Hospital Projects",
+    src: "/about-us/healthcare.png",
+    alt: "Healthcare projects",
     description:
-      "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore.",
+      "Hygienic stainless steel solutions such as trolleys, sinks, benches, and custom hospital fittings.",
+  },
+  {
+    title: "Hospitality Industry Fabrication",
+    src: "/about-us/industry.png",
+    alt: "Hospitality fabrication",
+    description:
+      "Durable stainless steel kitchen equipment, service counters, and metal features for hotels and restaurants.",
   },
 ];
 
 export default function PracticeAreasSection() {
   return (
     <Section
-      className="relative w-full bg-cover bg-center py-10 sm:sm:py-16 lg:py-20"
-      style={{
-        backgroundImage:
-          "url('/home/banner.webp')",
-      }}
+      className="relative w-full bg-cover bg-center bg-fixed py-10 sm:py-16 lg:py-20"
+      style={{ backgroundImage: `url('/home/banner.webp')` }}
     >
       {/* Overlay */}
-      <div className="absolute inset-0 bg-(--light-blue)/30" />
+      <div
+        className="absolute inset-0 bg-(--light-blue)/30 z-0"
+        aria-hidden="true"
+      />
 
-      <div className="relative">
+      <div className="relative z-10">
         {/* Header */}
         <div className="mb-10">
-          <Span className="text-xs font-semibold tracking-widest text-white">
-            PRACTICE AREAS
-          </Span>
-          <Heading level={4} className="mt-2 text-white">
-            Our Equipments
+          <div className="flex items-center gap-2 text-white ">
+            <GoDotFill />
+            <Paragraph size="base" className="font-medium uppercase">
+              WHAT WE DO
+            </Paragraph>
+          </div>
+
+          <Heading level={4} className="text-white">
+            Our Core Services
           </Heading>
         </div>
 
         {/* Cards */}
-        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {areas.map((area, index) => {
-            const Icon = area.icon;
-            return (
-              <div
-                key={index}
-                className="group flex flex-col items-center border border-white/30 bg-white/5 px-6 py-10 text-center transition-all duration-300 hover:bg-white/10"
-              >
-                <Icon className="h-10 w-10 text-white" />
+        <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-5">
+          {areas.map((area, index) => (
+            <div
+              key={index}
+              className="group flex flex-col justify-between rounded-md border border-(--gray)/30 bg-(--gray)/10 p-4 text-center backdrop-blur-md transition-all duration-300 hover:bg-(--gray)/20"
+            >
+              <div className="flex flex-col items-center">
+                <Image
+                  src={area.src}
+                  alt={area.alt}
+                  width={40}
+                  height={40}
+                  className="w-10 h-10 object-contain pointer-events-none"
+                  priority
+                />
 
-                <h3 className="mt-6 font-serif text-lg font-semibold text-white">
+                <Paragraph size="xl" className="my-4 font-semibold text-white">
                   {area.title}
-                </h3>
+                </Paragraph>
 
-                <p className="mt-4 text-sm leading-relaxed text-white">
+                <Paragraph size="base" className="text-white">
                   {area.description}
-                </p>
-
-                <button className="mt-6 text-sm font-semibold tracking-wide text-(--dark-blue)">
-                  LEARN MORE →
-                </button>
+                </Paragraph>
               </div>
-            );
-          })}
+
+              {/* <button className="mt-4 font-bold tracking-wide text-(--dark-blue)">
+                <Span>LEARN MORE</Span>
+              </button> */}
+            </div>
+          ))}
         </div>
       </div>
     </Section>

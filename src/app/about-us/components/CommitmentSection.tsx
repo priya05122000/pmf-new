@@ -2,11 +2,12 @@ import Image from "next/image";
 import Section from "@/components/common/Section";
 import Heading from "@/components/common/Heading";
 import Paragraph from "@/components/common/Paragraph";
+import CenterSection from "@/components/common/CenterSection";
 
 const CommitmentSection = () => {
   return (
-    <Section className="w-full pt-5 pb-10 lg:pb-20">
-      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 lg:gap-16">
+    <CenterSection className="w-full py-10 sm:py-16 lg:py-20">
+      <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2 ">
         {/* Image Section */}
         <div className="relative w-full h-full overflow-hidden rounded-md">
           <Image
@@ -21,20 +22,16 @@ const CommitmentSection = () => {
 
         {/* Content Section */}
         <div className="flex flex-col justify-center">
-          <Heading level={4} className="leading-tighter text-(--dark-blue)">
-            Committed To Helping <br className="hidden sm:block" />
-            Our Clients Succeed.
+          <Heading level={4} className="text-(--dark-blue)">
+            Our Commitment to Quality
           </Heading>
 
           <Paragraph size="base" className="mt-4 leading-relaxed text-(--dark-blue)">
-            Our client&apos;s success is our top priority, and we strive to
-            deliver exceptional legal support, advocacy, and counsel every step
-            of the way. Trust us to be your reliable legal partner, committed to
-            achieving your goals.
+            At PMF, we create metal fabrication solutions that balance strength, function, and clean design. Each project is handled with care, accuracy, and a clear focus on long-term use. We work closely with clients to deliver results that match their practical needs and expectations.
           </Paragraph>
         </div>
       </div>
-    </Section>
+    </CenterSection>
   );
 };
 

@@ -1,92 +1,110 @@
 "use client";
 import { useState } from "react";
-import { FiChevronDown } from "react-icons/fi";
 import Section from "@/components/common/Section";
 import Heading from "@/components/common/Heading";
-import Span from "@/components/common/Span";
 import Paragraph from "@/components/common/Paragraph";
+import { GoDotFill } from "react-icons/go";
+import { FiChevronDown } from "react-icons/fi";
+import CenterSection from "@/components/common/CenterSection";
 
 const points = [
   {
-    title: "Client-Centered Approach",
+    title: "Dual Material Expertise",
     content:
-      "We prioritize our clients' needs and goals, ensuring personalized legal strategies tailored to each unique situation.",
+      "Skilled fabrication in both mild steel and stainless steel for varied project needs.",
   },
   {
-    title: "Commitment to Communication",
+    title: "Advanced Fabrication Facility",
     content:
-      "We keep you informed at every stage, providing clear, timely updates and always being available to answer your questions.",
+      "Modern equipment and processes ensure accuracy, consistency, and clean finishing.",
   },
   {
-    title: "Strong Negotiation Skills",
+    title: "Safety and Standards Compliance",
     content:
-      "Our team excels at negotiating favorable outcomes, striving to resolve matters efficiently while protecting your interests.",
+      "All work follows strict safety guidelines and recognized industry standards.",
   },
   {
-    title: "Trial-Ready Representation",
+    title: "Timely Delivery, Assured Quality",
     content:
-      "If negotiations fail, we are fully prepared to advocate for you in court with skill and determination.",
+      "Projects are completed on schedule without compromising material or workmanship quality.",
+  },
+  {
+    title: "Complete Project Handling",
+    content:
+      "End-to-end management from design to installation for smooth project execution.",
   },
 ];
 
 export default function Accordion() {
-  const [openIndex, setOpenIndex] = useState<number | null>(null);
+  const [openIndex, setOpenIndex] = useState<number | null>(0);
 
-  const handleToggle = (idx: number) => {
-    setOpenIndex((prev) => (prev === idx ? null : idx));
+  const toggleAccordion = (index: number) => {
+    setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <Section className="w-full py-10 lg:sm:py-16 lg:py-20">
-        <div className="grid grid-cols-1 gap-4 lg:grid-cols-2 lg:gap-20">
-          {/* Left Content */}
-          <div>
-            <Span className="font-semibold uppercase tracking-widest text-(--dark-blue)">
-              We Make A Difference
-            </Span>
-            <Heading level={4} className="mt-2 text-(--dark-blue)">
-              Why Legal Edge LLC?
-            </Heading>
-            <Paragraph className="mt-4 leading-relaxed text-(--dark-blue)">
-              At Legal Edge LLC, we understand that choosing the right legal
-              representation is crucial for achieving successful outcomes in
-              your legal matters. We firmly believe that our firm stands out
-              from the rest for the following reasons.
+    <CenterSection className="w-full py-10 sm:py-16 lg:py-20">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-2 lg:gap-20">
+
+        {/* LEFT CONTENT */}
+        <div>
+          <div className="flex items-center gap-2">
+            <GoDotFill aria-hidden="true" />
+            <Paragraph size="base" className="font-medium uppercase">
+              Built for Commercial Demands
             </Paragraph>
           </div>
-          {/* Right Accordion List */}
-          <div className="flex flex-col divide-y divide-gray-200">
-            {points.map((item, index) => (
-              <div key={index}>
+
+          <Heading level={4} className="text-(--dark-blue)">
+            Why Choose PMF World?
+          </Heading>
+
+          <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-xl">
+            PMF World delivers reliable stainless steel kitchen and hotel kitchen
+            equipment designed for daily commercial use. Our supermarket display
+            equipment and bakery supplies combine strength, hygiene, and
+            practical layout.
+          </Paragraph>
+        </div>
+
+        {/* RIGHT ACCORDION */}
+        <div className="flex flex-col divide-y divide-slate-200">
+          {points.map((item, index) => {
+            const isOpen = openIndex === index;
+
+            return (
+              <div key={index} className="py-1">
                 <button
-                  type="button"
-                  className={`flex w-full cursor-pointer items-center justify-between transition text-(--dark-blue) focus:outline-none ${openIndex === index ? "pt-4 pb-0" : "py-4"}`}
-                  onClick={() => handleToggle(index)}
-                  aria-expanded={openIndex === index}
-                  aria-controls={`accordion-content-${index}`}
-                  id={`accordion-header-${index}`}
+                  onClick={() => toggleAccordion(index)}
+                  className="w-full flex justify-between items-center py-3 text-left cursor-pointer"
                 >
-                  <Paragraph size="base" className="font-medium text-(--dark-blue) text-left">
+                  <span className="font-medium text-slate-800">
                     {item.title}
-                  </Paragraph>
+                  </span>
+
+                  {/* ICON */}
                   <FiChevronDown
-                    className={`h-4 w-4 text-(--dark-blue) transform transition-transform duration-300 ${openIndex === index ? "rotate-180" : "rotate-0"}`}
+                    className={`text-xl text-slate-500 transition-transform duration-300 ease-out
+                      ${isOpen ? "rotate-180" : "rotate-0"}`}
                   />
                 </button>
+
+                {/* CONTENT */}
                 <div
-                  id={`accordion-content-${index}`}
-                  role="region"
-                  aria-labelledby={`accordion-header-${index}`}
-                  className={`overflow-hidden transition-all duration-500 ease-in-out ${openIndex === index ? "max-h-40 opacity-100 py-2" : "max-h-0 opacity-0 py-0"}`}
+                  className={`grid transition-all duration-300 ease-in-out
+                    ${isOpen ? "grid-rows-[1fr] opacity-100" : "grid-rows-[0fr] opacity-0"}`}
                 >
-                  <Span className="text-(--dark-blue) leading-relaxed">
-                    {item.content}
-                  </Span>
+                  <div className="overflow-hidden">
+                    <Paragraph size="sm" className="pb-5 text-slate-500">
+                      {item.content}
+                    </Paragraph>
+                  </div>
                 </div>
               </div>
-            ))}
-          </div>
+            );
+          })}
         </div>
-    </Section>
+      </div>
+    </CenterSection>
   );
 }

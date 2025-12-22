@@ -22,7 +22,7 @@ const NavLink = ({ href, label, isActive, onClick }: { href: string; label: stri
     <li>
         <Link
             href={href}
-            className={`transition-colors duration-200 font-medium  px-2 py-1 rounded focus:outline-none focus-visible:ring-2 focus-visible:ring-(--orange) hover:text-(--orange) ${isActive ? "text-(--orange)" : "text-(--white)"}`}
+            className={`transition-colors duration-200 font-medium  px-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-(--orange) hover:text-(--orange) ${isActive ? "text-(--orange)" : "text-(--white)"}`}
             aria-current={isActive ? "page" : undefined}
             tabIndex={0}
             onClick={onClick}
@@ -44,7 +44,7 @@ const Navbar = () => {
     return (
         <Section>
             <header className="w-full left-0 top-6 fixed z-50 px-6 sm:px-4">
-                <div className="bg-(--dark-blue)/80 shadow-lg rounded-md max-w-full sm:max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-4 h-16">
+                <div className="bg-(--dark-blue)/80 backdrop-blur-md bg-blend-overlay shadow-lg rounded-md max-w-full sm:max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-4 h-16">
                     {/* Logo */}
                     <div className="flex items-center h-16">
                         <Link href="/" className="flex items-center h-full" aria-label="Go to homepage">

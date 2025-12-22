@@ -171,7 +171,7 @@ const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void }> = 
                 {categories.map((cat) => (
                     <li key={cat}>
                         <button
-                            className={`w-full text-left px-4 py-2 rounded font-medium transition-colors duration-300 border-none outline-none ${selected === cat
+                            className={`w-full text-left px-4 py-2 rounded-md font-medium transition-colors duration-300 border-none outline-none ${selected === cat
                                 ? "bg-(--orange) text-white"
                                 : "bg-(--light-blue)/10 text-(--dark-blue) hover:bg-(--orange) hover:text-white cursor-pointer"
                                 }`}
