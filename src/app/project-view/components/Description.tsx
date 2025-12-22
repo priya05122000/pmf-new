@@ -19,7 +19,7 @@ export default function Description() {
   return (
     <Section className="space-y-16">
       {blocks.map((block, blockIdx) => (
-        <div key={blockIdx}>
+        <div key={blockIdx} className="pb-6 lg:pb-10">
           {/* First row: two images, stack on small screens */}
           <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 mb-6">
             <div className="w-full sm:w-1/2">

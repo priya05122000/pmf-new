@@ -20,7 +20,7 @@ const logos = [
 export default function Partners() {
   return (
     <Section
-      className="w-full py-10 lg:sm:py-16 lg:py-20"
+      className="w-full py-10 lg:sm:py-16 lg:py-20 bg-cover bg-no-repeat"
       style={{
         backgroundImage: "url('/home/banner.webp')",
       }}
