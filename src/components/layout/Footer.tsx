@@ -55,7 +55,7 @@ export const Footer = () => {
                                     />
                                 </div>
 
-                                <div className="h-full  block">
+                                <div className="h-full mt-8 sm:mt-0  block">
                                     <Heading
                                         level={6}
                                         className={`leading-none text-(--dark-blue) `}

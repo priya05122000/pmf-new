@@ -69,7 +69,7 @@ const ContactDetails = () => {
                     </div>
                 </div>
                 {/* Right: Contact Form */}
-                <div className="flex-1  px-8 flex flex-col justify-between text-(--dark-blue)">
+                <div className="flex-1  sm:pl-8 flex flex-col justify-between text-(--dark-blue)">
                     <div>
                         <Heading level={4} className="text-(--dark-blue) mb-2">Get In Touch</Heading>
                         <Paragraph size="base" className="">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut elit tellus, luctus nec ullamcorper mattis, pulvinar dapibus leo.</Paragraph>
