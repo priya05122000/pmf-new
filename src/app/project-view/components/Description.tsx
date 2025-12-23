@@ -4,12 +4,12 @@ import Section from "@/components/common/Section";
 
 const blocks = [
   {
-    images: ["/home/banner.webp", "/home/banner.webp", "/home/banner.webp"],
+    images: ["/home/banner.webp", "/home/banner.webp"],
     paragraph:
       "This is a short description for the first set of images. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
   },
   {
-    images: ["/home/banner.webp", "/home/banner.webp", "/home/banner.webp"],
+    images: ["/home/banner.webp", "/home/banner.webp"],
     paragraph:
       "This is a short description for the second set of images. Pellentesque habitant morbi tristique senectus et netus.",
   },
@@ -25,7 +25,7 @@ export default function Description() {
             <div className="w-full sm:w-1/2">
               <Image
                 src={block.images[0]}
-                alt={`Project image ${blockIdx * 3 + 1}`}
+                alt={`Project image ${blockIdx * 2 + 1}`}
                 width={500}
                 height={350}
                 className="rounded-md w-full object-cover"
@@ -35,22 +35,9 @@ export default function Description() {
             <div className="w-full sm:w-1/2 mt-4 sm:mt-0">
               <Image
                 src={block.images[1]}
-                alt={`Project image ${blockIdx * 3 + 2}`}
+                alt={`Project image ${blockIdx * 2 + 2}`}
                 width={500}
                 height={350}
-                className="rounded-md w-full object-cover"
-                sizes="(max-width: 640px) 100vw, 50vw"
-              />
-            </div>
-          </div>
-          {/* Second row: one image centered, full width on mobile, max-w on larger screens */}
-          <div className="flex justify-center mb-6">
-            <div className="w-full sm:w-3/4 md:w-2/3 lg:w-1/2">
-              <Image
-                src={block.images[2]}
-                alt={`Project image ${blockIdx * 3 + 3}`}
-                width={600}
-                height={400}
                 className="rounded-md w-full object-cover"
                 sizes="(max-width: 640px) 100vw, 50vw"
               />
