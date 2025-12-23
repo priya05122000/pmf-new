@@ -42,14 +42,14 @@ export const PROJECTS: ProjectCardProps[] = [
 
 // Reusable ProjectCard component
 const ProjectCard: React.FC<ProjectCardProps> = ({ image, tags, title, description, date }) => (
-    <article className=" rounded-md shadow-none flex flex-col" aria-label={title}>
-        <div className="overflow-hidden rounded-md">
+    <article className=" rounded-md flex flex-col" aria-label={title}>
+        <div className=" ">
             <Image
                 src={image}
                 alt={`Project image for ${title}`}
                 width={350}
                 height={200}
-                className="w-full h-64 object-cover rounded-md"
+                className="w-full h-64 object-cover shadow  rounded-md"
                 loading="lazy"
             />
         </div>
@@ -82,11 +82,11 @@ const ProjectGrid: React.FC<{ blogs: ProjectCardProps[] }> = ({ blogs }) => (
 const RecentProject: React.FC = () => (
     <Section aria-label="Recent Projects">
         <div className="py-10 sm:sm:py-16 lg:py-20 ">
-            <div>
-                <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  md:mr-4">
+            <div className='flex flex-col items-center text-center'>
+                {/* <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50  md:mr-4">
                     <GoDotFill aria-hidden="true" />
                     <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Reliable Solutions</Paragraph>
-                </div>
+                </div> */}
                 <Heading level={4} className="text-(--dark-blue)">Our Projects</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
                     PMF World delivers durable stainless steel solutions, from kitchen and bakery equipment to hotel systems, supermarket displays, and safety handrails, designed for demanding commercial use.

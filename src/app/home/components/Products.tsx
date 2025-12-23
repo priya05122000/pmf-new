@@ -136,30 +136,35 @@ export const LOCAL_PRODUCTS: Product[] = [
 // Reusable ProductItem component
 const ProductItem: FC<Product> = ({ imageSrc, imageAlt, name, href }) => (
     <div
-        className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4"
+        className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4  "
         role="listitem"
     >
-        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(242,244,245,0.5)] h-56 xl:h-72">
-            <Image
-                alt={imageAlt}
-                src={imageSrc}
-                className="w-full h-full rounded-md object-contain"
-                loading="lazy"
-                width={300}
-                height={300}
-                priority={false}
-            />
-        </div>
-        <div className="w-full border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
-            <div>
-                <Paragraph size='base' className="font-medium">
-                    <a href={href} tabIndex={-1}>
-                        <span aria-hidden="true" className="absolute inset-0" />
-                        {name}
-                    </a>
-                </Paragraph>
-            </div>
+        <div className="w-full shadow rounded-md overflow-hidden mb-10">
 
+
+            {/* <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(242,244,245,0.5)] h-56 xl:h-72"> */}
+            <div className="flex justify-around items-center w-full    overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
+                <Image
+                    alt={imageAlt}
+                    src={imageSrc}
+                    className="w-full h-full  object-contain"
+                    loading="lazy"
+                    width={300}
+                    height={300}
+                    priority={false}
+                />
+            </div>
+            <div className="w-full border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+                <div>
+                    <Paragraph size='base' className="font-medium">
+                        <a href={href} tabIndex={-1} className="cursor-pointer">
+                            <span aria-hidden="true" className="absolute inset-0" />
+                            {name}
+                        </a>
+                    </Paragraph>
+                </div>
+
+            </div>
         </div>
     </div>
 );
@@ -208,8 +213,8 @@ const Products: FC = () => (
         <div className="w-full relative mt-10 " role="list" aria-label="Product list">
             <ProductSlider products={LOCAL_PRODUCTS} />
         </div>
-        <div className="flex justify-end mt-10  px-6 sm:px-4">
-            <a href="/products" className="inline-block rounded-md bg-(--orange) text-white font-semibold px-8 py-2 text-base shadow  transition-colors focus:outline-none ">
+        <div className="flex justify-end  px-6 sm:px-4">
+            <a href="/products" className="inline-block rounded-full bg-(--orange) text-white font-semibold px-8 py-2 text-base shadow  transition-colors cursor-pointer focus:outline-none ">
                 <Paragraph size="base">View More</Paragraph>
             </a>
         </div>

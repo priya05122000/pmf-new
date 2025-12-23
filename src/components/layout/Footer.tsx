@@ -67,7 +67,8 @@ export const Footer = () => {
                                             <Link
                                                 key={link.label}
                                                 href={link.href}
-                                                className="text-(--light-blue)  transition-colors"
+                                                className="text-(--light-blue)
+                                                cursor-pointer transition-colors"
                                             >
                                                 <Paragraph size="base" >
                                                     {link.label}

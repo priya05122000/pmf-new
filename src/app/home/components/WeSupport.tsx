@@ -43,9 +43,9 @@ const WeSupport: FC = () => (
             </div>
             {/* Right: Main content */}
             <div className="flex-1">
-                <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 gap-10" role="list">
+                <div className="grid grid-cols-1 md:grid-cols-2  xl:grid-cols-3 gap-4" role="list">
                     {SUPPORT_ITEMS.map((item, i) => (
-                        <div key={i} className="flex flex-col justify-start items-start">
+                        <div key={i} className="flex flex-col justify-start items-start hover:bg-(--dark-blue) hover:text-(--white) rounded-md transition-all duration-200 p-4">
                             <img src={item.src} alt={`Support logo ${i + 1}`} className="h-14 object-contain" />
                             <Paragraph size='xl' className='my-2 font-bold'>{item.heading}</Paragraph>
                             <Paragraph size="base" className='text-justify'>{item.description}</Paragraph>

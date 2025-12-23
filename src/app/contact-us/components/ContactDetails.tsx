@@ -92,9 +92,11 @@ const ContactDetails = () => {
                             <label className="block mb-1" htmlFor="message">Your Message</label>
                             <textarea className="w-full px-4 py-2 bg-(--light-blue)/10 rounded-md focus:outline-none  transition duration-300" rows={4} placeholder="Enter your message" name="message" id="message" defaultValue={""} />
                         </div>
-                        <button className="w-full bg-(--orange) text-white py-2 px-4 rounded-md hover:bg-(--orange)/90 transition duration-300" type="submit">
-                            <Paragraph size='base'>Send Message</Paragraph>
-                        </button>
+                        <div className="flex justify-center">
+                            <button className="bg-(--orange) text-white cursor-pointer py-2 px-4 rounded-full hover:bg-(--orange)/90 transition duration-300" type="submit">
+                                <Paragraph size='base'>Send Message</Paragraph>
+                            </button>
+                        </div>
                     </form>
                 </div>
             </div>

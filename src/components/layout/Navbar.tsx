@@ -22,7 +22,7 @@ const NavLink = ({ href, label, isActive, onClick }: { href: string; label: stri
     <li>
         <Link
             href={href}
-            className={`transition-colors duration-200 font-medium  px-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-(--orange) hover:text-(--orange) ${isActive ? "text-(--orange)" : "text-(--white)"}`}
+            className={`transition-colors cursor-pointer duration-200 font-medium  px-2 py-1 rounded-md focus:outline-none focus-visible:ring-2 focus-visible:ring-(--orange) hover:text-(--orange) ${isActive ? "text-(--orange)" : "text-(--white)"}`}
             aria-current={isActive ? "page" : undefined}
             tabIndex={0}
             onClick={onClick}
@@ -47,7 +47,7 @@ const Navbar = () => {
                 <div className="bg-(--dark-blue)/80 backdrop-blur-md bg-blend-overlay shadow-lg rounded-md max-w-full sm:max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-4 h-16">
                     {/* Logo */}
                     <div className="flex items-center h-16">
-                        <Link href="/" className="flex items-center h-full" aria-label="Go to homepage">
+                        <Link href="/" className="flex items-center cursor-pointer h-full" aria-label="Go to homepage">
                             <Image
                                 src="/logo/pmf-logo.webp"
                                 alt="PMF Logo"
@@ -70,7 +70,7 @@ const Navbar = () => {
 
                     {/* Mobile Hamburger */}
                     <button
-                        className="lg:hidden flex items-center justify-center ml-2 text-(--orange) focus:outline-none focus:ring-2 focus:ring-(--orange)"
+                        className="lg:hidden flex items-center justify-center cursor-pointer ml-2 text-(--orange) focus:outline-none focus:ring-2 focus:ring-(--orange)"
                         aria-label="Open menu"
                         aria-controls="mobile-menu"
                         aria-expanded={menuOpen}
@@ -90,7 +90,7 @@ const Navbar = () => {
                     onKeyDown={handleKeyDown}
                 >
                     <button
-                        className="absolute top-6 right-6 sm:right-8 text-(--orange) focus:outline-none focus:ring-2 focus:ring-(--orange)"
+                        className="absolute cursor-pointer top-6 right-6 sm:right-8 text-(--orange) focus:outline-none focus:ring-2 focus:ring-(--orange)"
                         aria-label="Close menu"
                         onClick={() => setMenuOpen(false)}
                     >

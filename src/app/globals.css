@@ -8,6 +8,7 @@
   --light-blue: #364B64;
   --orange: #E97F4A;
   --gray: #f2f4f5;
+  --light-gray: #dee3e6;
 
 }
 
@@ -18,11 +19,13 @@
   }
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   background-color: #364b6410;
   position: relative;
   min-height: 100vh;
   z-index: 0;
 }
-
-

@@ -60,7 +60,7 @@ export const testimonials: TestimonialData[] = [
 
 // Reusable TestimonialCard component
 const TestimonialCard: FC<TestimonialData> = ({ text, name, title, image }) => (
-    <div className="flex flex-col px-6 justify-center items-center text-white mx-auto" role="group" aria-label={`Testimonial from ${name}`}>
+    <div className="flex flex-col px-4 sm:px-6 justify-center items-center text-(--dark-blue) mx-auto w-full max-w-full" role="group" aria-label={`Testimonial from ${name}`}>
         <Paragraph size="lg" className="font-medium mb-8 text-justify">
             “{text}”
         </Paragraph>
@@ -68,7 +68,7 @@ const TestimonialCard: FC<TestimonialData> = ({ text, name, title, image }) => (
             <img
                 src={image}
                 alt={`Photo of ${name}`}
-                className="w-12 h-12 rounded-full"
+                className="w-12 h-12 rounded-full bg-(--orange) p-0.5"
                 loading="lazy"
                 width={48}
                 height={48}
@@ -102,24 +102,24 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
     }, [swiperInstance]);
 
     return (
-        <div className="w-full h-full bg-(--dark-blue) my-10 py-10 rounded-md">
+        <div className="w-full h-full bg-(--light-gray) my-6 sm:my-10 py-6 sm:py-10 rounded-md">
             <Swiper
                 modules={[Navigation, Autoplay]}
                 loop
                 autoplay={{ delay: 3000, disableOnInteraction: false }}
                 onSwiper={setSwiperInstance}
-                className="max-w-3xl xl:max-w-4xl h-full "
+                className="w-full max-w-full h-full"
                 grabCursor
                 aria-label="Testimonials Carousel"
             >
                 {testimonials.map((t, i) => (
-                    <SwiperSlide key={i}>
+                    <SwiperSlide key={i} className="w-full max-w-full">
                         <TestimonialCard {...t} />
                     </SwiperSlide>
                 ))}
             </Swiper>
             {/* Navigation Buttons */}
-            <div className="flex mt-8 gap-2 px-6 max-w-3xl xl:max-w-4xl mx-auto">
+            <div className="flex mt-6 sm:mt-8 gap-2 px-4 sm:px-6 w-full max-w-full mx-auto">
                 <button
                     ref={prevRef}
                     className="bg-(--orange) text-white hover:bg-(--white) hover:text-(--dark-blue) rounded-full w-8 h-8 flex items-center justify-center cursor-pointer"
@@ -142,29 +142,19 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
 };
 
 const Testimonial: FC = () => (
-    <CenterSection aria-label="Testimonials Section">
-        <div className="py-10 sm:sm:py-16 lg:py-20">
-            {/* <div>
-                <Heading level={4} className="text-(--dark-blue) text-center">Our Testimonials</Heading>
-                <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
-                    Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.
-                </Paragraph>
-            </div> */}
-            <div className="text-center ">
-                {/* <div className="flex flex-row gap-2 justify-center  items-center lg:min-w-20 xl:min-w-50 mb-6 lg:mb-0 md:mr-4">
-                    <GoDotFill aria-hidden="true" />
-                    <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">Testimonials</Paragraph>
-                </div> */}
-                <Heading level={4} className="text-(--dark-blue)">Our Testimonials</Heading>
-                <Paragraph size="base" className="text-(--dark-blue) mx-auto mt-4 max-w-2xl">
+    <Section aria-label="Testimonials Section" className="bg-(--dark-blue)">
+        <div className="py-8 sm:py-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 justify-between w-full max-w-full">
+            <div className="sm:flex-1 text-white min-w-0 w-full max-w-full">
+                <Heading level={4}>Our Testimonials</Heading>
+                <Paragraph size="base" className="mx-auto mt-4 max-w-2xl">
                     Here’s what our satisfied clients are saying about working with PMF World. From quality craftsmanship to dependable service, their feedback reflects our commitment to lasting results.
                 </Paragraph>
-
-
             </div>
-            <TestimonialSlider testimonials={testimonials} />
+            <div className="sm:flex-1 lg:flex-2 min-w-0 w-full max-w-full">
+                <TestimonialSlider testimonials={testimonials} />
+            </div>
         </div>
-    </CenterSection>
+    </Section>
 );
 
 export default Testimonial;

@@ -111,8 +111,9 @@ export const products: Product[] = [
 
 // ProductCard component (reusable, accessible, optimized)
 const ProductCard: React.FC<{ product: Product }> = React.memo(({ product }) => (
-    <article className="group relative" aria-label={product.name} tabIndex={0}>
-        <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
+    <article className="group shadow rounded-md overflow-hidden relative mb-10" aria-label={product.name} tabIndex={0}>
+        <div className="flex justify-around items-center w-full    overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
+            {/* <div className="flex justify-around items-center w-full  rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72"> */}
             <Image
                 alt={product.imageAlt}
                 src={product.imageSrc}
@@ -126,7 +127,7 @@ const ProductCard: React.FC<{ product: Product }> = React.memo(({ product }) => 
         <div className=" border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
             <div>
                 <Paragraph size='lg' className="font-medium">
-                    <a href={product.href} tabIndex={-1}>
+                    <a href={product.href} tabIndex={-1} className='cursor-pointer'>
                         <span aria-hidden="true" className="absolute inset-0" />
                         {product.name}
                     </a>
@@ -171,7 +172,7 @@ const Explore: React.FC = () => {
                             </SwiperSlide>
                         ))}
                     </Swiper>
-                    <div className="flex flex-col items-end mt-4 ">
+                    <div className="flex flex-col items-end ">
                         <Span className="text-(--blue)">Prev/Nxt</Span>
                         <div className="flex items-center space-x-4 mt-2">
                             <button

@@ -133,8 +133,9 @@ export interface Product {
 
 // ProductCard (reusable, accessible, optimized)
 const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
-    <article className="group relative" aria-label={product.name} tabIndex={0}>
-        <div className="flex justify-around items-center w-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72">
+    <article className="group shadow rounded-md overflow-hidden relative" aria-label={product.name} tabIndex={0}>
+        {/* <div className="flex justify-around items-center w-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72"> */}
+        <div className="flex justify-around items-center w-full    overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
             <Image
                 alt={product.imageAlt}
                 src={product.imageSrc}
@@ -147,7 +148,7 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
         </div>
         <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
             <Paragraph size='lg' className="font-medium">
-                <a href={product.href} tabIndex={-1} aria-label={product.name}>
+                <a href={product.href} tabIndex={-1} className="cursor-pointer" aria-label={product.name}>
                     <span aria-hidden="true" className="absolute inset-0" />
                     {product.name}
                 </a>
@@ -171,7 +172,7 @@ const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void }> = 
                 {categories.map((cat) => (
                     <li key={cat}>
                         <button
-                            className={`w-full text-left px-4 py-2 rounded-md font-medium transition-colors duration-300 border-none outline-none ${selected === cat
+                            className={`w-full text-left px-4 py-2 rounded-md font-medium transition-colors duration-300 border-none cursor-pointer outline-none ${selected === cat
                                 ? "bg-(--orange) text-white"
                                 : "bg-(--light-blue)/10 text-(--dark-blue) hover:bg-(--orange) hover:text-white cursor-pointer"
                                 }`}
