@@ -1,14 +1,21 @@
-import React from 'react'
-import Blogs from './components/Projects'
-import BlogBanner from './components/ProjectBanner'
+import Projects from "./components/Projects";
+import ProjectBanner from "./components/ProjectBanner";
+import { getAllProjects } from "@/services/projectService";
+import { getAllProjectCategories } from "@/services/projectCategoryService";
 
-const page = () => {
+export default async function Page() {
+  const [projects, categories] = await Promise.all([
+    getAllProjects(),
+    getAllProjectCategories(),
+  ]);
+
   return (
     <>
-    <BlogBanner />
-    <Blogs />
+      <ProjectBanner />
+      <Projects
+        projects={projects || []}
+        projectCategories={categories || []}
+      />
     </>
-  )
+  );
 }
-
-export default page

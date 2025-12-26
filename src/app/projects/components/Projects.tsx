@@ -1,5 +1,6 @@
 "use client";
-import React, { useState, FC, memo } from "react";
+
+import React, { FC, memo, useMemo, useState } from "react";
 import Image from "next/image";
 import Paragraph from "@/components/common/Paragraph";
 import Heading from "@/components/common/Heading";
@@ -7,198 +8,235 @@ import Span from "@/components/common/Span";
 import Section from "@/components/common/Section";
 import { useRouter } from "next/navigation";
 
-// Types
-export interface ProjectCardProps {
-  image: string;
-  category: string;
-  tags: string[];
-  title: string;
-  description: string;
-  date: string;
+/* ================= TYPES ================= */
+
+interface ProjectCategory {
+  id: string;
+  name: string;
 }
 
-// Static data
-export const PROJECTS: ProjectCardProps[] = [
-  {
-    image: "/home/banner.webp",
-    category: "Travel",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Vlog",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Photography",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Travel",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Gaming",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Fashion",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Sales",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-  {
-    image: "/home/banner.webp",
-    category: "Fashion",
-    tags: ["Travel", "Life style"],
-    title: "LOW COST ADVERTISING",
-    description:
-      "Acres of Diamonds... you've read the famous story, or at least had it related to you A farmer.",
-    date: "31st January, 2018",
-  },
-];
+interface Project {
+  id: string;
+  title: string;
+  projectImagePath: string;
+  longDescription: string;
+  location?: string;
+  category_id: string;
+  active: boolean;
+  updated_at: string;
+}
 
-// Utility: Get unique categories
-const getUniqueCategories = (projects: ProjectCardProps[]): string[] => [
-  "All",
-  ...Array.from(new Set(projects.map((p) => p.category)))
-];
+interface ProjectsProps {
+  projects: Project[];
+  projectCategories: ProjectCategory[];
+}
 
-// CategoryList (reusable, accessible)
-const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void; categories: string[] }> = memo(({ selected, onSelect, categories }) => (
-  <nav aria-label="Project categories" className="flex flex-col gap-1 mb-4 sticky top-28">
+/* ================= HELPERS ================= */
+
+const getImageUrl = (path?: string | null) => {
+  if (!path || path.trim() === "") return null;
+  return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${path}`;
+};
+
+
+const formatDateWithOrdinal = (dateString: string) => {
+  const date = new Date(dateString);
+
+  const day = date.getDate();
+  const year = date.getFullYear();
+  const month = date.toLocaleString("en-US", { month: "long" });
+
+  const getOrdinal = (n: number) => {
+    if (n > 3 && n < 21) return "th";
+    switch (n % 10) {
+      case 1:
+        return "st";
+      case 2:
+        return "nd";
+      case 3:
+        return "rd";
+      default:
+        return "th";
+    }
+  };
+
+  return `${day}${getOrdinal(day)} ${month}, ${year}`;
+};
+
+
+/* ================= CATEGORY LIST ================= */
+
+const CategoryList: FC<{
+  categories: ProjectCategory[];
+  selected: string;
+  onSelect: (id: string) => void;
+}> = ({ categories, selected, onSelect }) => (
+  <nav
+    aria-label="Project categories"
+    className="flex flex-col gap-1 mb-4 sticky top-28"
+  >
     <div className="bg-(--gray) rounded-md shadow p-4 sticky top-28">
       <ul className="flex flex-col gap-2 lg:gap-3">
+        <li>
+          <button
+            onClick={() => onSelect("all")}
+            className={`w-full text-left px-4 py-2 rounded-md font-medium cursor-pointer ${selected === "all"
+              ? "bg-(--orange) text-white"
+              : "bg-(--light-blue)/10 text-(--dark-blue)"
+              }`}
+          >
+            All
+          </button>
+        </li>
+
         {categories.map((cat) => (
-          <li key={cat}>
+          <li key={cat.id}>
             <button
-              className={`w-full text-left px-4 py-2 rounded-md font-medium transition-colors duration-300 cursor-pointer border-none outline-none ${selected === cat
+              onClick={() => onSelect(cat.id)}
+              className={`w-full text-left px-4 py-2 rounded-md cursor-pointer font-medium ${selected === cat.id
                 ? "bg-(--orange) text-white"
-                : "bg-(--light-blue)/10 text-(--dark-blue) hover:bg-(--orange) hover:text-white cursor-pointer"
+                : "bg-(--light-blue)/10 text-(--dark-blue)"
                 }`}
-              onClick={() => onSelect(cat)}
-              aria-pressed={selected === cat}
             >
-              {cat}
+              {cat.name}
             </button>
           </li>
         ))}
       </ul>
     </div>
   </nav>
-));
+);
 
-// ProjectCard (reusable, accessible, optimized)
-const ProjectCard: FC<ProjectCardProps & { onClick: () => void }> = memo(({
-  image,
-  tags,
-  title,
-  description,
-  date,
-  onClick,
-}) => (
-  <article
-    className="rounded-md shadow-none flex flex-col cursor-pointer focus:outline-none"
-    aria-label={title}
-    tabIndex={0}
-    onClick={onClick}
-    onKeyPress={e => { if (e.key === 'Enter') onClick(); }}
-  >
-    <div className="overflow-hidden rounded-md">
-      <Image
-        src={image}
-        alt={`Project image for ${title}`}
-        width={350}
-        height={200}
-        className="w-full h-64 object-cover rounded-md"
-        loading="lazy"
-      />
-    </div>
-    <div className="mt-4 flex gap-1" aria-label="Project tags">
-      {tags.map((tag) => (
-        <Span
-          key={tag}
-          className="bg-(--orange) text-(--dark-blue) font-medium px-3 py-1 rounded-md mb-2"
-        >
-          {tag}
-        </Span>
+/* ================= PROJECT CARD ================= */
+
+const ProjectCard: FC<{
+  project: Project;
+  categoryName?: string;
+  onClick: () => void;
+}> = memo(({ project, categoryName, onClick }) => {
+  const imageUrl = getImageUrl(project.projectImagePath);
+
+  return (
+    <article
+      className="rounded-md shadow-none flex flex-col cursor-pointer focus:outline-none"
+      tabIndex={0}
+      onClick={onClick}
+      onKeyDown={(e) => e.key === "Enter" && onClick()}
+    >
+      <div className="overflow-hidden rounded-md">
+        {imageUrl ? (
+          <Image
+            src={imageUrl}
+            alt={project.title}
+            width={350}
+            height={200}
+            className="w-full h-48 object-cover"
+          />
+        ) : (
+          <div className="flex items-center justify-center bg-(--gray)">
+            No Image
+          </div>
+        )}
+      </div>
+
+      {/* LOCATION + CATEGORY (SAME DESIGN) */}
+      <div className="flex flex-wrap gap-2  mt-4">
+
+        {categoryName && (
+          <Span className="bg-(--orange) text-(--dark-blue) font-medium px-3 py-1 rounded-md">
+            {categoryName}
+          </Span>
+        )}
+        {project.location && (
+          <Span className="bg-(--orange) text-(--dark-blue) font-medium px-3 py-1 rounded-md">
+            {project.location}
+          </Span>
+        )}
+
+      </div>
+
+      <Paragraph
+        size="xl"
+        className="font-bold my-2 uppercase text-(--dark-blue)"
+      >
+        {project.title}
+      </Paragraph>
+
+      <Paragraph size="base" className="mb-2 text-(--dark-blue)">
+        <span
+          dangerouslySetInnerHTML={{
+            __html: project.longDescription,
+          }}
+        />
+      </Paragraph>
+      <Span className="font-medium text-(--dark-blue) mt-auto mb-2 block">
+        {formatDateWithOrdinal(project.updated_at)}
+      </Span>
+    </article>
+  );
+});
+
+/* ================= PROJECT GRID ================= */
+
+const ProjectGrid: FC<{
+  projects: Project[];
+  categoryMap: Record<string, string>;
+  onClick: () => void;
+}> = memo(({ projects, categoryMap, onClick }) => {
+  if (projects.length === 0) {
+    return (
+      <div className="w-full py-20 text-center">
+        <Heading level={4} className="text-(--dark-blue)">
+          No data found
+        </Heading>
+        <Paragraph className="mt-2 text-(--dark-blue)">
+          Please try selecting a different category.
+        </Paragraph>
+      </div>
+    );
+  }
+
+  return (
+    <div
+      className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
+      role="list"
+      aria-label="Recent project posts"
+    >
+      {projects.map((project) => (
+        <ProjectCard
+          key={project.id}
+          project={project}
+          categoryName={categoryMap[project.category_id]}
+          onClick={onClick}
+        />
       ))}
     </div>
-    <Paragraph
-      size="xl"
-      className="font-bold my-2 uppercase text-(--dark-blue)"
-    >
-      {title}
-    </Paragraph>
-    <Paragraph size="base" className="mb-2 text-(--dark-blue)">
-      {description}
-    </Paragraph>
-    <Span className="font-medium text-(--dark-blue) mt-auto mb-2 block">
-      {date}
-    </Span>
-  </article>
-));
+  );
+});
 
-// ProjectGrid (reusable, accessible)
-const ProjectGrid: FC<{ projects: ProjectCardProps[]; onClick: () => void }> = memo(({ projects, onClick }) => (
-  <div
-    className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8"
-    role="list"
-    aria-label="Recent project posts"
-  >
-    {projects.map((project, idx) => (
-      <ProjectCard
-        key={project.title + idx}
-        {...project}
-        onClick={onClick}
-      />
-    ))}
-  </div>
-));
+/* ================= MAIN ================= */
 
-const Projects: FC = () => {
+const Projects: FC<ProjectsProps> = ({
+  projects,
+  projectCategories,
+}) => {
   const router = useRouter();
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
-  const categories = getUniqueCategories(PROJECTS);
+  const [selectedCategory, setSelectedCategory] = useState<string>("all");
+
+  // 🔑 CATEGORY LOOKUP MAP (PROFESSIONAL)
+  const categoryMap = useMemo(() => {
+    return projectCategories.reduce<Record<string, string>>((acc, cat) => {
+      acc[cat.id] = cat.name;
+      return acc;
+    }, {});
+  }, [projectCategories]);
+
   const filteredProjects =
-    selectedCategory === "All"
-      ? PROJECTS
-      : PROJECTS.filter((p) => p.category === selectedCategory);
+    selectedCategory === "all"
+      ? projects
+      : projects.filter(
+        (p) => p.category_id === selectedCategory
+      );
 
   const handleClick = () => {
     router.push("/project-view");
@@ -206,20 +244,26 @@ const Projects: FC = () => {
 
   return (
     <Section aria-label="Recent Projects">
-      <div className="bg-(--gray) py-10 sm:sm:py-16 lg:py-20  rounded-md">
+      <div className="bg-(--gray) py-10 sm:sm:py-16 lg:py-20 rounded-md">
         <main>
           <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-4">
-            {/* Sidebar */}
-            <aside className="">
-              <CategoryList selected={selectedCategory} onSelect={setSelectedCategory} categories={categories} />
+
+            <aside>
+              <CategoryList
+                selected={selectedCategory}
+                onSelect={setSelectedCategory}
+                categories={projectCategories}
+              />
             </aside>
-            {/* Main content */}
+
             <main className="sm:col-span-2 lg:col-span-3">
               <ProjectGrid
                 projects={filteredProjects}
+                categoryMap={categoryMap}
                 onClick={handleClick}
               />
             </main>
+
           </div>
         </main>
       </div>

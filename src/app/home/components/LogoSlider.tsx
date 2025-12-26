@@ -7,34 +7,22 @@ import Image from "next/image";
 import Section from "@/components/common/Section";
 import type { FC } from "react";
 
-// Logo type for type safety
-interface Logo {
+interface Partner {
+    id: string;
+    name: string;
+    logo_url: string;
+    status: boolean;
+}
+
+interface LogoItemProps {
     src: string;
     name: string;
 }
 
-// Static local logos (move to a separate file if needed)
-const LOCAL_LOGOS: Logo[] = [
-    { src: "/clientlogos/c1.webp", name: "PMF" },
-    { src: "/clientlogos/c2.webp", name: "PMF" },
-    { src: "/clientlogos/c3.webp", name: "PMF" },
-    { src: "/clientlogos/c4.webp", name: "PMF" },
-    { src: "/clientlogos/c5.webp", name: "PMF" },
-    { src: "/clientlogos/c6.webp", name: "PMF" },
-    { src: "/clientlogos/c7.webp", name: "PMF" },
-    { src: "/clientlogos/c8.webp", name: "PMF" },
-    { src: "/clientlogos/c9.webp", name: "PMF" },
-    { src: "/clientlogos/c10.webp", name: "PMF" },
-    { src: "/clientlogos/c11.webp", name: "PMF" },
-    { src: "/clientlogos/c12.webp", name: "PMF" },
-    { src: "/clientlogos/c13.webp", name: "PMF" },
-    { src: "/clientlogos/c14.webp", name: "PMF" },
-    { src: "/clientlogos/c15.webp", name: "PMF" },
-    { src: "/clientlogos/c16.webp", name: "PMF" },
-];
+const getLogoSrc = (logoUrl: string) =>
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${logoUrl}`;
 
-// Reusable LogoItem component
-const LogoItem: FC<Logo> = ({ src, name }) => (
+const LogoItem: FC<LogoItemProps> = ({ src, name }) => (
     <div className="flex justify-center items-center h-full w-full">
         <Image
             src={src}
@@ -44,7 +32,6 @@ const LogoItem: FC<Logo> = ({ src, name }) => (
             className="h-16 lg:h-20 object-contain w-full filter grayscale hover:grayscale-0 p-4 transition-all cursor-pointer"
             loading="lazy"
             draggable={false}
-            priority={false}
         />
     </div>
 );
@@ -54,7 +41,6 @@ const swiperSettings = {
     loop: true,
     speed: 500,
     slidesPerView: 6,
-    spaceBetween: 0,
     autoplay: {
         delay: 2000,
         disableOnInteraction: false,
@@ -68,19 +54,33 @@ const swiperSettings = {
     },
 };
 
-const LogoSlider: FC = () => (
-    <Section aria-label="Our Partners" className="bg-(--light-blue)/10 ">
-        <div className="w-full relative py-10">
-            <Swiper {...swiperSettings} >
-            {/* <Swiper {...swiperSettings} className="cursor-grab active:cursor-grabbing"> */}
-                {LOCAL_LOGOS.map((logo, idx) => (
-                    <SwiperSlide key={logo.name + idx} className="flex justify-center items-center">
-                        <LogoItem {...logo} />
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-        </div>
-    </Section>
-);
+interface LogoSliderProps {
+    partners: Partner[];
+}
+
+const LogoSlider: FC<LogoSliderProps> = ({ partners }) => {
+    return (
+        <Section aria-label="Our Partners" className="bg-(--light-blue)/10">
+            <div className="w-full relative py-10">
+                <Swiper {...swiperSettings}>
+                    {partners
+                        .filter((p) => p.status && p.logo_url)
+                        .map((partner) => {
+                            const logoSrc = getLogoSrc(partner.logo_url);
+
+                            return (
+                                <SwiperSlide
+                                    key={partner.id}
+                                    className="flex justify-center items-center"
+                                >
+                                    <LogoItem src={logoSrc} name={partner.name} />
+                                </SwiperSlide>
+                            );
+                        })}
+                </Swiper>
+            </div>
+        </Section>
+    );
+};
 
 export default LogoSlider;

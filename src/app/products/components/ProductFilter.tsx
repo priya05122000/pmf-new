@@ -7,179 +7,97 @@ import Paragraph from '@/components/common/Paragraph';
 import Heading from '@/components/common/Heading';
 import Image from 'next/image';
 
+/* ---------- TYPES ---------- */
 
-
-export const products = [
-    {
-        id: 1,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: '/products/products1.webp',
-        imageAlt: "Front of men's Basic Tee in black.",
-        price: '$35',
-        color: 'Black',
-    },
-    {
-        id: 2,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: '/products/products2.webp',
-        imageAlt: "Front of men's Basic Tee in white.",
-        price: '$35',
-        color: 'Aspen White',
-    },
-    {
-        id: 3,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: '/products/products3.webp',
-        imageAlt: "Front of men's Basic Tee in dark gray.",
-        price: '$35',
-        color: 'Charcoal',
-    },
-    {
-        id: 4,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products4.webp',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 5,
-        name: 'Basic Tee',
-        href: '#',
-        imageSrc: '/products/products5.webp',
-        imageAlt: "Front of men's Basic Tee in dark gray.",
-        price: '$35',
-        color: 'Charcoal',
-    },
-    {
-        id: 6,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products6.webp',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 7,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products7.webp',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 8,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products8.webp',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 9,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products9.webp',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 10,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products10.png',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 11,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products11.png',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-    {
-        id: 12,
-        name: 'Artwork Tee',
-        href: '#',
-        imageSrc: '/products/products12.png',
-        imageAlt: "Front of men's Artwork Tee in peach with white and brown dots forming an isometric cube.",
-        price: '$35',
-        color: 'Iso Dots',
-    },
-];
-
-// Types
-export interface Product {
-    id: number;
+interface Category {
+    id: string;
     name: string;
-    href: string;
-    imageSrc: string;
-    imageAlt: string;
-    price: string;
-    color: string;
 }
 
-// ProductCard (reusable, accessible, optimized)
-const ProductCard: FC<{ product: Product }> = memo(({ product }) => (
-    <article className="group shadow rounded-md overflow-hidden relative" aria-label={product.name} tabIndex={0}>
-        {/* <div className="flex justify-around items-center w-full rounded-t-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)] h-56 xl:h-72"> */}
-        <div className="flex justify-around items-center w-full    overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
-            <Image
-                alt={product.imageAlt}
-                src={product.imageSrc}
-                className="w-full h-full rounded-md object-contain"
-                loading="lazy"
-                width={300}
-                height={300}
-                priority={false}
-            />
-        </div>
-        <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
-            <Paragraph size='lg' className="font-medium">
-                <a href={product.href} tabIndex={-1} className="cursor-pointer" aria-label={product.name}>
-                    <span aria-hidden="true" className="absolute inset-0" />
-                    {product.name}
-                </a>
-            </Paragraph>
-        </div>
-    </article>
-));
+interface Product {
+    id: string;
+    title: string;
+    primary_image_url?: string;
+    category_id: string;
+    active: boolean
+}
 
-// Category List (reusable, accessible)
-const categories = [
-    'All',
-    'Architectural',
-    'Food Processing',
-    'Retail Displays',
-];
 
-const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void }> = ({ selected, onSelect }) => (
+/* ---------- HELPERS ---------- */
+
+const getImageUrl = (primary_image_url?: string | null) => {
+    if (!primary_image_url || primary_image_url.trim() === "") return null;
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${primary_image_url}`;
+};
+
+
+/* ---------- ProductCard (UI SAME) ---------- */
+
+const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
+    const imageUrl = getImageUrl(product.primary_image_url);
+    console.log(imageUrl)
+    return (
+        <article className="group shadow rounded-md overflow-hidden relative" aria-label={product.title} tabIndex={0}>
+            <div className="flex justify-around items-center w-full overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
+                {imageUrl ? (
+                    <Image
+                        alt={product.title}
+                        src={imageUrl}
+                        className="w-full h-full rounded-md object-contain"
+                        width={300}
+                        height={300}
+                        loading="lazy"
+                    />
+                ) : (
+                    /* fallback (optional but recommended) */
+                    <div className="w-full h-full flex items-center justify-center text-sm text-(--light-blue)">
+                        No Image
+                    </div>
+                )}
+            </div>
+            <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+                <Paragraph size='lg' className="font-medium">
+                    {product.title}
+                </Paragraph>
+            </div>
+        </article>
+    )
+});
+
+/* ---------- Category List (UI SAME) ---------- */
+
+const CategoryList: FC<{
+    categories: Category[];
+    selected: string;
+    onSelect: (id: string) => void;
+}> = ({ categories, selected, onSelect }) => (
     <nav aria-label="Product categories" className="flex flex-col gap-1 mb-4 sticky top-28">
         <div className="bg-(--gray) rounded-md shadow p-4 sticky top-28">
             <ul className="flex flex-col gap-2 lg:gap-3">
-                {categories.map((cat) => (
-                    <li key={cat}>
+
+                {/* All */}
+                <li>
+                    <button
+                        onClick={() => onSelect('all')}
+                        className={`w-full text-left px-4 py-2 rounded-md font-medium cursor-pointer ${selected === 'all'
+                            ? "bg-(--orange) text-white"
+                            : "bg-(--light-blue)/10 text-(--dark-blue)"
+                            }`}
+                    >
+                        All
+                    </button>
+                </li>
+
+                {categories.map(cat => (
+                    <li key={cat.id}>
                         <button
-                            className={`w-full text-left px-4 py-2 rounded-md font-medium transition-colors duration-300 border-none cursor-pointer outline-none ${selected === cat
+                            onClick={() => onSelect(cat.id)}
+                            className={`w-full text-left px-4 py-2 rounded-md cursor-pointer font-medium ${selected === cat.id
                                 ? "bg-(--orange) text-white"
-                                : "bg-(--light-blue)/10 text-(--dark-blue) hover:bg-(--orange) hover:text-white cursor-pointer"
+                                : "bg-(--light-blue)/10 text-(--dark-blue)"
                                 }`}
-                            onClick={() => onSelect(cat)}
-                            aria-pressed={selected === cat}
                         >
-                            {cat}
+                            {cat.name}
                         </button>
                     </li>
                 ))}
@@ -188,36 +106,47 @@ const CategoryList: FC<{ selected: string; onSelect: (cat: string) => void }> = 
     </nav>
 );
 
-// Main ProductFilter
-const ProductFilter: FC = () => {
-    const [search, setSearch] = useState("");
-    const [category, setCategory] = useState(categories[0]);
+/* ---------- MAIN COMPONENT ---------- */
 
-    // Filter products by search and category
-    let filteredProducts = products.filter(product => {
-        const matchesSearch = product.name.toLowerCase().includes(search.toLowerCase()) || product.color.toLowerCase().includes(search.toLowerCase());
-        const matchesCategory = category === 'All' || product.name.toLowerCase().includes(category.toLowerCase());
-        return matchesSearch && matchesCategory;
+const ProductFilter: FC<{
+    products: Product[];
+    categories: Category[];
+}> = ({ products, categories }) => {
+
+    const [search, setSearch] = useState("");
+    const [category, setCategory] = useState<string>('all');
+
+    const filteredProducts = products.filter(p => {
+        const matchesSearch =
+            p.title.toLowerCase().includes(search.toLowerCase());
+
+        const matchesCategory =
+            category === 'all' || p.category_id === category;
+
+        const isActive = p.active === true;
+
+
+        return matchesSearch && matchesCategory && isActive;
     });
 
-    // Category-specific filtering
-    if (category === 'Architectural') {
-        filteredProducts = products.filter(p => [1, 2, 3].includes(p.id));
-    } else if (category === 'Food Processing') {
-        filteredProducts = products.filter(p => [4, 5, 6, 7, 8, 9].includes(p.id));
-    } else if (category === 'Retail Displays') {
-        filteredProducts = products.filter(p => [10, 11, 12].includes(p.id));
-    }
-
-    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) =>
+        setSearch(e.target.value);
 
     return (
         <Section>
-            <div className='bg-(--gray) -mt-20  rounded-md'>
+            <div className='bg-(--gray) -mt-20 rounded-md'>
                 <main>
+
+                    {/* HEADER – UI SAME */}
                     <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4 px-4">
-                        <Heading level={4} className="font-bold tracking-tight text-(--dark-blue)">Give All You Need</Heading>
-                        <form className="flex items-center gap-2 w-full max-w-xs rounded-md border border-(--light-blue)/10 pl-2" role="search" aria-label="Search products" onSubmit={e => e.preventDefault()}>
+                        <Heading level={4} className="font-bold tracking-tight text-(--dark-blue)">
+                            Give All You Need
+                        </Heading>
+
+                        <form
+                            className="flex items-center gap-2 w-full max-w-xs rounded-md border border-(--light-blue)/10 pl-2"
+                            onSubmit={e => e.preventDefault()}
+                        >
                             <BiSearch className="size-5 text-(--light-blue)/20" aria-hidden="true" />
                             <input
                                 type="text"
@@ -237,26 +166,33 @@ const ProductFilter: FC = () => {
                             </button>
                         </form>
                     </div>
-                    <section aria-labelledby="products-heading" className="py-10">
+
+                    {/* BODY – UI SAME */}
+                    <section className="py-10">
                         <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-4">
+
                             <div>
-                                <CategoryList selected={category} onSelect={setCategory} />
+                                <CategoryList
+                                    categories={categories}
+                                    selected={category}
+                                    onSelect={setCategory}
+                                />
                             </div>
-                            {/* Product grid */}
+
                             <div className="sm:col-span-2 lg:col-span-3">
-                                <div>
-                                    <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
-                                        {filteredProducts.length > 0 ? (
-                                            filteredProducts.map(product => (
-                                                <ProductCard key={product.id} product={product} />
-                                            ))
-                                        ) : (
-                                            <Paragraph size="lg" className="col-span-full text-center text-(--dark-blue)">No products found.</Paragraph>
-                                        )}
-                                    </div>
-                                    {/* <Pagination /> */}
+                                <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                                    {filteredProducts.length ? (
+                                        filteredProducts.map(p => (
+                                            <ProductCard key={p.id} product={p} />
+                                        ))
+                                    ) : (
+                                        <Paragraph className="col-span-full text-center">
+                                            No products found.
+                                        </Paragraph>
+                                    )}
                                 </div>
                             </div>
+
                         </div>
                     </section>
                 </main>
