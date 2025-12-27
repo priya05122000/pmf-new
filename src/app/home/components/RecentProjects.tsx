@@ -129,10 +129,7 @@ const ProjectGrid: FC<{
 );
 
 
-
-
 /* ================= MAIN ================= */
-
 
 const RecentProject: FC<RecentProjectProps> = ({
     projects,

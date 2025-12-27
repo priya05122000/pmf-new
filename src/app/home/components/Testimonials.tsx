@@ -110,13 +110,19 @@ const TestimonialSlider: FC<{ testimonials: TestimonialData[] }> = ({ testimonia
     );
 };
 
-// Accept testimonials as a prop
-interface TestimonialProps {
-    testimonials: TestimonialData[];
-}
+// Remove testimonials prop from TestimonialProps
+interface TestimonialProps { }
 
-const Testimonial: FC<TestimonialProps> = ({ testimonials }) => {
-    // Remove local fetching and state, use prop instead
+const Testimonial: FC<TestimonialProps> = () => {
+    const [testimonials, setTestimonials] = useState<TestimonialData[]>([]);
+
+    useEffect(() => {
+        getAllTestimonials()
+            .then((data) => {
+                setTestimonials(data);
+            });
+    }, []);
+
     return (
         <Section aria-label="Testimonials Section" className="bg-(--dark-blue)">
             <div className="py-8 sm:py-10 flex flex-col sm:flex-row items-center gap-6 sm:gap-10 justify-between w-full max-w-full">
@@ -128,7 +134,7 @@ const Testimonial: FC<TestimonialProps> = ({ testimonials }) => {
                 </div>
                 <div className="sm:flex-1 lg:flex-2 min-w-0 w-full max-w-full">
                     {testimonials.length === 0 ? (
-                        <Paragraph className="text-center text-white">No testimonials found.</Paragraph>
+                        <Paragraph className="text-center text-white ">No testimonials found.</Paragraph>
                     ) : (
                         <TestimonialSlider testimonials={testimonials} />
                     )}

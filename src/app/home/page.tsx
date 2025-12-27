@@ -11,15 +11,13 @@ import { getAllProducts } from "@/services/productService";
 import { getAllProjects } from "@/services/projectService";
 import { getAllProjectCategories } from "@/services/projectCategoryService";
 import { getAllPartners } from "@/services/partnerService";
-import { getAllTestimonials } from "@/services/testimonialService";
 
 export default async function HomePage() {
-    const [products, projects, categories, partners, testimonials] = await Promise.all([
+    const [products, projects, categories, partners] = await Promise.all([
         getAllProducts(),
         getAllProjects(),
         getAllProjectCategories(),
         getAllPartners(),
-        getAllTestimonials()
     ]);
 
     return (
@@ -34,7 +32,7 @@ export default async function HomePage() {
                 projects={projects || []}
                 projectCategories={categories || []}
             />
-            <Testimonial testimonials={testimonials || []} />
+            <Testimonial  />
         </div>
     );
 }
