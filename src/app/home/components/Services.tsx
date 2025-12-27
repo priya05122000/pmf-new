@@ -11,12 +11,12 @@ import Link from "next/link"
 
 // Service image type
 interface ServiceImage {
-    id: string
-    src: string
-    src1: string
-    alt: string
-    title: string
-    description: string
+    id: string;
+    src: string;
+    src1: string;
+    alt: string;
+    title: string;
+    description: string;
 }
 
 const SERVICE_IMAGES: ServiceImage[] = [
@@ -73,30 +73,30 @@ interface ServiceImageCardProps {
 }
 
 // Reusable ServiceImageCard function
-function ServiceImageCard({ src, alt, layoutId, onClick, priority = false, className = "" }: ServiceImageCardProps) {
-    return (
-        <motion.div
-            layoutId={layoutId}
-            className={className}
-            whileHover={onClick ? { scale: 1.05 } : undefined}
-            transition={{ type: "spring", stiffness: 130, damping: 22 }}
-            onClick={onClick}
-            tabIndex={onClick ? 0 : -1}
-            role={onClick ? "button" : undefined}
-            aria-label={alt}
-            style={{ outline: "none" }}
-        >
-            <Image
-                src={src}
-                alt={alt}
-                fill
-                priority={priority}
-                className="object-cover rounded-md"
-                sizes="(max-width: 768px) 100vw, 50vw"
-            />
-        </motion.div>
-    );
-}
+const ServiceImageCard = ({ src, alt, layoutId, onClick, priority = false, className = "" }: ServiceImageCardProps) => (
+    <motion.div
+        layoutId={layoutId}
+        className={className}
+        whileHover={onClick ? { scale: 1.05 } : undefined}
+        transition={{ type: "spring", stiffness: 130, damping: 22 }}
+        onClick={onClick}
+        tabIndex={onClick ? 0 : -1}
+        role={onClick ? "button" : undefined}
+        aria-label={alt}
+        style={{ outline: "none" }}
+    >
+        <Image
+            src={src}
+            alt={alt}
+            fill
+            priority={priority}
+            className="object-cover rounded-md"
+            sizes="(max-width: 768px) 100vw, 50vw"
+            loading={priority ? undefined : "lazy"}
+            draggable={false}
+        />
+    </motion.div>
+);
 
 export default function Services() {
     const [images, setImages] = useState<ServiceImage[]>(SERVICE_IMAGES);
@@ -142,7 +142,7 @@ export default function Services() {
                                     animate={{ opacity: 1, y: 0 }}
                                     exit={{ opacity: 0, y: -20 }}
                                     transition={{ duration: 0.4 }}
-                                    className="absolute bottom-0 p-4 bg-(--dark-blue)/80 backdrop-blur-md rounded-md w-4/5 sm:w-2/3 m-4"
+                                    className="absolute bottom-0 p-4 bg-(--dark-blue-eight) backdrop-blur-md rounded-md w-4/5 sm:w-2/3 m-4"
                                 >
                                     <Heading level={6} className="text-white">
                                         {images[0].title}

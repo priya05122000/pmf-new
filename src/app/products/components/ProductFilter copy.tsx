@@ -159,7 +159,7 @@ export const products = [
 const ProductCard = ({ product }: { product: typeof products[0] }) => (
     <div key={product.id} className="group relative">
         <div
-            className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue)/10 shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)]  lg:h-72 "
+            className="flex justify-around items-center  w-full h-full rounded-md overflow-hidden p-6 neumorphic-variation2 bg-(--light-blue-one) shadow-[inset_6px_6px_10px_0_rgba(0,0,0,0.1),inset_-6px_-6px_40px_0_rgba(255,255,255,0.5)]  lg:h-72 "
         >
             <img
                 alt={product.imageAlt}
@@ -182,7 +182,7 @@ const ProductCard = ({ product }: { product: typeof products[0] }) => (
             <p className="text-sm font-medium text-(--dark-blue)">{product.price}</p>
         </div>
         <div className='flex justify-between mt-2'>
-            <button className='rounded-md border border-(--light-blue)/20 bg-(--light-blue)/20   py-1 px-4'>Add to Cart</button>
+            <button className='rounded-md border border-(--light-blue-two) bg-(--light-blue-two)   py-1 px-4'>Add to Cart</button>
             <button className='rounded-md  bg-(--dark-blue)  text-white py-1 px-4'>Buy Now</button>
         </div>
     </div>
@@ -276,8 +276,8 @@ const ProductFilter = () => {
                     <div className="flex items-center justify-between py-4 ">
                         <Heading level={4} className=" font-bold tracking-tight text-(--dark-blue)">Give All You Need</Heading>
 
-                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-md border border-(--light-blue)/10  pl-2 ">
-                            <BiSearch className="size-5 text-(--light-blue)/20 " />
+                        <div className="flex items-center gap-2 w-full max-w-xs  rounded-md border border-(--light-blue-one)  pl-2 ">
+                            <BiSearch className="size-5 text-(--light-blue-two) " />
                             <input
                                 type="text"
                                 value={search}

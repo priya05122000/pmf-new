@@ -27,7 +27,7 @@ export default async function Partners() {
       style={{ backgroundImage: "url('/home/banner.webp')" }}
     >
       <div
-        className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0"
+        className="absolute inset-0 bg-(--light-blue-three) rounded-xl z-0"
         aria-hidden="true"
       />
 

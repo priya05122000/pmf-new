@@ -204,7 +204,7 @@ const Projects: React.FC = () => {
                         className={`w-full text-left px-4 py-2 rounded font-medium transition-colors duration-300 border-none outline-none ${
                           selectedCategory === cat
                             ? "bg-(--orange) text-(--dark-blue)"
-                            : "bg-gray-100 text-(--dark-blue) hover:bg-(--orange)/20"
+                            : "bg-gray-100 text-(--dark-blue) hover:bg-(--orange-two)"
                         }`}
                         onClick={() => setSelectedCategory(cat)}
                         aria-pressed={selectedCategory === cat}

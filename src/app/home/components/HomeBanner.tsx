@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useCallback } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
@@ -14,6 +14,15 @@ interface BannerSlide {
     heading: string;
     description: string;
     backgroundImageUrl: string;
+}
+
+interface BannerItemProps {
+    src: string;
+    alt: string;
+    label: string;
+    withBorder?: boolean;
+    priority?: boolean;
+    onClick: () => void;
 }
 
 const BANNERS: BannerSlide[] = [
@@ -48,84 +57,101 @@ const BANNER_ITEMS = [
         src: "/home/steel.png",
         alt: "Steel Products",
         label: "Products",
+        href: "/products",
+        external: false,
     },
     {
         src: "/home/contact.png",
         alt: "24/7 Support",
         label: "Contact",
+        href: "tel:+919500000000",
+        external: true,
     },
     {
         src: "/home/catalogue.png",
         alt: "Catalogue",
         label: "Catalogue",
+        href: "/pdf/catalogue.pdf",
+        external: true,
     },
 ];
 
-function BannerItem({ src, alt, label, withBorder, priority = false }: { src: string; alt: string; label: string; withBorder?: boolean; priority?: boolean }) {
-    const router = useRouter();
-    const handleClick = () => {
-        if (label === "Products") {
-            router.push("/products");
-        } else if (label === "Catalogue") {
-            window.open("/pdf/catalogue.pdf", "_blank", "noopener,noreferrer");
-        } else if (label === "Contact") {
-            window.open("tel:+919500000000"); // Replace with your actual phone number
-        }
-    };
-    return (
-        <button
-            className={`px-4 sm:px-10 py-4 sm:py-6 flex flex-col items-center justify-center cursor-pointer select-none ${withBorder ? ' border-x border-white/20' : ''} transition-colors duration-300 bg-transparent hover:bg-(--light-blue)/50  focus:outline-none`}
-            tabIndex={0}
-            aria-label={label}
-            type="button"
-            onClick={handleClick}
-        >
-            <Image src={src} alt={alt} width={40} height={40} className="w-10 h-10 object-cover" priority={priority} />
-            <Paragraph size='base' className="text-center mt-2 text-white" aria-hidden="true">{label}</Paragraph>
-        </button>
-    );
-}
+const BannerItem: React.FC<BannerItemProps> = React.memo(({ src, alt, label, withBorder, priority = false, onClick }) => (
+    <button
+        className={`px-4 sm:px-10 py-4 sm:py-6 flex flex-col items-center justify-center cursor-pointer select-none${withBorder ? ' border-x border-white/20' : ''} transition-colors duration-300 bg-transparent hover:bg-[rgba(54,75,100,0.5)] focus:outline-none`}
+        tabIndex={0}
+        aria-label={label}
+        type="button"
+        onClick={onClick}
+    >
+        <Image src={src} alt={alt} width={40} height={40} className="w-10 h-10 object-cover" priority={priority} />
+        <Paragraph size='base' className="text-center mt-2 text-white" aria-hidden="true">{label}</Paragraph>
+    </button>
+));
+BannerItem.displayName = "BannerItem";
 
-const HomeBanner = () => (
-    <section className="p-3" aria-label="Steel Quality Banner">
-        <div className="w-full mb-20 h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl relative focus:outline-none" tabIndex={-1}>
-            <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
-            <nav className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-md z-20" aria-label="Quick links">
-                <ul className="flex justify-center sm:w-xl py-4 bg-(--dark-blue)/80 rounded-md backdrop-blur-md bg-blend-overlay">
-                    {BANNER_ITEMS.map((item, idx) => (
-                        <li key={item.label} className=" rounded-md">
-                            <BannerItem {...item} withBorder={idx === 1} priority={idx === 0} />
-                        </li>
-                    ))}
-                </ul>
-            </nav>
-            <Swiper
-                modules={[Autoplay]}
-                className="w-full h-full z-10"
-                loop
-                autoplay={{ delay: 3000, disableOnInteraction: false }}
-                aria-roledescription="carousel"
-                grabCursor
-            >
-                {BANNERS.map((slide, idx) => (
-                    <SwiperSlide key={idx} aria-label={`Slide ${idx + 1}`}>
-                        <Section
-                            className="w-full h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
-                            style={{ backgroundImage: `url('${slide.backgroundImageUrl}')` }}
-                        >
-                            <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
-                            <div className="h-[85vh] w-full flex items-center justify-start relative z-10">
-                                <div className="max-w-2xl">
-                                    <Heading level={4} className="text-white leading-tight">{slide.heading}</Heading>
-                                    <Paragraph size="base" className="text-white mt-4">{slide.description}</Paragraph>
+const HomeBanner: React.FC = () => {
+    const router = useRouter();
+
+    const handleBannerItemClick = useCallback((item: typeof BANNER_ITEMS[number]) => {
+        if (item.external) {
+            if (item.label === "Catalogue") {
+                window.open(item.href, "_blank", "noopener,noreferrer");
+            } else if (item.label === "Contact") {
+                window.open(item.href);
+            }
+        } else {
+            router.push(item.href);
+        }
+    }, [router]);
+
+    return (
+        <section className="p-3" aria-label="Steel Quality Banner">
+            <div className="w-full mb-20 h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl relative focus:outline-none" tabIndex={-1}>
+                <nav className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-md z-20" aria-label="Quick links">
+                    <ul className="flex justify-center sm:w-xl py-4 bg-[rgba(26,37,60,0.8)] rounded-md backdrop-blur-md bg-blend-overlay">
+                        {BANNER_ITEMS.map((item, idx) => (
+                            <li key={item.label} className="rounded-md">
+                                <BannerItem
+                                    src={item.src}
+                                    alt={item.alt}
+                                    label={item.label}
+                                    withBorder={idx === 1}
+                                    priority={idx === 0}
+                                    onClick={() => handleBannerItemClick(item)}
+                                />
+                            </li>
+                        ))}
+                    </ul>
+                </nav>
+                <Swiper
+                    modules={[Autoplay]}
+                    className="w-full h-full z-10"
+                    loop
+                    autoplay={{ delay: 3000, disableOnInteraction: false }}
+                    aria-roledescription="carousel"
+                    grabCursor
+                >
+                    {BANNERS.map((slide, idx) => (
+                        <SwiperSlide key={idx} aria-label={`Slide ${idx + 1}`}>
+                            <Section
+                                className="w-full h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
+                                style={{ backgroundImage: `url('${slide.backgroundImageUrl}')` }}
+                            >
+                                <div className="absolute inset-0 bg-[rgba(54,75,100,0.3)] rounded-xl z-0" aria-hidden="true"></div>
+                                <div className="h-[85vh] w-full flex items-center justify-start relative z-10">
+                                    <div className="max-w-2xl">
+                                        <Heading level={4} className="text-white leading-tight">{slide.heading}</Heading>
+                                        <Paragraph size="base" className="text-white mt-4">{slide.description}</Paragraph>
+                                    </div>
                                 </div>
-                            </div>
-                        </Section>
-                    </SwiperSlide>
-                ))}
-            </Swiper>
-        </div>
-    </section>
-);
+                            </Section>
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            </div>
+        </section>
+    );
+};
 
 export default HomeBanner;

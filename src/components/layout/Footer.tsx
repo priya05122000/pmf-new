@@ -19,7 +19,7 @@ const footerLinks = [
 
 export const Footer = () => {
     return (
-        <footer className="w-full h-[70vh] sm:h-[60vh] lg:h-[70vh] pt-10 bg-(--light-blue)/10  relative overflow-hidden pb-0 flex flex-col  ">
+        <footer className="w-full h-[70vh] sm:h-[60vh] lg:h-[70vh] pt-10 bg-(--light-blue-one)  relative overflow-hidden pb-0 flex flex-col  ">
             <div className="h-full flex  flex-col relative justify-between ">
                 <div>
                     <Section>

@@ -82,7 +82,7 @@ const CategoryList: FC<{
             onClick={() => onSelect("all")}
             className={`w-full text-left px-4 py-2 rounded-md font-medium cursor-pointer ${selected === "all"
               ? "bg-(--orange) text-white"
-              : "bg-(--light-blue)/10 text-(--dark-blue)"
+              : "bg-(--light-blue-one) text-(--dark-blue)"
               }`}
           >
             All
@@ -95,7 +95,7 @@ const CategoryList: FC<{
               onClick={() => onSelect(cat.id)}
               className={`w-full text-left px-4 py-2 rounded-md cursor-pointer font-medium ${selected === cat.id
                 ? "bg-(--orange) text-white"
-                : "bg-(--light-blue)/10 text-(--dark-blue)"
+                : "bg-(--light-blue-one) text-(--dark-blue)"
                 }`}
             >
               {cat.name}
@@ -185,12 +185,9 @@ const ProjectGrid: FC<{
 }> = memo(({ projects, categoryMap, onClick }) => {
   if (projects.length === 0) {
     return (
-      <div className="w-full py-20 text-center">
-        <Heading level={4} className="text-(--dark-blue)">
+      <div className="pb-10 text-center">
+        <Paragraph size="base" className="text-(--dark-blue)">
           No data found
-        </Heading>
-        <Paragraph className="mt-2 text-(--dark-blue)">
-          Please try selecting a different category.
         </Paragraph>
       </div>
     );

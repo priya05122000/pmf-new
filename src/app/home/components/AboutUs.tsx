@@ -1,12 +1,12 @@
+import React, { FC } from 'react';
 import Section from '@/components/common/Section';
 import Paragraph from '@/components/common/Paragraph';
 import Heading from '@/components/common/Heading';
 import AnimatedCounter from '@/components/common/AnimatedCounter';
-import type { FC } from 'react';
 import { GoDotFill } from 'react-icons/go';
 
-// Helper to extract prefix, number, and suffix
-function parseStatValue(value: string) {
+// Helper: Parse stat value into prefix, number, and suffix
+const parseStatValue = (value: string) => {
     const match = value.match(/^([^\d]*)([\d,.]+)(.*)$/);
     if (!match) return { prefix: '', number: 0, suffix: '' };
     return {
@@ -14,13 +14,15 @@ function parseStatValue(value: string) {
         number: parseFloat(match[2].replace(/,/g, '')),
         suffix: match[3] || '',
     };
-}
+};
 
+// Types
 interface Stat {
     value: string;
     label: string;
 }
 
+// Data
 const ABOUT_STATS: Stat[] = [
     { value: '30+', label: 'People' },
     { value: '1015', label: 'Projects' },
@@ -28,16 +30,16 @@ const ABOUT_STATS: Stat[] = [
     { value: '170+', label: 'Clients' },
 ];
 
-// Reusable StatCard component
-const StatCard: FC<Stat> = ({ value, label }) => {
+// Reusable StatCard
+const StatCard: FC<Stat> = React.memo(({ value, label }) => {
     const { prefix, number, suffix } = parseStatValue(value);
     return (
         <div
-            className="pl-4 border-(--dark-blue)/20 border-r-0 border-l"
-            role="region"
+            className="pl-4 border-l border-[rgba(26,37,60,0.2)]"
+            role="listitem"
             aria-label={label}
         >
-            <Heading level={4} className="font-bold text-(--orange)">
+            <Heading level={4} className="font-bold text-[#E97F4A]">
                 <AnimatedCounter
                     to={number}
                     prefix={prefix}
@@ -48,17 +50,16 @@ const StatCard: FC<Stat> = ({ value, label }) => {
             <Paragraph size="base" className="mt-1">{label}</Paragraph>
         </div>
     );
-};
+});
+StatCard.displayName = 'StatCard';
 
 const AboutUs: FC = () => (
     <Section aria-labelledby="about-us-heading">
-        <div className="py-10 sm:sm:py-16 lg:py-20 flex flex-col lg:flex-row md:items-start lg:gap-12 text-(--dark-blue)">
+        <div className="py-10 sm:py-16 lg:py-20 flex flex-col lg:flex-row md:items-start lg:gap-12 text-[#1a253c]">
             {/* Left: Dot and About Us */}
             <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-4 md:mr-4">
-
                 <GoDotFill aria-hidden="true" />
                 <Paragraph size="base" className="font-medium uppercase" id="about-us-heading">ABOUT US</Paragraph>
-
             </div>
             {/* Right: Main content */}
             <div className="flex-1">

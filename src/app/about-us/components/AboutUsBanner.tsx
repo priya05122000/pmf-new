@@ -32,7 +32,7 @@ const AboutUsBanner: FC<AboutUsBannerProps> = ({
             className="w-full mb-10 h-full bg-cover bg-center rounded-xl bg-fixed relative"
             style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
         >
-            <div className="absolute inset-0 bg-(--light-blue)/30 rounded-xl z-0" aria-hidden="true"></div>
+            <div className="absolute inset-0 bg-(--light-blue-three) rounded-xl z-0" aria-hidden="true"></div>
             <div className="h-[80vh] sm:h-[70vh] w-full flex items-center justify-center relative z-10">
                 <div className='text-center'>
                     <Heading level={4} className="text-white">{heading}</Heading>

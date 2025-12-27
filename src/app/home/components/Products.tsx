@@ -60,7 +60,7 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
                         </div>
                     )}
                 </div>
-                <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+                <div className="border-x border-b rounded-b-md p-2 border-(--light-blue-two) text-center">
                     <Paragraph size='lg' className="font-medium">
                         {product.title}
                     </Paragraph>

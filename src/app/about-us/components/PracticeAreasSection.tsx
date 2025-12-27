@@ -51,7 +51,7 @@ export default function PracticeAreasSection() {
     >
       {/* Overlay */}
       <div
-        className="absolute inset-0 bg-(--light-blue)/30 z-0"
+        className="absolute inset-0 bg-(--light-blue-three) z-0"
         aria-hidden="true"
       />
 
@@ -75,7 +75,7 @@ export default function PracticeAreasSection() {
           {areas.map((area, index) => (
             <div
               key={index}
-              className="group flex flex-col justify-between rounded-md border border-(--gray)/30 bg-(--gray)/10 p-4 text-center backdrop-blur-md transition-all duration-300 hover:bg-(--gray)/20"
+              className="group flex flex-col justify-between rounded-md border border-(--gray-three) bg-(--gray-one) p-4 text-center backdrop-blur-md transition-all duration-300 hover:bg-(--gray-two)"
             >
               <div className="flex flex-col items-center">
                 <Image

@@ -86,7 +86,7 @@ export default function HeroSwiper() {
                                         className="h-full rounded-md w-full bg-cover bg-center relative overflow-hidden"
                                         style={{ backgroundImage: `url(${slide.image})` }}
                                     >
-                                        <div className="absolute bottom-0 left-1/2  -translate-x-1/2 w-full  text-white bg-(--dark-blue)/80 p-4">
+                                        <div className="absolute bottom-0 left-1/2  -translate-x-1/2 w-full  text-white bg-(--dark-blue-eight) p-4">
                                             <Heading level={6} className="font-bold mb-2">
                                                 {slide.name}
                                             </Heading>

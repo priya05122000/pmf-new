@@ -55,7 +55,7 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
                     </div>
                 )}
             </div>
-            <div className="border-x border-b rounded-b-md p-2 border-(--light-blue)/20 text-center">
+            <div className="border-x border-b rounded-b-md p-2 border-(--light-blue-two) text-center">
                 <Paragraph size='lg' className="font-medium">
                     {product.title}
                 </Paragraph>
@@ -81,7 +81,7 @@ const CategoryList: FC<{
                         onClick={() => onSelect('all')}
                         className={`w-full text-left px-4 py-2 rounded-md font-medium cursor-pointer ${selected === 'all'
                             ? "bg-(--orange) text-white"
-                            : "bg-(--light-blue)/10 text-(--dark-blue)"
+                            : "bg-(--light-blue-one) text-(--dark-blue)"
                             }`}
                     >
                         All
@@ -94,7 +94,7 @@ const CategoryList: FC<{
                             onClick={() => onSelect(cat.id)}
                             className={`w-full text-left px-4 py-2 rounded-md cursor-pointer font-medium ${selected === cat.id
                                 ? "bg-(--orange) text-white"
-                                : "bg-(--light-blue)/10 text-(--dark-blue)"
+                                : "bg-(--light-blue-one) text-(--dark-blue)"
                                 }`}
                         >
                             {cat.name}
@@ -144,10 +144,10 @@ const ProductFilter: FC<{
                         </Heading>
 
                         <form
-                            className="flex items-center gap-2 w-full max-w-xs rounded-md border border-(--light-blue)/10 pl-2"
+                            className="flex items-center gap-2 w-full max-w-xs rounded-md border border-(--light-blue-one) pl-2"
                             onSubmit={e => e.preventDefault()}
                         >
-                            <BiSearch className="size-5 text-(--light-blue)/20" aria-hidden="true" />
+                            <BiSearch className="size-5 text-(--light-blue-two)" aria-hidden="true" />
                             <input
                                 type="text"
                                 value={search}
