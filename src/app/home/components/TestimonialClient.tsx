@@ -1,16 +1,12 @@
-"use client";
+import Testimonials from "./Testimonials";
+import type { FC } from "react";
 
-import dynamic from "next/dynamic";
-
-const Testimonials = dynamic(
-    () => import("./Testimonials"),
-    { ssr: false }
-);
-
-export default function TestimonialClient({
-    testimonials,
-}: {
+interface TestimonialClientProps {
     testimonials: any[];
-}) {
-    return <Testimonials testimonials={testimonials} />;
 }
+
+const TestimonialClient: FC<TestimonialClientProps> = ({ testimonials }) => {
+    return <Testimonials testimonials={testimonials} />;
+};
+
+export default TestimonialClient;
