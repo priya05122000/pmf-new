@@ -1,7 +1,7 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function createAppoinmentRequest(data: any) {
-    const res = await fetch(`${API_BASE_URL}/api/appointment-request`, {
+    const res = await fetch(`${API_BASE_URL}/api/appointment-request/create`, {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json',
