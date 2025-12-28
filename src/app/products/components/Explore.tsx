@@ -88,54 +88,60 @@ const Explore: FC<{
                             Our Popular Products
                         </Heading>
                     </div>
-                    <Swiper
-                        modules={[Navigation, Autoplay]}
-                        spaceBetween={32}
-                        slidesPerView={4}
-                        loop
-                        grabCursor
-                        navigation={navigation}
-                        autoplay={{ delay: 3000, disableOnInteraction: false }}
-                        breakpoints={{
-                            0: { slidesPerView: 1, spaceBetween: 16 },
-                            640: { slidesPerView: 3, spaceBetween: 24 },
-                            1024: { slidesPerView: 3, spaceBetween: 32 },
-                            1280: { slidesPerView: 4, spaceBetween: 32 },
-                        }}
-                    >
-                        {popularProducts.map((product) => (
-                            <SwiperSlide key={product.id}>
-                                <ProductCard product={product} />
-                            </SwiperSlide>
-                        ))}
-                    </Swiper>
-                    <div className="flex flex-col items-end ">
-                        <Span className="text-(--blue)">Prev/Nxt</Span>
-                        <div className="flex items-center space-x-4 mt-2">
-                            <button
-                                ref={(node) => {
-                                    if (node && navigation.prevEl !== node)
-                                        setNavigation((nav) => ({ ...nav, prevEl: node }));
+                    {popularProducts.length === 0 ? (
+                        <Paragraph size='base' className="text-center text-(--dark-blue)">No data found</Paragraph>
+                    ) : (
+                        <>
+                            <Swiper
+                                modules={[Navigation, Autoplay]}
+                                spaceBetween={32}
+                                slidesPerView={4}
+                                loop
+                                grabCursor
+                                navigation={navigation}
+                                autoplay={{ delay: 3000, disableOnInteraction: false }}
+                                breakpoints={{
+                                    0: { slidesPerView: 1, spaceBetween: 16 },
+                                    640: { slidesPerView: 3, spaceBetween: 24 },
+                                    1024: { slidesPerView: 3, spaceBetween: 32 },
+                                    1280: { slidesPerView: 4, spaceBetween: 32 },
                                 }}
-                                className="text-2xl text-(--blue) focus:outline-none cursor-pointer"
-                                aria-label="Previous"
-                                type="button"
                             >
-                                <CgArrowLongLeft />
-                            </button>
-                            <button
-                                ref={(node) => {
-                                    if (node && navigation.nextEl !== node)
-                                        setNavigation((nav) => ({ ...nav, nextEl: node }));
-                                }}
-                                className="text-2xl text-(--blue) focus:outline-none cursor-pointer"
-                                aria-label="Next"
-                                type="button"
-                            >
-                                <CgArrowLongRight />
-                            </button>
-                        </div>
-                    </div>
+                                {popularProducts.map((product) => (
+                                    <SwiperSlide key={product.id}>
+                                        <ProductCard product={product} />
+                                    </SwiperSlide>
+                                ))}
+                            </Swiper>
+                            <div className="flex flex-col items-end ">
+                                <Span className="text-(--blue)">Prev/Nxt</Span>
+                                <div className="flex items-center space-x-4 mt-2">
+                                    <button
+                                        ref={(node) => {
+                                            if (node && navigation.prevEl !== node)
+                                                setNavigation((nav) => ({ ...nav, prevEl: node }));
+                                        }}
+                                        className="text-2xl text-(--blue) focus:outline-none cursor-pointer"
+                                        aria-label="Previous"
+                                        type="button"
+                                    >
+                                        <CgArrowLongLeft />
+                                    </button>
+                                    <button
+                                        ref={(node) => {
+                                            if (node && navigation.nextEl !== node)
+                                                setNavigation((nav) => ({ ...nav, nextEl: node }));
+                                        }}
+                                        className="text-2xl text-(--blue) focus:outline-none cursor-pointer"
+                                        aria-label="Next"
+                                        type="button"
+                                    >
+                                        <CgArrowLongRight />
+                                    </button>
+                                </div>
+                            </div>
+                        </>
+                    )}
                 </div>
             </Section>
         </div>

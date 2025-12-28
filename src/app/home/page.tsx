@@ -1,7 +1,7 @@
 import HomeBanner from "./components/HomeBanner";
 import AboutUs from "./components/AboutUs";
 import LogoSlider from "./components/LogoSlider";
-import Testimonial from "./components/Testimonials";
+import TestimonialClient from "./components/TestimonialClient";
 import Products from "./components/Products";
 import Services from "./components/Services";
 import WeSupport from "./components/WeSupport";
@@ -34,7 +34,7 @@ export default async function HomePage() {
                 projects={projects || []}
                 projectCategories={categories || []}
             />
-            <Testimonial testimonials={testimonials || []} />
+            <TestimonialClient testimonials={testimonials || []} />
         </div>
     );
 }

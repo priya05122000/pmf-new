@@ -64,7 +64,7 @@ const BANNER_ITEMS = [
         src: "/home/contact.png",
         alt: "24/7 Support",
         label: "Contact",
-        href: "tel:+919500000000",
+        href: "tel:+97165351536",
         external: true,
     },
     {
@@ -78,7 +78,7 @@ const BANNER_ITEMS = [
 
 const BannerItem: React.FC<BannerItemProps> = React.memo(({ src, alt, label, withBorder, priority = false, onClick }) => (
     <button
-        className={`px-4 sm:px-10 py-4 sm:py-6 flex flex-col items-center justify-center cursor-pointer select-none${withBorder ? ' border-x border-white/20' : ''} transition-colors duration-300 bg-transparent hover:bg-[rgba(54,75,100,0.5)] focus:outline-none`}
+        className={`px-4 sm:px-10 py-4 sm:py-6 flex flex-col items-center justify-center cursor-pointer select-none${withBorder ? ' border-x border-white/20' : ''} transition-colors duration-300 bg-transparent hover:bg-(--light-blue-five) focus:outline-none`}
         tabIndex={0}
         aria-label={label}
         type="button"
