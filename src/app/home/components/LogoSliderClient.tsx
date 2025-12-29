@@ -5,7 +5,9 @@ import { Autoplay } from "swiper/modules";
 import "swiper/css";
 import Image from "next/image";
 import type { FC } from "react";
+import { memo } from "react";
 
+// Types
 interface Partner {
     id: string;
     name: string;
@@ -18,10 +20,12 @@ interface LogoItemProps {
     name: string;
 }
 
+// Utility to get logo src
 const getLogoSrc = (logoUrl: string) =>
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${logoUrl}`;
 
-const LogoItem: FC<LogoItemProps> = ({ src, name }) => (
+// Reusable LogoItem component
+const LogoItem: FC<LogoItemProps> = memo(({ src, name }) => (
     <div className="flex justify-center items-center h-full w-full">
         <Image
             src={src}
@@ -31,11 +35,12 @@ const LogoItem: FC<LogoItemProps> = ({ src, name }) => (
             className="h-16 lg:h-20 object-contain w-full filter grayscale hover:grayscale-0 p-4 transition-all cursor-pointer"
             loading="lazy"
             draggable={false}
-            aria-label={name}
         />
     </div>
-);
+));
+LogoItem.displayName = "LogoItem";
 
+// Swiper settings
 const swiperSettings = {
     modules: [Autoplay],
     loop: true,

@@ -1,4 +1,4 @@
-import React, { FC } from 'react';
+import React, { FC, memo } from 'react';
 import Section from '@/components/common/Section';
 import Paragraph from '@/components/common/Paragraph';
 import Heading from '@/components/common/Heading';
@@ -31,7 +31,7 @@ const ABOUT_STATS: Stat[] = [
 ];
 
 // Reusable StatCard
-const StatCard: FC<Stat> = React.memo(({ value, label }) => {
+const StatCard: FC<Stat> = memo(({ value, label }) => {
     const { prefix, number, suffix } = parseStatValue(value);
     return (
         <div

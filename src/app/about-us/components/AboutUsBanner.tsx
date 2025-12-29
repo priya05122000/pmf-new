@@ -3,6 +3,7 @@ import Paragraph from '@/components/common/Paragraph';
 import Section from '@/components/common/Section';
 import Image from 'next/image';
 import type { FC, CSSProperties } from 'react';
+import Banner from '@/components/common/Banner';
 
 interface AboutUsBannerProps {
     heading?: string;
@@ -24,25 +25,15 @@ const AboutUsBanner: FC<AboutUsBannerProps> = ({
     className = 'h-[80vh] sm:h-[70vh]',
     style = {},
 }) => (
-    <section
-        className={`p-3 ${className}`.trim()}
-        aria-label="Steel Quality Banner"
-    >
-        <Section
-            className="w-full mb-10 h-full bg-cover bg-center rounded-xl bg-fixed relative"
-            style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
-        >
-            <div className="absolute inset-0 bg-(--light-blue-three) rounded-xl z-0" aria-hidden="true"></div>
-            <div className="h-[80vh] sm:h-[70vh] w-full flex items-center justify-center relative z-10">
-                <div className='text-center'>
-                    <Heading level={4} className="text-white">{heading}</Heading>
-                    <Paragraph size="base" className="text-white mt-4 max-w-2xl">
-                        {description}
-                    </Paragraph>
-                </div>
-            </div>
-        </Section>
-    </section>
+    <Banner
+        heading={heading}
+        description={description}
+        backgroundImageUrl={backgroundImageUrl}
+        className={className}
+        style={style}
+        headingClassName="text-white"
+        descriptionClassName="text-white mt-4 max-w-2xl"
+    />
 );
 
 export default AboutUsBanner;

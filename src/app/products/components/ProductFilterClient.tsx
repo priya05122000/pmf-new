@@ -8,6 +8,7 @@ import Image from 'next/image';
 import CategoryList from '@/components/common/CategoryList';
 import Section from '@/components/common/Section';
 
+// Types
 interface Category {
     id: string;
     name: string;
@@ -21,11 +22,13 @@ interface Product {
     active: boolean;
 }
 
+// Utility for image url
 const getImageUrl = (primary_image_url?: string | null) => {
     if (!primary_image_url || primary_image_url.trim() === "") return null;
     return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${primary_image_url}`;
 };
 
+// Reusable Product Card
 const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
     const imageUrl = getImageUrl(product.primary_image_url);
     return (
@@ -54,6 +57,7 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
         </article>
     );
 });
+ProductCard.displayName = 'ProductCard';
 
 const ProductFilterClient: FC<{
     products: Product[];
@@ -63,20 +67,17 @@ const ProductFilterClient: FC<{
     const [category, setCategory] = useState<string>('all');
 
     const filteredProducts = products.filter(p => {
-        const matchesSearch =
-            p.title.toLowerCase().includes(search.toLowerCase());
-        const matchesCategory =
-            category === 'all' || p.category_id === category;
+        const matchesSearch = p.title.toLowerCase().includes(search.toLowerCase());
+        const matchesCategory = category === 'all' || p.category_id === category;
         const isActive = p.active === true;
         return matchesSearch && matchesCategory && isActive;
     });
 
-    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) =>
-        setSearch(e.target.value);
+    const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
 
     return (
         <>
-            {/* HEADER – UI SAME */}
+            {/* HEADER */}
             <div className="flex flex-col md:flex-row items-center justify-between py-4 gap-4 px-4">
                 <Heading level={4} className="font-bold tracking-tight text-(--dark-blue)">
                     Give All You Need
@@ -84,6 +85,8 @@ const ProductFilterClient: FC<{
                 <form
                     className="flex items-center gap-2 w-full max-w-xs rounded-md border border-(--light-blue-one) pl-2"
                     onSubmit={e => e.preventDefault()}
+                    role="search"
+                    aria-label="Product Search"
                 >
                     <BiSearch className="size-5 text-(--light-blue-two)" aria-hidden="true" />
                     <input
@@ -104,7 +107,7 @@ const ProductFilterClient: FC<{
                     </button>
                 </form>
             </div>
-            {/* BODY – UI SAME */}
+            {/* BODY */}
             <section className="py-10">
                 <div className="grid grid-cols-1 sm:grid-cols-3 gap-x-8 gap-y-10 lg:grid-cols-4">
                     <div>
@@ -115,13 +118,13 @@ const ProductFilterClient: FC<{
                         />
                     </div>
                     <div className="sm:col-span-2 lg:col-span-3">
-                        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3">
+                        <div className="grid grid-cols-1 gap-x-6 gap-y-10 sm:grid-cols-2 lg:grid-cols-3" role="list" aria-label="Product List">
                             {filteredProducts.length ? (
                                 filteredProducts.map(p => (
                                     <ProductCard key={p.id} product={p} />
                                 ))
                             ) : (
-                                <Paragraph className=" col-span-full text-center">
+                                <Paragraph className="col-span-full text-center">
                                     No products found.
                                 </Paragraph>
                             )}

@@ -70,7 +70,7 @@ const CommonEnquiryFields: React.FC<CommonEnquiryFieldsProps> = ({
                 name="message"
                 value={formData.message}
                 onChange={handleChange}
-                rows={2}
+                rows={3}
                 required={false}
             />
             <div className="flex justify-end mt-4">
@@ -84,26 +84,11 @@ const CommonEnquiryFields: React.FC<CommonEnquiryFieldsProps> = ({
 const SubmitButton: React.FC<{ loading?: boolean; submitText?: string }> = ({ loading, submitText }) => (
     <button
         type="submit"
-        className="relative flex justify-center items-center rounded-full bg-transparent overflow-hidden cursor-pointer border border-(--yellow) group transition-all duration-300 min-w-[110px]"
+        className="bg-(--orange) text-white cursor-pointer py-2 px-4 rounded-full hover:bg-(--orange-nine) transition duration-300 min-w-28"
         disabled={loading}
         style={loading ? { pointerEvents: 'none', opacity: 0.7 } : {}}
     >
-        <span className="relative z-20 text-center no-underline w-full px-2 py-1 text-(--yellow) text-base transition-all duration-300 group-hover:text-(--blue)">{loading ? "Submitting..." : submitText}</span>
-        <span className="absolute left-0 top-0 w-full h-0 bg-(--yellow) transition-all duration-300 ease-in-out group-hover:h-full group-hover:top-auto group-hover:bottom-0 z-10" />
-    </button>
-);
-
-const DownloadBrochureButton: React.FC<{ loading?: boolean }> = ({ loading }) => (
-    <button
-        type="submit"
-        className="relative flex justify-center items-center gap-1 rounded bg-(--yellow) overflow-hidden cursor-pointer border border-(--yellow) group transition-all duration-300 px-4 py-1"
-        disabled={loading}
-        style={loading ? { pointerEvents: 'none', opacity: 0.7 } : {}}
-    >
-        <span className="relative z-20 gap-x-1 flex items-center text-center no-underline w-full text-(--blue) transition-all duration-300 group-hover:text-(--yellow)">
-            {loading ? "Downloading Brochure..." : "Download Brochure"} <GoDownload />
-        </span>
-        <span className="absolute left-0 top-0 w-full h-0 bg-(--blue) transition-all duration-300 ease-in-out group-hover:h-full group-hover:top-auto group-hover:bottom-0 z-10" />
+        <Paragraph size='base'>{loading ? "Submitting..." : submitText}</Paragraph>
     </button>
 );
 

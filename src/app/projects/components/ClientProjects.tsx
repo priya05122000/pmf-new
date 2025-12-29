@@ -66,6 +66,8 @@ const ProjectCard: FC<{
       tabIndex={0}
       onClick={onClick}
       onKeyDown={(e) => e.key === "Enter" && onClick()}
+      aria-label={project.title}
+      role="listitem"
     >
       <div className="overflow-hidden rounded-md">
         {imageUrl ? (
@@ -75,12 +77,13 @@ const ProjectCard: FC<{
             width={350}
             height={200}
             className="w-full h-48 object-cover"
+            loading="lazy"
           />
         ) : (
-          <div className="flex items-center justify-center bg-(--gray)">No Image</div>
+          <div className="flex items-center justify-center bg-(--gray) w-full h-48">No Image</div>
         )}
       </div>
-      <div className="flex flex-wrap gap-2  mt-4">
+      <div className="flex flex-wrap gap-2 mt-4">
         {categoryName && (
           <Span className="bg-(--orange) text-(--dark-blue) font-medium px-3 py-1 rounded-md">
             {categoryName}
@@ -98,6 +101,7 @@ const ProjectCard: FC<{
     </article>
   );
 });
+ProjectCard.displayName = 'ProjectCard';
 
 const ProjectGrid: FC<{
   projects: Project[];
@@ -124,6 +128,7 @@ const ProjectGrid: FC<{
     </div>
   );
 });
+ProjectGrid.displayName = 'ProjectGrid';
 
 const ClientProjects: FC<ProjectsProps> = ({ projects, projectCategories }) => {
   const router = useRouter();

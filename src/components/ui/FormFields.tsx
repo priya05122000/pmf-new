@@ -18,44 +18,20 @@ export const InputField: React.FC<InputFieldProps> = ({
   onChange,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [internalValue, setInternalValue] = useState("");
   const inputId =
     id ||
     (label ? `input-${label.replace(/\s+/g, "-").toLowerCase()}` : undefined);
-  const showFloating = isFocused || Boolean(value ?? internalValue);
 
-  const handleFocus = (e: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocused(true);
-    props.onFocus?.(e);
-  };
-  const handleBlur = (e: React.FocusEvent<HTMLInputElement>) => {
-    setIsFocused(false);
-    props.onBlur?.(e);
-  };
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     if (value === undefined) setInternalValue(e.target.value);
     onChange?.(e);
   };
 
   return (
-    <div className="relative w-full ">
+    <div className="mb-3 w-full">
       {label && (
-        <label
-          htmlFor={inputId}
-          className={`absolute left-0 transition-all duration-200 z-10 pointer-events-none
-            ${showFloating
-              ? `-top-2 text-base ${className.includes("text-(--blue)")
-                ? "text-(--blue)"
-                : "text-(--white-custom)"
-              }`
-              : `top-3  xl:top-5 ${className.includes("text-(--blue)")
-                ? "text-(--blue)"
-                : "text-(--white-custom)"
-              } text-base`
-            }
-          `}
-        >
+        <label className="block mb-1" htmlFor={inputId}>
           {label}
         </label>
       )}
@@ -64,10 +40,7 @@ export const InputField: React.FC<InputFieldProps> = ({
         {...props}
         value={value ?? internalValue}
         onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        className={`${baseInputClass} ${className} ${label ? "pt-5" : ""
-          }`}
+        className={`w-full px-4 py-2 bg-(--light-blue-one) rounded-md focus:outline-none transition duration-300 ${className}`}
         autoComplete={props.autoComplete || "off"}
       />
     </div>
@@ -93,50 +66,24 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
   onChange,
   ...props
 }) => {
-  const [isFocused, setIsFocused] = useState(false);
   const [internalValue, setInternalValue] = useState("");
   const textAreaId =
     id ||
-    (label
-      ? `textarea-${label.replace(/\s+/g, "-").toLowerCase()}`
-      : undefined);
-  const showFloating = isFocused || Boolean(value ?? internalValue);
+    (label ? `textarea-${label.replace(/\s+/g, "-").toLowerCase()}` : undefined);
 
-  const handleFocus = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    setIsFocused(true);
-    props.onFocus?.(e);
-  };
-  const handleBlur = (e: React.FocusEvent<HTMLTextAreaElement>) => {
-    setIsFocused(false);
-    props.onBlur?.(e);
-  };
   const handleChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
     if (value === undefined) setInternalValue(e.target.value);
     onChange?.(e);
   };
 
-  const borderClass = className.includes("text-(--blue)")
-    ? "border-blue-custom"
-    : "border-white-custom";
+  // Ensure autoComplete is a string
+  const autoCompleteValue =
+    typeof props.autoComplete === "string" ? props.autoComplete : "off";
 
   return (
-    <div className="relative w-full">
+    <div className="mb-3 w-full">
       {label && (
-        <label
-          htmlFor={textAreaId}
-          className={`absolute left-0 transition-all duration-200 z-10 pointer-events-none
-            ${showFloating
-              ? `-top-3 text-base ${className.includes("text-(--blue)")
-                ? "text-(--blue)"
-                : "text-(--white-custom)"
-              }`
-              : `top-3 xl:top-5 ${className.includes("text-(--blue)")
-                ? "text-(--blue)"
-                : "text-(--white-custom)"
-              } text-base`
-            }
-          `}
-        >
+        <label className="block mb-1" htmlFor={textAreaId}>
           {label}
         </label>
       )}
@@ -145,11 +92,9 @@ export const TextAreaField: React.FC<TextAreaFieldProps> = ({
         {...props}
         value={value ?? internalValue}
         onChange={handleChange}
-        onFocus={handleFocus}
-        onBlur={handleBlur}
-        className={`${baseTextAreaClass} border-b ${borderClass} ${className} ${label ? "pt-5" : ""}`}
-        autoComplete={props.autoComplete || "off"}
+        className={`w-full px-4 py-2 bg-(--light-blue-one) rounded-md focus:outline-none transition duration-300 ${className}`}
+        autoComplete={autoCompleteValue}
       />
     </div>
   );
-}
+};

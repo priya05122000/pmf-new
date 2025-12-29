@@ -5,6 +5,7 @@ import Heading from "@/components/common/Heading";
 import Span from "@/components/common/Span";
 import Section from "@/components/common/Section";
 
+// Types
 interface ProjectCategory {
     id: string;
     name: string;
@@ -26,9 +27,11 @@ interface RecentProjectProps {
     projectCategories: ProjectCategory[];
 }
 
+// Utility: get image url
 const getImageUrl = (path?: string | null) =>
     path ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${path}` : null;
 
+// Utility: format date with ordinal
 const formatDateWithOrdinal = (dateString: string) => {
     const date = new Date(dateString);
     const day = date.getDate();
@@ -41,13 +44,14 @@ const formatDateWithOrdinal = (dateString: string) => {
     return `${day}${ordinal(day)} ${month}, ${year}`;
 };
 
+// Reusable ProjectCard
 const ProjectCard: FC<{
     project: Project;
     categoryName?: string;
 }> = memo(({ project, categoryName }) => {
     const imageUrl = getImageUrl(project.projectImagePath);
     return (
-        <article className="rounded-md flex flex-col">
+        <article className="rounded-md flex flex-col" role="listitem" aria-label={project.title} tabIndex={0}>
             <div className="overflow-hidden rounded-md">
                 {imageUrl ? (
                     <Image
@@ -56,6 +60,8 @@ const ProjectCard: FC<{
                         width={350}
                         height={200}
                         className="w-full h-64 object-cover"
+                        loading="lazy"
+                        draggable={false}
                     />
                 ) : (
                     <div className="h-48 flex items-center justify-center bg-(--gray)">
@@ -90,7 +96,9 @@ const ProjectCard: FC<{
         </article>
     );
 });
+ProjectCard.displayName = 'ProjectCard';
 
+// Reusable ProjectGrid
 const ProjectGrid: FC<{
     projects: Project[];
     categoryMap: Record<string, string>;
@@ -110,10 +118,7 @@ const ProjectGrid: FC<{
     </div>
 );
 
-const RecentProject: FC<RecentProjectProps> = ({
-    projects,
-    projectCategories,
-}) => {
+const RecentProject: FC<RecentProjectProps> = ({ projects, projectCategories }) => {
     const categoryMap = useMemo(() => {
         return projectCategories.reduce<Record<string, string>>((acc, cat) => {
             acc[cat.id] = cat.name;

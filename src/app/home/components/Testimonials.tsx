@@ -13,6 +13,7 @@ import 'swiper/css/autoplay';
 import Section from '@/components/common/Section';
 import { MdKeyboardArrowLeft, MdKeyboardArrowRight } from 'react-icons/md';
 
+// Types
 interface TestimonialData {
     message: string;
     name: string;
@@ -22,16 +23,13 @@ interface TestimonialData {
     status?: boolean;
 }
 
-const TestimonialCard: FC<TestimonialData> = ({ message, name, designation, location, photo_url }) => {
+// Reusable TestimonialCard
+const TestimonialCard: FC<TestimonialData> = memo(({ message, name, designation, location, photo_url }) => {
     const imageSrc = photo_url && photo_url.trim() !== "" ? photo_url : "/home/profile.webp";
     return (
         <div className="flex flex-col px-4 sm:px-6 justify-center items-center text-(--dark-blue) mx-auto w-full max-w-full" role="group" aria-label={`Testimonial from ${name}`}>
             <Paragraph size="lg" className="font-medium mb-8 text-justify">
-                <span
-                    dangerouslySetInnerHTML={{
-                        __html: message,
-                    }}
-                />
+                <span dangerouslySetInnerHTML={{ __html: message }} />
             </Paragraph>
             <div className="flex items-center gap-3 w-full">
                 <Image
@@ -43,6 +41,7 @@ const TestimonialCard: FC<TestimonialData> = ({ message, name, designation, loca
                     height={48}
                     unoptimized={imageSrc.startsWith('http')}
                     priority={false}
+                    draggable={false}
                 />
                 <div>
                     <Paragraph size="base" className="font-semibold">{name}</Paragraph>
@@ -51,7 +50,8 @@ const TestimonialCard: FC<TestimonialData> = ({ message, name, designation, loca
             </div>
         </div>
     );
-};
+});
+TestimonialCard.displayName = 'TestimonialCard';
 
 // Reusable Navigation Button
 interface NavButtonProps {
@@ -73,6 +73,7 @@ const NavButton: FC<NavButtonProps> = memo(({ onClick, ariaLabel, children, butt
         {children}
     </button>
 ));
+NavButton.displayName = 'NavButton';
 
 const Testimonials: FC<{ testimonials: TestimonialData[] }> = ({ testimonials }) => {
     // Filter only active testimonials

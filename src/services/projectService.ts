@@ -16,3 +16,4 @@ export async function getAllProjects() {
     // ✅ return only the array
     return json.data;
 }
+

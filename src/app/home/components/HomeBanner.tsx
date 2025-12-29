@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useCallback } from "react";
+import React, { useCallback, memo } from "react";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import Image from "next/image";
@@ -10,21 +10,28 @@ import Section from "@/components/common/Section";
 import { Autoplay } from "swiper/modules";
 import { useRouter } from "next/navigation";
 
+// Types
 interface BannerSlide {
     heading: string;
     description: string;
     backgroundImageUrl: string;
 }
 
-interface BannerItemProps {
+interface BannerItemData {
     src: string;
     alt: string;
     label: string;
+    href: string;
+    external: boolean;
+}
+
+interface BannerItemProps extends Omit<BannerItemData, 'href' | 'external'> {
     withBorder?: boolean;
     priority?: boolean;
     onClick: () => void;
 }
 
+// Constants
 const BANNERS: BannerSlide[] = [
     {
         heading: 'Custom Kitchens: Built for Everyday Living',
@@ -52,7 +59,7 @@ const BANNERS: BannerSlide[] = [
     },
 ];
 
-const BANNER_ITEMS = [
+const BANNER_ITEMS: BannerItemData[] = [
     {
         src: "/home/steel.png",
         alt: "Steel Products",
@@ -76,7 +83,8 @@ const BANNER_ITEMS = [
     },
 ];
 
-const BannerItem: React.FC<BannerItemProps> = React.memo(({ src, alt, label, withBorder, priority = false, onClick }) => (
+// Reusable BannerItem component
+const BannerItem = memo<BannerItemProps>(({ src, alt, label, withBorder, priority = false, onClick }) => (
     <button
         className={`px-4 sm:px-10 py-4 sm:py-6 flex flex-col items-center justify-center cursor-pointer select-none${withBorder ? ' border-x border-white/20' : ''} transition-colors duration-300 bg-transparent hover:bg-(--light-blue-five) focus:outline-none`}
         tabIndex={0}
@@ -93,13 +101,10 @@ BannerItem.displayName = "BannerItem";
 const HomeBanner: React.FC = () => {
     const router = useRouter();
 
-    const handleBannerItemClick = useCallback((item: typeof BANNER_ITEMS[number]) => {
+    // Handles navigation for banner items
+    const handleBannerItemClick = useCallback((item: BannerItemData) => {
         if (item.external) {
-            if (item.label === "Catalogue") {
-                window.open(item.href, "_blank", "noopener,noreferrer");
-            } else if (item.label === "Contact") {
-                window.open(item.href);
-            }
+            window.open(item.href, item.label === "Catalogue" ? "_blank" : undefined, item.label === "Catalogue" ? "noopener,noreferrer" : undefined);
         } else {
             router.push(item.href);
         }
@@ -109,7 +114,7 @@ const HomeBanner: React.FC = () => {
         <section className="p-3" aria-label="Steel Quality Banner">
             <div className="w-full mb-20 h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl relative focus:outline-none" tabIndex={-1}>
                 <nav className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 rounded-md z-20" aria-label="Quick links">
-                    <ul className="flex justify-center sm:w-xl py-4 bg-[rgba(26,37,60,0.8)] rounded-md backdrop-blur-md bg-blend-overlay">
+                    <ul className="flex justify-center sm:w-xl py-4 bg-(--dark-blue-eight) rounded-md backdrop-blur-md bg-blend-overlay">
                         {BANNER_ITEMS.map((item, idx) => (
                             <li key={item.label} className="rounded-md">
                                 <BannerItem
@@ -138,7 +143,7 @@ const HomeBanner: React.FC = () => {
                                 className="w-full h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
                                 style={{ backgroundImage: `url('${slide.backgroundImageUrl}')` }}
                             >
-                                <div className="absolute inset-0 bg-[rgba(54,75,100,0.3)] rounded-xl z-0" aria-hidden="true"></div>
+                                <div className="absolute inset-0 bg-(--light-blue-three) rounded-xl z-0" aria-hidden="true"></div>
                                 <div className="h-[85vh] w-full flex items-center justify-start relative z-10">
                                     <div className="max-w-2xl">
                                         <Heading level={4} className="text-white leading-tight">{slide.heading}</Heading>

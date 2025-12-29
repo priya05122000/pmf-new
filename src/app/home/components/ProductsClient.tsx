@@ -11,6 +11,7 @@ import 'swiper/css/autoplay';
 import Section from '@/components/common/Section';
 import { GoDotFill } from 'react-icons/go';
 
+// Product type
 interface Product {
     id: string;
     title: string;
@@ -20,11 +21,13 @@ interface Product {
     active?: boolean;
 }
 
+// Utility to get image URL
 const getImageUrl = (primary_image_url?: string | null) => {
     if (!primary_image_url || primary_image_url.trim() === "") return null;
     return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${primary_image_url}`;
 };
 
+// Reusable ProductCard
 const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
     const imageUrl = getImageUrl(product.primary_image_url);
     return (
@@ -39,6 +42,7 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
                             width={300}
                             height={300}
                             loading="lazy"
+                            draggable={false}
                         />
                     ) : (
                         <div className="w-full h-full flex items-center justify-center text-sm text-(--light-blue)">
@@ -55,6 +59,7 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
         </div>
     );
 });
+ProductCard.displayName = 'ProductCard';
 
 const swiperSettings = {
     modules: [Navigation, Autoplay],

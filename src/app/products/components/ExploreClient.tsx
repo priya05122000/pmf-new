@@ -2,7 +2,7 @@
 
 import Heading from '@/components/common/Heading';
 import Paragraph from '@/components/common/Paragraph';
-import React, { useState, FC, memo } from 'react';
+import React, { useState, FC, memo, useRef } from 'react';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import { Navigation, Autoplay } from 'swiper/modules';
 import Image from 'next/image';
@@ -55,11 +55,12 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
         </article>
     );
 });
+ProductCard.displayName = 'ProductCard';
 
 const ExploreClient: FC<{ products: Product[] }> = ({ products }) => {
     const [navigation, setNavigation] = useState<{ prevEl: null | HTMLElement; nextEl: null | HTMLElement; }>({ prevEl: null, nextEl: null });
-    const eventsRef = React.useRef<HTMLDivElement | null>(null);
-    const headingRef = React.useRef<HTMLHeadingElement | null>(null);
+    const eventsRef = useRef<HTMLDivElement | null>(null);
+    const headingRef = useRef<HTMLHeadingElement | null>(null);
 
     return (
         <div ref={eventsRef}>
@@ -88,9 +89,10 @@ const ExploreClient: FC<{ products: Product[] }> = ({ products }) => {
                                     1024: { slidesPerView: 3, spaceBetween: 32 },
                                     1280: { slidesPerView: 4, spaceBetween: 32 },
                                 }}
+                                aria-label="Popular Products Carousel"
                             >
                                 {products.map((product) => (
-                                    <SwiperSlide key={product.id}>
+                                    <SwiperSlide key={product.id} role="group" aria-label={product.title}>
                                         <ProductCard product={product} />
                                     </SwiperSlide>
                                 ))}

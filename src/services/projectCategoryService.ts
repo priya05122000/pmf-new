@@ -16,3 +16,14 @@ export async function getAllProjectCategories() {
     // ✅ return only the array
     return json.data;
 }
+
+export async function getProjectCategoryById(id: string) {
+    const res = await fetch(`${API_BASE_URL}/api/project-category/${id}`, {
+        cache: "no-store",
+    });
+    if (!res.ok) {
+        throw new Error("Failed to fetch project category");
+    }
+    const json = await res.json();
+    return json.data;
+}

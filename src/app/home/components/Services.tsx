@@ -2,14 +2,14 @@
 
 import Image from "next/image"
 import { motion, LayoutGroup, AnimatePresence } from "framer-motion"
-import { useState } from "react"
+import { useState, KeyboardEvent, FC, memo } from "react"
 import CenterSection from "@/components/common/CenterSection"
 import { GoArrowUpRight } from "react-icons/go"
 import Paragraph from "@/components/common/Paragraph"
 import Heading from "@/components/common/Heading"
 import Link from "next/link"
 
-// Service image type
+// Types
 interface ServiceImage {
     id: string;
     src: string;
@@ -19,6 +19,16 @@ interface ServiceImage {
     description: string;
 }
 
+interface ServiceImageCardProps {
+    src: string;
+    alt: string;
+    layoutId: string;
+    onClick?: () => void;
+    priority?: boolean;
+    className?: string;
+}
+
+// Data
 const SERVICE_IMAGES: ServiceImage[] = [
     {
         id: "1",
@@ -62,28 +72,20 @@ const SERVICE_IMAGES: ServiceImage[] = [
     },
 ]
 
-// Reusable ServiceImageCard props type
-interface ServiceImageCardProps {
-    src: string;
-    alt: string;
-    layoutId: string;
-    onClick?: () => void;
-    priority?: boolean;
-    className?: string;
-}
-
-// Reusable ServiceImageCard function
-const ServiceImageCard = ({ src, alt, layoutId, onClick, priority = false, className = "" }: ServiceImageCardProps) => (
+// Reusable ServiceImageCard
+const ServiceImageCard: FC<ServiceImageCardProps> = memo(({ src, alt, layoutId, onClick, priority = false, className = "" }) => (
     <motion.div
         layoutId={layoutId}
         className={className}
-        whileHover={onClick ? { scale: 1.05 } : undefined}
         transition={{ type: "spring", stiffness: 130, damping: 22 }}
         onClick={onClick}
         tabIndex={onClick ? 0 : -1}
         role={onClick ? "button" : undefined}
         aria-label={alt}
         style={{ outline: "none" }}
+        onKeyDown={onClick ? (e: KeyboardEvent<HTMLDivElement>) => {
+            if (e.key === "Enter" || e.key === " ") onClick();
+        } : undefined}
     >
         <Image
             src={src}
@@ -96,7 +98,8 @@ const ServiceImageCard = ({ src, alt, layoutId, onClick, priority = false, class
             draggable={false}
         />
     </motion.div>
-);
+));
+ServiceImageCard.displayName = "ServiceImageCard";
 
 export default function Services() {
     const [images, setImages] = useState<ServiceImage[]>(SERVICE_IMAGES);
@@ -174,26 +177,14 @@ export default function Services() {
                         {/* THUMB GRID */}
                         <div className="grid grid-cols-2 gap-4 h-[25vh] sm:h-[60vh]">
                             {images.slice(1).map((img, i) => (
-                                <div
+                                <ServiceImageCard
                                     key={img.id}
-                                    className="relative rounded-md overflow-hidden cursor-pointer h-full"
+                                    src={img.src1}
+                                    alt={img.alt}
+                                    layoutId={img.id}
+                                    className="relative w-full h-full cursor-pointer"
                                     onClick={() => swap(i + 1)}
-                                    tabIndex={0}
-                                    role="button"
-                                    aria-label={`Show ${img.alt}`}
-                                    onKeyDown={e => (e.key === "Enter" || e.key === " ") && swap(i + 1)}
-                                    style={{ outline: "none" }}
-                                >
-                                    <AnimatePresence mode="popLayout">
-                                        <ServiceImageCard
-                                            key={img.id}
-                                            src={img.src1}
-                                            alt={img.alt}
-                                            layoutId={img.id}
-                                            className="relative w-full h-full"
-                                        />
-                                    </AnimatePresence>
-                                </div>
+                                />
                             ))}
                         </div>
                     </div>

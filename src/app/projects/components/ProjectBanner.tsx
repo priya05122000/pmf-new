@@ -3,6 +3,7 @@ import Paragraph from '@/components/common/Paragraph';
 import Section from '@/components/common/Section';
 import Image from 'next/image';
 import type { FC, CSSProperties } from 'react';
+import Banner from '@/components/common/Banner';
 
 interface ContactBannerProps {
     heading?: string;
@@ -24,25 +25,15 @@ const ContactBanner: FC<ContactBannerProps> = ({
     className = 'h-[60vh]',
     style = {},
 }) => (
-    <section
-        className={`p-3 ${className}`.trim()}
-        aria-label="Steel Quality Banner"
-    >
-        <Section
-            className="w-full h-full bg-cover bg-center rounded-xl bg-fixed relative flex items-center justify-center"
-            style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
-        >
-            <div className="absolute inset-0 bg-(--light-blue-three) rounded-xl z-0" aria-hidden="true"></div>
-            <div className="h-full w-full flex items-center justify-center relative z-10">
-                <div className="flex flex-col items-center justify-center h-full w-full">
-                    <Heading level={4} className="text-white text-center">{heading}</Heading>
-                    <Paragraph size="base" className="text-white mt-4 max-w-2xl text-center">
-                        {description}
-                    </Paragraph>
-                </div>
-            </div>
-        </Section>
-    </section>
+    <Banner
+        heading={heading}
+        description={description}
+        backgroundImageUrl={backgroundImageUrl}
+        className={className}
+        style={style}
+        headingClassName="text-white text-center"
+        descriptionClassName="text-white mt-4 max-w-2xl text-center"
+    />
 );
 
 export default ContactBanner;
