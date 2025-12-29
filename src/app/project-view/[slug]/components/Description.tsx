@@ -4,24 +4,6 @@ import Section from "@/components/common/Section";
 import React, { FC, memo } from "react";
 import type { Description } from "@/types";
 
-interface Block {
-  images: string[];
-  paragraph: string;
-}
-
-const blocks: Block[] = [
-  {
-    images: ["/home/banner.webp", "/home/banner.webp"],
-    paragraph:
-      "This is a short description for the first set of images. Lorem ipsum dolor sit amet, consectetur adipiscing elit.",
-  },
-  {
-    images: ["/home/banner.webp", "/home/banner.webp"],
-    paragraph:
-      "This is a short description for the second set of images. Pellentesque habitant morbi tristique senectus et netus.",
-  },
-];
-
 // Reusable image row
 const ImageRow: FC<{ images: string[]; }> = memo(
   ({ images }) => (
@@ -52,13 +34,8 @@ export default function Description({ descriptions }: { descriptions: any[] }) {
     <Section className="space-y-16">
       {descriptions.map((desc) => (
         <div key={desc.id} className="pb-6 lg:pb-10">
-          <ImageRow images={[desc.primary_ImagePath, desc.secondary_ImagePath ?? ""]}/>
-          <Paragraph
-            size="base"
-            className="text-gray-700 text-center max-w-2xl mx-auto"
-          >
-            {desc.description}
-          </Paragraph>
+          <ImageRow images={[desc.primary_imagePath, desc.secondary_imagePath ?? ""]} />
+          <div className="leading-relaxed text-(--dark-blue) text-base my-4" dangerouslySetInnerHTML={{ __html: desc.description }} />
         </div>
       ))}
     </Section>

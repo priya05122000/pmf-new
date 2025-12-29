@@ -1,16 +1,25 @@
-import React from 'react'
-import HeroSection from './components/HeroSection'
-import Description from './components/Description'
-import { Project, ProjectCategory } from '@/types'
+"use client";
 
+import React from "react";
+import HeroSection from "./components/HeroSection";
+import Description from "./components/Description";
+import { Project, ProjectCategory } from "@/types";
 
-const ClientPage = ({ project, projectCategories }: { project: Project; projectCategories: ProjectCategory[] }) => {
+interface Props {
+  project: Project;
+  projectCategories: ProjectCategory[];
+}
+
+const ClientPage = ({ project, projectCategories }: Props) => {
   return (
     <div>
-        <HeroSection project={project} projectCategories={projectCategories} />
-        <Description descriptions={project.descriptions ?? []} />
+      <HeroSection
+        project={project}
+        projectCategories={projectCategories}
+      />
+      <Description descriptions={project.descriptions ?? []} />
     </div>
-  )
-}
+  );
+};
 
 export default ClientPage;

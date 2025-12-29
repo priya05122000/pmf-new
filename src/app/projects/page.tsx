@@ -1,7 +1,7 @@
-import Projects from "./components/Projects";
 import ProjectBanner from "./components/ProjectBanner";
 import { getAllProjectCategories } from "@/services/projectCategoryService";
 import { getAllProjects } from "@/services/projectService";
+import ProjectFilter from "./components/ProjectFilter";
 
 export default async function Page() {
   const [projects, categories] = await Promise.all([
@@ -12,9 +12,9 @@ export default async function Page() {
   return (
     <>
       <ProjectBanner />
-      <Projects
+      <ProjectFilter
         projects={projects || []}
-        projectCategories={categories || []}
+        categories={categories || []}
       />
     </>
   );

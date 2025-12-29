@@ -18,7 +18,7 @@ export async function getAllProjects() {
 }
 
 export async function getProjectBySlug(slug: string) {
-    const res = await fetch(`${API_BASE_URL}/api/project/${slug}`, {
+    const res = await fetch(`${API_BASE_URL}/api/project/slug/${slug}`, {
         // choose ONE:
         cache: "no-store", // always fresh
         // next: { revalidate: 3600 }, // OR ISR (1 hour)
