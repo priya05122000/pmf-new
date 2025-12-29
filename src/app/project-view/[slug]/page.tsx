@@ -9,64 +9,45 @@ interface PageProps {
   };
 }
 
-/**
- * ✅ SAFE OpenGraph metadata
- * - Wrapped in try/catch
- * - Prevents dev crashes
- * - Facebook reads this on live domain
- */
+// ✅ Facebook / OpenGraph metadata
 export async function generateMetadata({ params }: PageProps) {
-  try {
-    const { slug } = params;
+  const { slug } = await params;
 
-    const project = await getProjectBySlug(slug);
-    if (!project) return {};
+  const project = await getProjectBySlug(slug);
+  if (!project) return {};
 
-    const imageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${project.projectImagePath}`;
-    const pageUrl = `https://pmfworld.com/project-view/${slug}`;
+  const imageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${project.projectImagePath}`;
+  const pageUrl = `https://pmfworld.com/project-view/${slug}`;
 
-    return {
+  return {
+    title: project.title,
+    description: project.shortNote || project.longDescription || "",
+    openGraph: {
       title: project.title,
-      description: project.shortNote || project.longDescription || "",
-      openGraph: {
-        title: project.title,
-        description: project.shortNote || "",
-        url: pageUrl,
-        type: "article",
-        images: [
-          {
-            url: imageUrl,
-            width: 1200,
-            height: 630,
-            alt: project.title,
-          },
-        ],
-      },
-    };
-  } catch (error) {
-    console.error("generateMetadata failed:", error);
-    return {};
-  }
+      description: project.shortNote || "",
+      url: pageUrl,
+      type: "article",
+      images: [
+        {
+          url: imageUrl,
+          width: 1200,
+          height: 630,
+          alt: project.title,
+        },
+      ],
+    },
+  };
 }
 
 const Page = async ({ params }: PageProps) => {
-  const { slug } = params;
+  const { slug } = await params;
 
-  let project = null;
-  let projectCategories = [];
+  const [project, projectCategories] = await Promise.all([
+    getProjectBySlug(slug),
+    getAllProjectCategories(),
+  ]);
 
-  try {
-    [project, projectCategories] = await Promise.all([
-      getProjectBySlug(slug),
-      getAllProjectCategories(),
-    ]);
-  } catch (error) {
-    console.error("Page data fetch failed:", error);
-  }
-
-  if (!project) {
-    notFound();
-  }
+  if (!project) notFound();
 
   return (
     <ClientPage

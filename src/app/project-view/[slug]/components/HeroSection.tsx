@@ -4,7 +4,7 @@ import Image from "next/image";
 import Paragraph from "@/components/common/Paragraph";
 import Heading from "@/components/common/Heading";
 import Section from "@/components/common/Section";
-import React, { FC, memo } from "react";
+import React, { FC, memo, useEffect, useState } from "react";
 import Span from "@/components/common/Span";
 import { Project, ProjectCategory } from "@/types";
 import { FaFacebook } from "react-icons/fa6";
@@ -46,9 +46,12 @@ export default function HeroSection({
     day: "2-digit",
   });
 
-  // ✅ Facebook share URL (client-side)
-  const shareUrl =
-    typeof window !== "undefined" ? window.location.href : "";
+  // ✅ SAFE: same HTML on server + client
+  const [shareUrl, setShareUrl] = useState<string>("");
+
+  useEffect(() => {
+    setShareUrl(window.location.href);
+  }, []);
 
   const facebookShareUrl = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
     shareUrl
@@ -75,10 +78,10 @@ export default function HeroSection({
         />
       </div>
 
-      {/* ✅ Social Share */}
+      {/* ✅ Social Share (hydration-safe) */}
       <div className="flex gap-4 text-(--dark-blue) text-2xl mb-6">
         <a
-          href={facebookShareUrl}
+          href={shareUrl ? facebookShareUrl : "#"}
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Share on Facebook"
