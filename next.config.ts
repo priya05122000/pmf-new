@@ -16,7 +16,7 @@ const nextConfig: NextConfig = {
     ],
     unoptimized: true,
   },
-  
+
   compiler: {
     removeConsole: false,
   },
