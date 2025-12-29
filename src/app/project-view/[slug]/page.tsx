@@ -18,13 +18,16 @@ export async function generateMetadata({ params }: PageProps) {
 
   const imageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${project.projectImagePath}`;
   const pageUrl = `https://pmfworld.com/project-view/${slug}`;
+  const description =
+    project.shortNote || project.longDescription || "";
 
   return {
     title: project.title,
-    description: project.shortNote || project.longDescription || "",
+    description,
+
     openGraph: {
       title: project.title,
-      description: project.shortNote || "",
+      description,
       url: pageUrl,
       type: "article",
       images: [
@@ -36,8 +39,15 @@ export async function generateMetadata({ params }: PageProps) {
         },
       ],
     },
+    twitter: {
+      card: "summary_large_image",
+      title: project.title,
+      description,
+      images: [imageUrl],
+    },
   };
 }
+
 
 const Page = async ({ params }: PageProps) => {
   const { slug } = await params;
@@ -57,5 +67,5 @@ const Page = async ({ params }: PageProps) => {
   );
 };
 
-export default Page;
 
+export default Page;

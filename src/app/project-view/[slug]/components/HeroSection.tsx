@@ -7,8 +7,9 @@ import Section from "@/components/common/Section";
 import React, { FC, memo, useEffect, useState } from "react";
 import Span from "@/components/common/Span";
 import { Project, ProjectCategory } from "@/types";
-import { FaFacebook } from "react-icons/fa6";
+import { FaFacebook, FaFacebookF, FaLinkedin, FaXTwitter } from "react-icons/fa6";
 import { BsLinkedin, BsTwitter } from "react-icons/bs";
+import Link from "next/link";
 
 interface InfoBlockProps {
   label: string;
@@ -67,7 +68,7 @@ export default function HeroSection({
 
   return (
     <Section className="w-full pb-6 lg:pb-10 pt-32">
-      <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
+      <div className=" grid grid-cols-1 sm:grid-cols-3 gap-8">
         <InfoBlock
           label="Date"
           value={
@@ -86,9 +87,7 @@ export default function HeroSection({
         />
       </div>
 
-      {/* ✅ Social Share (hydration-safe) */}
-      <div className="flex gap-4 text-(--dark-blue) text-2xl mb-6">
-        {/* Facebook */}
+      {/* <div className="flex gap-4 text-(--dark-blue) text-2xl mb-6">
         <a
           href={shareUrl ? facebookShareUrl : "#"}
           target="_blank"
@@ -98,7 +97,6 @@ export default function HeroSection({
           <FaFacebook className="cursor-pointer hover:text-blue-600" />
         </a>
 
-        {/* LinkedIn */}
         <a
           href={shareUrl ? linkedInShareUrl : "#"}
           target="_blank"
@@ -108,8 +106,7 @@ export default function HeroSection({
           <BsLinkedin className="cursor-pointer hover:text-blue-700" />
         </a>
 
-        {/* Twitter / X */}
-        <a
+=        <a
           href={shareUrl ? twitterShareUrl : "#"}
           target="_blank"
           rel="noopener noreferrer"
@@ -117,6 +114,19 @@ export default function HeroSection({
         >
           <BsTwitter className="cursor-pointer hover:text-sky-500" />
         </a>
+      </div> */}
+
+      <div className="card my-8">
+        <Span className="share font-semibold uppercase tracking-wide">Share</Span>
+        <Link className="social-link" href="#">
+          <FaFacebookF className="text-(--dark-blue) w-5 h-5 " />
+        </Link>
+        <Link className="social-link" href="#">
+          <FaLinkedin className="text-(--dark-blue) w-5 h-5" />
+        </Link>
+        <Link className="social-link" href="#">
+          <FaXTwitter className="text-(--dark-blue) w-5 h-5" />
+        </Link>
       </div>
 
 
