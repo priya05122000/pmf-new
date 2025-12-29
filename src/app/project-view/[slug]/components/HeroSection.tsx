@@ -8,7 +8,7 @@ import React, { FC, memo, useEffect, useState } from "react";
 import Span from "@/components/common/Span";
 import { Project, ProjectCategory } from "@/types";
 import { FaFacebook } from "react-icons/fa6";
-import { BsInstagram, BsTwitter } from "react-icons/bs";
+import { BsLinkedin, BsTwitter } from "react-icons/bs";
 
 interface InfoBlockProps {
   label: string;
@@ -57,6 +57,14 @@ export default function HeroSection({
     shareUrl
   )}`;
 
+  const linkedInShareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(
+    shareUrl
+  )}`;
+
+  const twitterShareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+    shareUrl
+  )}&text=${encodeURIComponent(project.title)}`;
+
   return (
     <Section className="w-full pb-6 lg:pb-10 pt-32">
       <div className="mb-10 grid grid-cols-1 sm:grid-cols-3 gap-8">
@@ -80,6 +88,7 @@ export default function HeroSection({
 
       {/* ✅ Social Share (hydration-safe) */}
       <div className="flex gap-4 text-(--dark-blue) text-2xl mb-6">
+        {/* Facebook */}
         <a
           href={shareUrl ? facebookShareUrl : "#"}
           target="_blank"
@@ -89,9 +98,27 @@ export default function HeroSection({
           <FaFacebook className="cursor-pointer hover:text-blue-600" />
         </a>
 
-        <BsInstagram className="opacity-50 cursor-not-allowed" />
-        <BsTwitter className="opacity-50 cursor-not-allowed" />
+        {/* LinkedIn */}
+        <a
+          href={shareUrl ? linkedInShareUrl : "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on LinkedIn"
+        >
+          <BsLinkedin className="cursor-pointer hover:text-blue-700" />
+        </a>
+
+        {/* Twitter / X */}
+        <a
+          href={shareUrl ? twitterShareUrl : "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Twitter"
+        >
+          <BsTwitter className="cursor-pointer hover:text-sky-500" />
+        </a>
       </div>
+
 
       <Heading level={4} className="text-(--dark-blue)">
         {project.title}
