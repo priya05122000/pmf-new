@@ -6,12 +6,15 @@
   --white: #ffffff;
   --dark-blue: #1a253c;
   --dark-blue-two: rgba(26, 37, 60, 0.2);
+  --dark-blue-five: rgba(26, 37, 60, 0.5);
+  --dark-blue-six: rgba(26, 37, 60, 0.6);
   --dark-blue-eight: rgba(26, 37, 60, 0.8);
   --light-blue: #364B64;
   --light-blue-one: rgba(54, 75, 100, 0.1);
   --light-blue-two: rgba(54, 75, 100, 0.2);
   --light-blue-three: rgba(54, 75, 100, 0.3);
   --light-blue-five: rgba(54, 75, 100, 0.5);
+  --light-blue-six: rgba(54, 75, 100, 0.6);
   --orange: #E97F4A;
   --orange-one: rgba(233, 127, 74, 0.1);
   --orange-two: rgba(233, 127, 74, 0.2);

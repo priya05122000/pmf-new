@@ -32,8 +32,8 @@ const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
     const imageUrl = getImageUrl(product.primary_image_url);
     return (
         <div className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4" role="listitem">
-            <article className="group shadow rounded-md overflow-hidden relative" aria-label={product.title} tabIndex={0}>
-                <div className="flex justify-around items-center w-full overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
+            <article className="group shadow rounded-md overflow-hidden relative w-full" aria-label={product.title} tabIndex={0}>
+                <div className="flex justify-around items-center   w-full overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
                     {imageUrl ? (
                         <Image
                             alt={product.title}
@@ -66,7 +66,7 @@ const swiperSettings = {
     navigation: false,
     loop: true,
     speed: 500,
-    spaceBetween: 16,
+    spaceBetween: 0,
     autoplay: {
         delay: 2000,
         disableOnInteraction: false,
@@ -114,7 +114,7 @@ const ProductsClient: FC<{ products: Product[] }> = ({ products }) => {
                         </div>
                     )}
                 </div>
-                <div className="flex justify-end  px-6 sm:px-4">
+                <div className="flex justify-end mt-6 px-6 sm:px-4">
                     <a href="/products" className="inline-block rounded-full bg-(--orange) text-white font-semibold px-8 py-2 text-base shadow  transition-colors cursor-pointer focus:outline-none ">
                         <Paragraph size="base">View More</Paragraph>
                     </a>

@@ -1,5 +1,11 @@
-import Testimonials from "./Testimonials";
+"use client";
+
+import dynamic from "next/dynamic";
 import type { FC } from "react";
+
+const Testimonials = dynamic(() => import("./Testimonials"), {
+    ssr: false, // 🚨 THIS IS THE FIX
+});
 
 interface TestimonialClientProps {
     testimonials: any[];

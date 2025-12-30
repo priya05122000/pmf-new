@@ -37,25 +37,25 @@ const BANNERS: BannerSlide[] = [
         heading: 'Custom Kitchens: Built for Everyday Living',
         description:
             'Our custom kitchen fabrication blends thoughtful design with precise craftsmanship to create spaces that work as well as they look. Every cabinet, surface, and finish is tailored to your daily needs and long-term comfort.',
-        backgroundImageUrl: "/home/banner.webp",
+        backgroundImageUrl: "/home/banner1.webp",
     },
     {
         heading: 'Display solutions that sell at first glance.',
         description:
             'Our supermarket display equipment is designed to organize products clearly and attract customer attention without clutter. Built for durability and flexibility, each unit supports smooth movement, easy stocking, and better in-store flow.',
-        backgroundImageUrl: "/home/banner.webp",
+        backgroundImageUrl: "/home/banner2.webp",
     },
     {
         heading: 'Strong steel solutions for modern architecture.',
         description:
             'We fabricate architectural steel components that bring strength, accuracy, and clean structure to every building project. From frames to fittings, each piece is built to support lasting performance and reliable construction.',
-        backgroundImageUrl: "/home/banner.webp",
+        backgroundImageUrl: "/home/banner3.webp",
     },
     {
         heading: 'Fabrication shaped to modern spaces.',
         description:
             'PMF World delivers tailor-made fabrication solutions designed to meet the changing needs of today’s infrastructure and interior environments. Each project reflects careful planning, precise execution, and a clear understanding of functional design.',
-        backgroundImageUrl: "/home/banner.webp",
+        backgroundImageUrl: "/home/banner4.webp",
     },
 ];
 
@@ -92,7 +92,7 @@ const BannerItem = memo<BannerItemProps>(({ src, alt, label, withBorder, priorit
         type="button"
         onClick={onClick}
     >
-        <Image src={src} alt={alt} width={40} height={40} className="w-10 h-10 object-cover" priority={priority} />
+        <Image src={src} alt={alt} width={1000} height={1000} className="w-6 h-6 sm:w-10 sm:h-10 object-cover" priority={priority} />
         <Paragraph size='base' className="text-center mt-2 text-white" aria-hidden="true">{label}</Paragraph>
     </button>
 ));
@@ -140,10 +140,13 @@ const HomeBanner: React.FC = () => {
                     {BANNERS.map((slide, idx) => (
                         <SwiperSlide key={idx} aria-label={`Slide ${idx + 1}`}>
                             <Section
-                                className="w-full h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative"
+                                className="w-full h-[80vh] xl:h-[85vh] bg-cover bg-center rounded-xl bg-fixed relative "
                                 style={{ backgroundImage: `url('${slide.backgroundImageUrl}')` }}
                             >
-                                <div className="absolute inset-0 bg-(--light-blue-three) rounded-xl z-0" aria-hidden="true"></div>
+                                <div
+                                    className="absolute inset-0 rounded-xl z-0 bg-linear-to-br from-(--dark-blue) via-(--dark-blue-six) to-(--light-blue-one)"
+                                    aria-hidden="true"
+                                />
                                 <div className="h-[85vh] w-full flex items-center justify-start relative z-10">
                                     <div className="max-w-2xl">
                                         <Heading level={4} className="text-white leading-tight">{slide.heading}</Heading>

@@ -18,7 +18,7 @@ const CategoryList: FC<CategoryListProps> = ({
   onSelect,
   allLabel = "All",
 }) => (
-  <nav aria-label="Categories" className="flex flex-col gap-1 mb-4 sticky top-28">
+  <nav aria-label="Categories" className="flex flex-col gap-1 mb-4 sm:mb-0 sticky top-28">
     <div className="bg-(--gray) rounded-md shadow p-4 sticky top-28">
       <ul className="flex flex-col gap-2 lg:gap-3">
         <li>

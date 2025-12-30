@@ -76,6 +76,11 @@ const NavButton: FC<NavButtonProps> = memo(({ onClick, ariaLabel, children, butt
 NavButton.displayName = 'NavButton';
 
 const Testimonials: FC<{ testimonials: TestimonialData[] }> = ({ testimonials }) => {
+
+    if (!testimonials || testimonials.length === 0) {
+        return null;
+    }
+
     // Filter only active testimonials
     const activeTestimonials = testimonials.filter(t => t.status === true);
     const [navigation, setNavigation] = useState<{ prevEl: null | HTMLElement; nextEl: null | HTMLElement; }>({ prevEl: null, nextEl: null });
