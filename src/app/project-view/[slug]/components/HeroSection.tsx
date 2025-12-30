@@ -83,7 +83,11 @@ export default function HeroSection({
         />
         <InfoBlock
           label="Location"
-          value={project.location ?? "Unknown"}
+          value={
+            project.location && project.location.trim()
+              ? project.location
+              : "-"
+          }
         />
       </div>
 
