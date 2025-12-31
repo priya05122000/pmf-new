@@ -68,7 +68,7 @@ const ContactCard: FC<ContactItem> = memo(({ icon, label, value }) => {
         );
     }
     return (
-        <div className="rounded-md shadow p-6 flex flex-col items-center text-center gap-2 bg-(--orange-one) text-(--dark-blue)" role="listitem">
+        <div className="rounded-md shadow p-4 flex flex-col items-center text-center gap-2 bg-(--orange-one) text-(--dark-blue)" role="listitem">
             <Heading level={5}>{icon}</Heading>
             <Paragraph size="base" className="font-semibold">{label}</Paragraph>
             <Span>{valueNode}</Span>
@@ -128,7 +128,7 @@ const ContactDetails: FC = () => {
                     </div>
                 </section>
                 {/* Right: Contact Form */}
-                <section className="flex-1 sm:pl-8 flex flex-col justify-between text-(--dark-blue)" aria-label="Contact Form">
+                <section className="flex-1 lg:pl-8 flex flex-col justify-between text-(--dark-blue)" aria-label="Contact Form">
                     <div>
                         <Heading level={4} className="text-(--dark-blue) mb-2">Get In Touch</Heading>
                         <Paragraph size="base">

@@ -174,7 +174,7 @@ const ProjectFilterClient: FC<{
                                     <ProjectCard key={p.id} project={p} categoryName={categoryMap[p.category_id]} onClick={handleClick} />
                                 ))
                             ) : (
-                                <Paragraph className="col-span-full text-center">
+                                <Paragraph className="col-span-full text-center text-(--dark-blue)" >
                                     No projects found.
                                 </Paragraph>
                             )}

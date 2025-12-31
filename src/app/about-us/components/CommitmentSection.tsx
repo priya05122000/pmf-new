@@ -6,20 +6,20 @@ import type { FC } from "react";
 
 const CommitmentSection: FC = () => (
   <CenterSection className="w-full py-10 sm:py-16 lg:py-20">
-    <div className="grid grid-cols-1 items-center gap-10 lg:grid-cols-2">
+    <div className="grid grid-cols-1 items-center gap-10 sm:grid-cols-2">
       {/* Image Section */}
-      <div className="relative w-full h-full overflow-hidden rounded-md">
+      <div className="relative w-full h-full overflow-hidden rounded-md order-2 sm:order-1">
         <Image
           src="/home/service1.webp"
           alt="PMF custom metal fabrication work"
           width={700}
           height={500}
-          className="h-52 md:h-100 w-full object-cover"
+          className="h-52 sm:h-full xl:h-100 w-full object-cover"
           priority
         />
       </div>
       {/* Content Section */}
-      <div className="flex flex-col justify-center">
+      <div className="flex flex-col justify-center order-1 sm:order-2">
         <Heading level={4} className="text-(--dark-blue)">
           Our Commitment to Quality
         </Heading>

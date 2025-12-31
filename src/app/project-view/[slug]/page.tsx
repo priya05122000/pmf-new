@@ -2,6 +2,7 @@ import ClientPage from "./ClientPage";
 import { getAllProjectCategories } from "@/services/projectCategoryService";
 import { getProjectBySlug } from "@/services/projectService";
 import { notFound } from "next/navigation";
+import type { Metadata } from "next";
 
 interface PageProps {
   params: {

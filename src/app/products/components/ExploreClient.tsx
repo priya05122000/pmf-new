@@ -61,6 +61,7 @@ const ExploreClient: FC<{ products: Product[] }> = ({ products }) => {
     const [navigation, setNavigation] = useState<{ prevEl: null | HTMLElement; nextEl: null | HTMLElement; }>({ prevEl: null, nextEl: null });
     const eventsRef = useRef<HTMLDivElement | null>(null);
     const headingRef = useRef<HTMLHeadingElement | null>(null);
+    const canNavigate = products.length > 4; // 4 = max slidesPerView
 
     return (
         <div ref={eventsRef}>
@@ -97,7 +98,7 @@ const ExploreClient: FC<{ products: Product[] }> = ({ products }) => {
                                     </SwiperSlide>
                                 ))}
                             </Swiper>
-                            <div className="flex flex-col items-end ">
+                            <div className="flex flex-col items-end mt-6 ">
                                 <Span className="text-(--blue)">Prev/Nxt</Span>
                                 <div className="flex items-center space-x-4 mt-2">
                                     <button
