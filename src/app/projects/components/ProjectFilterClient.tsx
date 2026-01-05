@@ -27,7 +27,7 @@ interface Project {
 
 const getImageUrl = (path?: string | null) => {
     if (!path || path.trim() === "") return null;
-    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${path}`;
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/${path}`;
 };
 
 const formatDateWithOrdinal = (dateString: string) => {

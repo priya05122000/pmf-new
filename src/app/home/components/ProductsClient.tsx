@@ -24,7 +24,7 @@ interface Product {
 // Utility to get image URL
 const getImageUrl = (primary_image_url?: string | null) => {
     if (!primary_image_url || primary_image_url.trim() === "") return null;
-    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${primary_image_url}`;
+    return `${process.env.NEXT_PUBLIC_API_BASE_URL}/${primary_image_url}`;
 };
 
 // Reusable ProductCard

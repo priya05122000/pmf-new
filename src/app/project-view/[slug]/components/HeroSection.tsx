@@ -146,7 +146,7 @@ export default function HeroSection({
 
       <div className="mt-10">
         <Image
-          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${project.projectImagePath}`}
+          src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${project.projectImagePath}`}
           alt={project.title}
           width={1200}
           height={700}

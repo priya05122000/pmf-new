@@ -11,7 +11,7 @@ const ImageRow: FC<{ images: string[]; }> = memo(
       {images.map((img, idx) => (
         <div className="w-full sm:w-1/2" key={img + idx}>
           <Image
-            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${img}`}
+            src={`${process.env.NEXT_PUBLIC_API_BASE_URL}/${img}`}
             alt={`Project image ${idx + 1}`}
             width={1200}
             height={700}

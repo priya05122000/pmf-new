@@ -29,7 +29,7 @@ interface RecentProjectProps {
 
 // Utility: get image url
 const getImageUrl = (path?: string | null) =>
-    path ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${path}` : null;
+    path ? `${process.env.NEXT_PUBLIC_API_BASE_URL}/${path}` : null;
 
 // Utility: format date with ordinal
 const formatDateWithOrdinal = (dateString: string) => {

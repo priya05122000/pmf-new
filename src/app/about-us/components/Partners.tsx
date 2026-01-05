@@ -13,7 +13,7 @@ interface Partner {
 
 const getLogoSrc = (logoUrl: string) => {
   if (!logoUrl) return null;
-  return `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${logoUrl}`;
+  return `${process.env.NEXT_PUBLIC_API_BASE_URL}/${logoUrl}`;
 };
 
 // Reusable Partner Logo Card

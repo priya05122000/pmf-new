@@ -22,7 +22,7 @@ interface LogoItemProps {
 
 // Utility to get logo src
 const getLogoSrc = (logoUrl: string) =>
-    `${process.env.NEXT_PUBLIC_API_BASE_URL}/uploads/${logoUrl}`;
+    `${process.env.NEXT_PUBLIC_API_BASE_URL}/${logoUrl}`;
 
 // Reusable LogoItem component
 const LogoItem: FC<LogoItemProps> = memo(({ src, name }) => (
