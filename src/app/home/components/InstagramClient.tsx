@@ -101,7 +101,6 @@ const InstagramClient: React.FC<Props> = ({ posts }) => {
                     aria-label="Instagram feed"
                     className="flex flex-row items-center justify-center mt-10 gap-2 md:gap-6 w-full  overflow-hidden "
                 >
-
                     {/* LEFT LARGE */}
                     <InstagramCard
                         post={latestPosts[0]}

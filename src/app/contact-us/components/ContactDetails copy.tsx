@@ -22,14 +22,14 @@ const CONTACTS = [
 
         ),
         label: 'Whatsapp',
-        value: '+971 56 828 4581',
+        value: '+971568284581',
     },
     {
         icon: (
             <MdOutlineMail />
         ),
         label: 'Email',
-        value: 'Sales@pmfworld.com',
+        value: 'sales@pmfworld.com',
     },
     {
         icon: (

@@ -24,9 +24,9 @@ interface ContactItem {
 
 const CONTACTS: ContactItem[] = [
     { icon: <MdOutlinePhoneInTalk />, label: 'Phone', value: '+97165351536' },
-    { icon: <MdOutlineWhatsapp />, label: 'Whatsapp', value: '+971 56 828 4581' },
-    { icon: <MdOutlineMail />, label: 'Email', value: 'Sales@pmfworld.com' },
-    { icon: <BsShop />, label: 'Address', value: 'Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E.' },
+    { icon: <MdOutlineWhatsapp />, label: 'Whatsapp', value: '+971568284581' },
+    { icon: <MdOutlineMail />, label: 'Email', value: 'sales@pmfworld.com' },
+    { icon: <BsShop />, label: 'Address', value: 'Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E' },
 ];
 
 // --- Reusable Contact Card ---
