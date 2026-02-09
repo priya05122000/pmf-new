@@ -91,10 +91,10 @@ const InstagramClient: React.FC<Props> = ({ posts }) => {
             <div className="py-10 sm:py-16 lg:py-20">
                 <div className="flex flex-col items-center text-center">
                     <Heading level={4} className="text-(--dark-blue)">
-                        Our Latest Work
+                        Instagram Feed
                     </Heading>
                     <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
-                        PMF World (Promed Metal Furniture) presents recent fabrication projects across retail, hospitality, and industrial spaces, built for durability, precision, and long-term performance.
+                        From architectural and miscellaneous works to custom kitchen equipment and retail displays, PMF World (Promed Metal Furniture) covers a wide range of fabrication needs.
                     </Paragraph>
                 </div>
                 <div
@@ -150,7 +150,7 @@ const InstagramClient: React.FC<Props> = ({ posts }) => {
                         rel="noopener noreferrer"
                         className="flex items-center text-sm  gap-2 transition-shadow"
                     >
-                        See All <BsArrowRight />
+                        Instagram <BsArrowRight />
                     </Link>
                 </div>
 
