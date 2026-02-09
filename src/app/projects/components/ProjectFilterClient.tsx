@@ -103,7 +103,6 @@ const ProjectFilterClient: FC<{
     const router = useRouter();
     const [search, setSearch] = useState("");
     const [category, setCategory] = useState<string>('all');
-    console.log('Initial Projects:', projects);
 
     const categoryMap = useMemo(() => {
         return categories.reduce<Record<string, string>>((acc, cat) => {
@@ -118,7 +117,6 @@ const ProjectFilterClient: FC<{
         const isActive = p.status === true;
         return matchesSearch && matchesCategory && isActive;
     });
-    console.log('Filtered Projects:', filteredProjects);
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
     const handleClick = ({ slug }: { slug: string }) => {
