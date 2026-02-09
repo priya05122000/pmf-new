@@ -201,7 +201,7 @@ const ProductSlider: FC<{ products: Product[] }> = ({ products }) => (
 );
 
 const Products: FC = () => (
-    <div aria-label="Our Products" className="overflow-x-hidden w-full py-10 sm:sm:py-16 lg:py-20 ">
+    <div aria-label="Our Products" className="overflow-x-hidden w-full py-10 sm:py-16 lg:py-20 ">
         <Section>
             <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-0 md:mr-4">
                 <GoDotFill aria-hidden="true" />

@@ -105,7 +105,7 @@ export default function Accordion() {
             Why Choose PMF World?
           </Heading>
           <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-xl">
-            PMF World delivers reliable stainless steel kitchen and hotel kitchen equipment designed for daily commercial use. Our supermarket display equipment and bakery supplies combine strength, hygiene, and practical layout.
+            PMF World (Promed Metal Furniture) delivers reliable stainless steel kitchen and hotel kitchen equipment designed for daily commercial use. Our supermarket display equipment and bakery supplies combine strength, hygiene, and practical layout.
           </Paragraph>
         </div>
         {/* RIGHT ACCORDION */}

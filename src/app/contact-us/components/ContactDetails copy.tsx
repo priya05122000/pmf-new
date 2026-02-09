@@ -43,7 +43,7 @@ const CONTACTS = [
 const ContactDetails = () => {
     return (
         <CenterSection>
-            <div className="flex flex-col md:flex-row gap-8 w-full py-10 sm:sm:py-16 lg:py-20">
+            <div className="flex flex-col md:flex-row gap-8 w-full py-10 sm:py-16 lg:py-20">
                 {/* Left: Contact Info & Map */}
                 <div className="flex-1 flex flex-col gap-4">
                     <div className="grid grid-cols-2 gap-4">

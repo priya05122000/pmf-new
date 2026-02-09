@@ -24,7 +24,7 @@ const CommitmentSection: FC = () => (
           Our Commitment to Quality
         </Heading>
         <Paragraph size="base" className="mt-4 leading-relaxed text-(--dark-blue)">
-          At PMF, we create metal fabrication solutions that balance strength, function, and clean design. Each project is handled with care, accuracy, and a clear focus on long-term use. We work closely with clients to deliver results that match their practical needs and expectations.
+          At PMF (Promed Metal Furniture), we create metal fabrication solutions that balance strength, function, and clean design. Each project is handled with care, accuracy, and a clear focus on long-term use. We work closely with clients to deliver results that match their practical needs and expectations.
         </Paragraph>
       </div>
     </div>

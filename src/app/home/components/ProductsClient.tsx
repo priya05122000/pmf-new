@@ -31,7 +31,7 @@ const getImageUrl = (primary_image_url?: string | null) => {
 const ProductCard: FC<{ product: Product }> = memo(({ product }) => {
     const imageUrl = getImageUrl(product.primary_image_url);
     return (
-        <div className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4" role="listitem">
+        <div className="flex flex-col justify-center items-center h-full w-full px-6 sm:px-4  pb-6" role="listitem">
             <article className="group shadow rounded-md overflow-hidden relative w-full" aria-label={product.title} tabIndex={0}>
                 <div className="flex justify-around items-center   w-full overflow-hidden p-6 neumorphic-variation2 bg-[radial-gradient(circle_at_center,color-mix(in_srgb,var(--light-blue)_10%,transparent),var(--dark-blue)_120%)] h-56 xl:h-72">
                     {imageUrl ? (
@@ -89,7 +89,7 @@ const ProductsClient: FC<{ products: Product[] }> = ({ products }) => {
     );
     return (
         <div ref={eventsRef}>
-            <div className="py-10 sm:sm:py-16 lg:py-20">
+            <div className="py-10 sm:py-16 lg:py-20">
                 <Section>
                     <div className="flex flex-row gap-2 items-center lg:min-w-20 xl:min-w-50 mb-0 md:mr-4">
                         <GoDotFill aria-hidden="true" />
@@ -97,7 +97,7 @@ const ProductsClient: FC<{ products: Product[] }> = ({ products }) => {
                     </div>
                     <Heading level={4} className="text-(--dark-blue)">Our Products</Heading>
                 </Section>
-                <div className="w-full relative mt-10" role="list" aria-label="Product list">
+                <div className="w-full relative mt-10 " role="list" aria-label="Product list">
                     {popularProducts.length > 0 ? (
                         <Swiper {...swiperSettings} className="w-full">
                             {popularProducts.map((product) => (
@@ -114,7 +114,7 @@ const ProductsClient: FC<{ products: Product[] }> = ({ products }) => {
                         </div>
                     )}
                 </div>
-                <div className="flex justify-end mt-6 px-6 sm:px-4">
+                <div className="flex justify-end  px-6 sm:px-4">
                     <a href="/products" className="inline-block rounded-full bg-(--orange) text-white font-semibold px-8 py-2 text-base shadow  transition-colors cursor-pointer focus:outline-none ">
                         <Paragraph size="base">View More</Paragraph>
                     </a>

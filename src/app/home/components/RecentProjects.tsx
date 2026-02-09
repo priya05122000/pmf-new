@@ -138,7 +138,7 @@ const RecentProject: FC<RecentProjectProps> = ({ projects, projectCategories }) 
                         Our Projects
                     </Heading>
                     <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
-                        PMF World delivers durable stainless steel solutions, from kitchen and
+                        PMF World (Promed Metal Furniture) delivers durable stainless steel solutions, from kitchen and
                         bakery equipment to hotel systems, supermarket displays, and safety
                         handrails, designed for demanding commercial use.
                     </Paragraph>

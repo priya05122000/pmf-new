@@ -42,7 +42,7 @@ const Navbar = () => {
     };
 
     return (
-        <Section>   
+        <Section>
             <header className="w-full left-0 top-6 fixed z-50 px-6 sm:px-4">
                 <div className="bg-(--dark-blue-eight) backdrop-blur-md bg-blend-overlay shadow-lg rounded-md max-w-full sm:max-w-2xl md:max-w-2xl lg:max-w-4xl xl:max-w-7xl mx-auto flex items-center justify-between px-6 sm:px-4 h-16">
                     {/* Logo */}
@@ -50,7 +50,7 @@ const Navbar = () => {
                         <Link href="/" className="flex items-center cursor-pointer h-full" aria-label="Go to homepage">
                             <Image
                                 src="/logo/pmf-logo.webp"
-                                alt="PMF Logo"
+                                alt="PMF (Promed Metal Furniture) Logo"
                                 width={140}
                                 height={40}
                                 className="h-10 w-auto object-contain"

@@ -49,7 +49,7 @@ export default function HeroSwiper() {
 
     return (
         <CenterSection>
-            <div className="py-10 sm:sm:py-16 lg:py-20">
+            <div className="py-10 sm:py-16 lg:py-20">
                 {/* <Heading level={4} className="text-(--dark-blue) text-center">Our Services</Heading>
                 <Paragraph size="base" className="text-(--dark-blue) text-center mt-4 max-w-2xl mx-auto">
                     Stay updated with our latest insights, industry trends, and expert advice through our curated blog posts. Explore topics that matter to you and discover how we can help your business thrive.

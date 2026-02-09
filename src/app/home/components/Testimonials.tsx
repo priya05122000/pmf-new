@@ -93,7 +93,7 @@ const Testimonials: FC<{ testimonials: TestimonialData[] }> = ({ testimonials })
                     <div className="sm:flex-1 text-white min-w-0 w-full max-w-full">
                         <Heading level={4}>Our Testimonials</Heading>
                         <Paragraph size="base" className="mx-auto mt-4 max-w-2xl">
-                            Here’s what our satisfied clients are saying about working with PMF World. From quality craftsmanship to dependable service, their feedback reflects our commitment to lasting results.
+                            Here’s what our satisfied clients are saying about working with PMF World (Promed Metal Furniture). From quality craftsmanship to dependable service, their feedback reflects our commitment to lasting results.
                         </Paragraph>
                     </div>
                     <div className="sm:flex-1 lg:flex-2 min-w-0 w-full max-w-full">

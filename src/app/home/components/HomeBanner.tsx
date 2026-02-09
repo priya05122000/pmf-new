@@ -54,7 +54,7 @@ const BANNERS: BannerSlide[] = [
     {
         heading: 'Fabrication shaped to modern spaces.',
         description:
-            'PMF World delivers tailor-made fabrication solutions designed to meet the changing needs of today’s infrastructure and interior environments. Each project reflects careful planning, precise execution, and a clear understanding of functional design.',
+            'PMF World (Promed Metal Furniture) delivers tailor-made fabrication solutions designed to meet the changing needs of today’s infrastructure and interior environments. Each project reflects careful planning, precise execution, and a clear understanding of functional design.',
         backgroundImageUrl: "/home/banner4.webp",
     },
 ];

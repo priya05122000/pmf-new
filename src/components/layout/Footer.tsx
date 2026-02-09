@@ -33,8 +33,8 @@ export const Footer = () => {
                                 className="object-contain h-20 w-20 "
                             />
                             <Span className="text-(--light-blue) absolute bottom-0 left-24  uppercase ">
-                                Copyright 2025 Favorite Doctor,
-                                <br /> All Rights Reserved
+                                © 2025 PROMED Metal Furniture LLC-FX.
+                                <br /> All Rights Reserved.
                             </Span>
                         </div>
                     </Section>
@@ -76,8 +76,12 @@ export const Footer = () => {
                                             </Link>
                                         ))}
                                         <Span className="text-(--dark-blue) flex gap-3 mt-2 lg:mt-4 ">
-                                            <FaFacebookF className="w-4 h-4" />
-                                            <SiInstagram className="w-4 h-4" />
+                                            <Link href="https://www.facebook.com/profile.php?id=61585444726813" target="_blank" rel="noopener noreferrer">
+                                                <FaFacebookF className="w-4 h-4" />
+                                            </Link>
+                                            <Link href="https://instagram.com/pmf.world" target="_blank" rel="noopener noreferrer">
+                                                <SiInstagram className="w-4 h-4" />
+                                            </Link>
                                         </Span>
                                     </nav>
                                 </div>

@@ -12,14 +12,17 @@ import { getAllProjects } from "@/services/projectService";
 import { getAllProjectCategories } from "@/services/projectCategoryService";
 import { getAllPartners } from "@/services/partnerService";
 import { getAllTestimonials } from "@/services/testimonialService";
+import Instagram from "./components/Instagram";
+import { getInstagramPosts } from "@/services/instagramService";
 
 export default async function HomePage() {
-    const [products, projects, categories, partners, testimonials] = await Promise.all([
+    const [products, projects, categories, partners, testimonials, instagramPosts] = await Promise.all([
         getAllProducts(),
         getAllProjects(),
         getAllProjectCategories(),
         getAllPartners(),
-        getAllTestimonials()
+        getAllTestimonials(),
+        getInstagramPosts()
     ]);
 
     return (
@@ -35,6 +38,7 @@ export default async function HomePage() {
                 projectCategories={categories || []}
             />
             <TestimonialClient testimonials={testimonials || []} />
+            <Instagram posts={instagramPosts || []} />
         </div>
     );
 }

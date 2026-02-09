@@ -64,7 +64,7 @@ const AboutUs: FC = () => (
             {/* Right: Main content */}
             <div className="flex-1">
                 <Paragraph size="xl" className="font-medium text-justify">
-                    PMF World is a trusted name in stainless steel fabrication, delivering precision-built solutions that balance strength, finish, and long-term use. Our expertise covers both mild steel and stainless steel, crafted with close attention to detail at every stage. We serve a wide range of sectors, including retail, construction, hospitals, and hotels. Each project reflects our commitment to quality, reliability, and skilled workmanship.
+                    PMF World (Promed Metal Furniture) is a trusted name in stainless steel fabrication, delivering precision-built solutions that balance strength, finish, and long-term use. Our expertise covers both mild steel and stainless steel, crafted with close attention to detail at every stage. We serve a wide range of sectors, including retail, construction, hospitals, and hotels. Each project reflects our commitment to quality, reliability, and skilled workmanship.
                 </Paragraph>
                 <div className="grid grid-cols-2 sm:grid-cols-4 gap-6 mt-12" role="list">
                     {ABOUT_STATS.map((stat) => (

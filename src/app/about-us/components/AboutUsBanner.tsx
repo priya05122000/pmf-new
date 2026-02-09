@@ -15,7 +15,7 @@ interface AboutUsBannerProps {
 
 const DEFAULT_HEADING = 'Built to Fit. Built to Last.';
 const DEFAULT_DESCRIPTION =
-    'PMF World delivers custom fabrication solutions shaped to the changing needs of modern infrastructure and interior spaces. With advanced manufacturing, every project is finished with lasting strength, clean design, and precise detail.';
+    'PMF World (Promed Metal Furniture)  delivers custom fabrication solutions shaped to the changing needs of modern infrastructure and interior spaces. With advanced manufacturing, every project is finished with lasting strength, clean design, and precise detail.';
 const DEFAULT_BG = "/home/banner.webp";
 
 const AboutUsBanner: FC<AboutUsBannerProps> = ({
