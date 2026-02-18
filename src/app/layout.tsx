@@ -19,6 +19,10 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <head>
+        <title>PMF World | Steel Fabrication, Retail Fitouts, Hospitality & Industrial Projects</title>
+        <meta name="description" content="PMF World delivers precision steel fabrication, custom shopfitting, and modern solutions for retail, hospitality, and industrial spaces. Built for durability, performance, and contemporary design." />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >

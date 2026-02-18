@@ -16,20 +16,20 @@ import Instagram from "./components/Instagram";
 import { getInstagramPosts } from "@/services/instagramService";
 
 export default async function HomePage() {
-    const [products, projects, categories, partners, testimonials] = await Promise.all([
-        getAllProducts(),
-        getAllProjects(),
-        getAllProjectCategories(),
-        getAllPartners(),
-        getAllTestimonials()]);
-    // const [products, projects, categories, partners, testimonials, instagramPosts] = await Promise.all([
+    // const [products, projects, categories, partners, testimonials] = await Promise.all([
     //     getAllProducts(),
     //     getAllProjects(),
     //     getAllProjectCategories(),
     //     getAllPartners(),
-    //     getAllTestimonials(),
-    //     getInstagramPosts()
-    // ]);
+    //     getAllTestimonials()]);
+    const [products, projects, categories, partners, testimonials, instagramPosts] = await Promise.all([
+        getAllProducts(),
+        getAllProjects(),
+        getAllProjectCategories(),
+        getAllPartners(),
+        getAllTestimonials(),
+        getInstagramPosts()
+    ]);
 
     return (
         <div>
@@ -44,7 +44,7 @@ export default async function HomePage() {
                 projectCategories={categories || []}
             />
             <TestimonialClient testimonials={testimonials || []} />
-            {/* <Instagram posts={instagramPosts || []} /> */}
+            <Instagram posts={instagramPosts || []} />
         </div>
     );
 }
