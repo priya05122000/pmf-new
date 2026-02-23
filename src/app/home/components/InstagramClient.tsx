@@ -127,7 +127,6 @@ const InstagramCard = ({
 const InstagramClient: React.FC<Props> = ({ posts }) => {
     const latestPosts = posts.slice(0, 6); // ✅ latest 6 only
 
-    console.log("Latest Instagram Posts:", latestPosts); // ✅ Debug log
     return (
         <section aria-label="Instagram Feed">
             <div className="py-10 sm:py-16 lg:py-20">
