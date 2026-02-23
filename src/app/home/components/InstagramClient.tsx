@@ -3,6 +3,7 @@
 import Heading from "@/components/common/Heading";
 import Paragraph from "@/components/common/Paragraph";
 import Section from "@/components/common/Section";
+import Span from "@/components/common/Span";
 import Image from "next/image";
 import Link from "next/link";
 import React from "react";
@@ -16,6 +17,9 @@ type InstagramPost = {
     permalink: string;
     thumbnail_url?: string;
     media_type: MediaType;
+    caption?: string;
+    timestamp?: string;
+
 };
 
 type Props = {
@@ -54,6 +58,19 @@ const InstagramMedia = ({ post }: { post: InstagramPost }) => {
     );
 };
 
+
+const formatDate = (dateString?: string) => {
+    if (!dateString) return "";
+
+    const date = new Date(dateString);
+
+    return date.toLocaleDateString("en-IN", {
+        day: "2-digit",
+        month: "short",
+        year: "numeric",
+    });
+};
+
 /* ---------------------------------------------
    Wrapper Card
 ---------------------------------------------- */
@@ -72,20 +89,45 @@ const InstagramCard = ({
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Open Instagram post"
-            className={`${className} transition-shadow duration-300`}
+            className={`${className} group relative overflow-hidden`}
         >
-            <div className="absolute inset-0 rounded-inherit ">
+            {/* MEDIA */}
+            <div className="absolute inset-0">
                 <InstagramMedia post={post} />
             </div>
+
+            {/* GRADIENT OVERLAY */}
+            <div className="
+                absolute inset-0
+                  bg-linear-to-t
+    from-(--dark-blue)
+    from-0%
+    to-transparent
+    to-20%
+                transition-opacity duration-300
+            " />
+            {/* CONTENT */}
+            <div className="absolute bottom-0 left-0 right-0 p-3 text-white z-10">
+                <span className="text-xs  mt-1 block">
+                    {formatDate(post.timestamp)}
+                </span>
+            </div>
+
+
         </a>
     );
 };
+
+
+
 
 /* ---------------------------------------------
    Main Component
 ---------------------------------------------- */
 const InstagramClient: React.FC<Props> = ({ posts }) => {
     const latestPosts = posts.slice(0, 6); // ✅ latest 6 only
+
+    console.log("Latest Instagram Posts:", latestPosts); // ✅ Debug log
     return (
         <section aria-label="Instagram Feed">
             <div className="py-10 sm:py-16 lg:py-20">
@@ -99,7 +141,7 @@ const InstagramClient: React.FC<Props> = ({ posts }) => {
                 </div>
                 <div
                     aria-label="Instagram feed"
-                    className="flex flex-row items-center justify-center mt-10 gap-2 md:gap-6 w-full  overflow-hidden "
+                    className="sm:flex flex-row items-center justify-center mt-10 gap-2 md:gap-6 w-full  overflow-hidden hidden"
                 >
                     {/* LEFT LARGE */}
                     <InstagramCard
@@ -139,9 +181,50 @@ const InstagramClient: React.FC<Props> = ({ posts }) => {
                         </div>
 
                     </div>
-
-
                 </div>
+
+                <div aria-label="Instagram feed"
+                    className="flex sm:hidden flex-row items-center justify-center mt-10 gap-2 md:gap-6 w-full  overflow-hidden">
+
+                    {/* RIGHT STACK */}
+                    <div className="flex flex-row gap-2 md:gap-6 flex-1 w-full">
+
+                        {/* TOP ROW */}
+                        <div className="flex flex-col w-full items-end gap-2 md:gap-6">
+                            <InstagramCard
+                                post={latestPosts[0]}
+                                className="relative h-48 w-full overflow-hidden rounded-lg"
+                            />
+                            <InstagramCard
+                                post={latestPosts[1]}
+                                className="relative h-48 w-full overflow-hidden rounded-lg"
+                            />
+                            <InstagramCard
+                                post={latestPosts[2]}
+                                className="relative h-48 w-full overflow-hidden rounded-lg"
+                            />
+
+                        </div>
+
+                        {/* BOTTOM ROW */}
+                        <div className="flex flex-col w-full mt-10 gap-2 md:gap-6">
+                            <InstagramCard
+                                post={latestPosts[3]}
+                                className="relative h-48 w-full overflow-hidden rounded-lg"
+                            />
+                            <InstagramCard
+                                post={latestPosts[4]}
+                                className="relative h-48 w-full overflow-hidden rounded-lg"
+                            />
+                            <InstagramCard
+                                post={latestPosts[5]}
+                                className="relative h-48 w-full overflow-hidden rounded-lg"
+                            />
+                        </div>
+
+                    </div>
+                </div>
+
                 <div className="flex justify-end mt-6 text-(--dark-blue) hover:underline">
                     <Link
                         href="https://www.instagram.com/pmf.world/"

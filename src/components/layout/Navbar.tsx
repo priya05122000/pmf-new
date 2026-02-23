@@ -49,7 +49,7 @@ const Navbar = () => {
                     <div className="flex items-center h-16">
                         <Link href="/" className="flex items-center cursor-pointer h-full" aria-label="Go to homepage">
                             <Image
-                                src="/logo/pmf-logo.webp"
+                                src="/logo/navlogo.webp"
                                 alt="PMF (Promed Metal Furniture) Logo"
                                 width={140}
                                 height={40}

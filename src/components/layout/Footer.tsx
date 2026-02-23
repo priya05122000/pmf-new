@@ -19,43 +19,56 @@ const footerLinks = [
 
 export const Footer = () => {
     return (
-        <footer className="w-full h-[70vh] sm:h-[60vh] lg:h-[70vh] pt-10 bg-(--light-blue-one)  relative overflow-hidden pb-0 flex flex-col  ">
+        <footer className="w-full h-full sm:h-[60vh] lg:h-[80vh] pt-10 bg-(--light-blue-one)  relative overflow-hidden pb-0 flex flex-col  ">
+            {/* <footer className="w-full h-[70vh] sm:h-[60vh] lg:h-[70vh] pt-10 bg-(--light-blue-one)  relative overflow-hidden pb-0 flex flex-col  "> */}
             <div className="h-full flex  flex-col relative justify-between ">
                 <div>
                     <Section>
-                        <div className="w-full flex items-center relative">
+                        {/* <div className="w-full flex items-center relative">
                             <Image
-                                src="/logo/logo.png"
+                                src="/logo/footerlogo.webp"
                                 alt="logo1"
                                 height={1000}
                                 width={1000}
                                 quality={100}
-                                className="object-contain h-20 w-20 "
+                                className="object-contain h-full w-20 "
                             />
-                            <Span className="text-(--light-blue) absolute bottom-0 left-24  uppercase ">
+                            <span className="text-xs sm:text-sm text-(--light-blue) absolute bottom-0 left-24  uppercase ">
                                 © 2025 PROMED Metal Furniture LLC-FX.
                                 <br /> All Rights Reserved.
-                            </Span>
-                        </div>
+                            </span>
+                        </div> */}
+                        <Span className=" text-(--light-blue)  uppercase ">
+                            © 2025 PROMED Metal Furniture LLC-FX.
+                            <br /> All Rights Reserved.
+                        </Span>
                     </Section>
                 </div>
 
                 <div>
                     <RightSpaceGridSection>
-                        <div className="col-span-2  ">
+                        <div className="col-span-2 sm:mt-10">
                             <div className="w-full  h-full flex flex-col-reverse   md:flex-row justify-between relative sm:gap-10 ">
                                 <div className=" h-full -ml-6 sm:ml-0 mt-10 sm:mt-0">
-                                    <Image
-                                        src="/logo/pmf-1.png"
+                                    {/* <Image
+                                        src="/logo/bigpmf.webp"
                                         alt="logo1"
                                         height={1000}
                                         width={1000}
                                         quality={100}
                                         className="object-contain h-full w-xl sm:w-5xl xl:w-6xl "
+                                    /> */}
+                                    <Image
+                                        src="/logo/bigpmf.webp"
+                                        alt="logo1"
+                                        height={1000}
+                                        width={1000}
+                                        quality={100}
+                                        className="object-contain h-full "
                                     />
                                 </div>
 
-                                <div className="h-full mt-8 sm:mt-0  block">
+                                <div className="h-full mt-8 sm:mt-0   block">
                                     <Heading
                                         level={6}
                                         className={`leading-none text-(--dark-blue) `}
