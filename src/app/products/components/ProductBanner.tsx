@@ -1,36 +1,35 @@
-import Section from '@/components/common/Section';
-import Image from 'next/image';
 import type { FC, CSSProperties } from 'react';
+import Banner from '@/components/common/Banner';
 
 interface ProductBannerProps {
+    heading?: string;
+    description?: string;
     backgroundImageUrl?: string;
     className?: string;
     style?: CSSProperties;
 }
 
-const DEFAULTS = {
-    backgroundImageUrl: '/home/banner.webp',
-    className: 'h-[60vh]',
-    style: {} as CSSProperties,
-};
+const DEFAULT_HEADING = 'Our Products';
+const DEFAULT_DESCRIPTION =
+    'Discover premium refractory solutions designed to enhance steel production efficiency and quality.';
+const DEFAULT_BG = "/home/banner.webp";
 
 const ProductBanner: FC<ProductBannerProps> = ({
-    backgroundImageUrl = DEFAULTS.backgroundImageUrl,
-    className = DEFAULTS.className,
-    style = DEFAULTS.style,
+    heading = DEFAULT_HEADING,
+    description = DEFAULT_DESCRIPTION,
+    backgroundImageUrl = DEFAULT_BG,
+    className = 'h-[60vh]',
+    style = {},
 }) => (
-    <section
-        className={`p-3 ${className}`.trim()}
-        aria-label="Steel Quality Banner"
-        role="region"
-    >
-        <div
-            className="w-full h-full bg-cover bg-center rounded-xl bg-fixed relative flex items-center justify-center"
-            style={{ backgroundImage: `url('${backgroundImageUrl}')`, ...style }}
-            aria-hidden="true"
-        >
-        </div>
-    </section>
+    <Banner
+        heading={heading}
+        description={description}
+        backgroundImageUrl={backgroundImageUrl}
+        className={className}
+        style={style}
+        headingClassName="text-white text-center"
+        descriptionClassName="text-white mt-4 max-w-2xl text-center"
+    />
 );
 
 export default ProductBanner;

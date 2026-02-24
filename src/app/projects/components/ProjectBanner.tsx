@@ -5,7 +5,7 @@ import Image from 'next/image';
 import type { FC, CSSProperties } from 'react';
 import Banner from '@/components/common/Banner';
 
-interface ContactBannerProps {
+interface ProjectBannerProps {
     heading?: string;
     description?: string;
     backgroundImageUrl?: string;
@@ -18,7 +18,7 @@ const DEFAULT_DESCRIPTION =
     'Discover premium refractory solutions designed to enhance steel production efficiency and quality.';
 const DEFAULT_BG = "/home/banner.webp";
 
-const ContactBanner: FC<ContactBannerProps> = ({
+const ProjectBanner: FC<ProjectBannerProps> = ({
     heading = DEFAULT_HEADING,
     description = DEFAULT_DESCRIPTION,
     backgroundImageUrl = DEFAULT_BG,
@@ -36,4 +36,4 @@ const ContactBanner: FC<ContactBannerProps> = ({
     />
 );
 
-export default ContactBanner;
+export default ProjectBanner;

@@ -135,7 +135,7 @@ const InstagramClient: React.FC<Props> = ({ posts }) => {
                         Instagram Feed
                     </Heading>
                     <Paragraph size="base" className="text-(--dark-blue) mt-4 max-w-2xl">
-                        From architectural and miscellaneous works to custom kitchen equipment and retail displays, PMF World (Promed Metal Furniture) covers a wide range of fabrication needs.
+                        Showcasing quality fabrication, smart design, and durable performance.
                     </Paragraph>
                 </div>
                 <div

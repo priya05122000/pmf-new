@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: PageProps) {
   if (!project) return {};
 
   const imageUrl = `${process.env.NEXT_PUBLIC_API_BASE_URL}/${project.projectImagePath}`;
-  const pageUrl = `https://pmfworld.com/project-view/${slug}`;
+  const pageUrl = `https://pmfworld.com/projects/${slug}`;
   const description =
     project.shortNote || project.longDescription || "";
 

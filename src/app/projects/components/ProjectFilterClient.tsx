@@ -120,7 +120,7 @@ const ProjectFilterClient: FC<{
 
     const handleSearchChange = (e: ChangeEvent<HTMLInputElement>) => setSearch(e.target.value);
     const handleClick = ({ slug }: { slug: string }) => {
-        router.push(`/project-view/${slug}`);
+        router.push(`/projects/${slug}`);
     };
 
     return (

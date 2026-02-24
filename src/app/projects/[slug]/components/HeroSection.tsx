@@ -122,13 +122,22 @@ export default function HeroSection({
 
       <div className="card my-8">
         <Span className="share font-semibold uppercase tracking-wide">Share</Span>
-        <Link className="social-link" href="#">
+        <Link className="social-link" href={shareUrl ? facebookShareUrl : "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Facebook">
           <FaFacebookF className="text-(--dark-blue) w-5 h-5 " />
         </Link>
-        <Link className="social-link" href="#">
+        <Link className="social-link" href={shareUrl ? linkedInShareUrl : "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on LinkedIn">
           <FaLinkedin className="text-(--dark-blue) w-5 h-5" />
         </Link>
-        <Link className="social-link" href="#">
+        <Link className="social-link" href={shareUrl ? twitterShareUrl : "#"}
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Share on Twitter">
           <FaXTwitter className="text-(--dark-blue) w-5 h-5" />
         </Link>
       </div>
@@ -150,7 +159,7 @@ export default function HeroSection({
           alt={project.title}
           width={1200}
           height={700}
-          className="w-full h-60 sm:h-100 object-cover rounded-md"
+          className="w-full h-full object-cover rounded-md"
           priority
         />
       </div>
