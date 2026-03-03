@@ -23,7 +23,7 @@ interface ContactItem {
 }
 
 const CONTACTS: ContactItem[] = [
-    { icon: <MdOutlinePhoneInTalk />, label: 'Phone', value: '+97165351536' },
+    { icon: <MdOutlinePhoneInTalk />, label: 'Phone', value: '+97143433792' },
     { icon: <MdOutlineWhatsapp />, label: 'Whatsapp', value: '+971509002987' },
     { icon: <MdOutlineMail />, label: 'Email', value: 'sales@pmfworld.com' },
     { icon: <BsShop />, label: 'Address', value: 'Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E' },
