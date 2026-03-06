@@ -73,7 +73,7 @@ const ExploreClient: FC<{ products: Product[] }> = ({ products }) => {
                         </Heading>
                     </div>
                     {products.length === 0 ? (
-                        <Paragraph size='base' className="text-center text-(--dark-blue)">No data found</Paragraph>
+                        <Paragraph size='base' className="text-center text-(--orange)">No data found</Paragraph>
                     ) : (
                         <>
                             <Swiper

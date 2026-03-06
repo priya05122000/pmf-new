@@ -124,7 +124,7 @@ const ProductFilterClient: FC<{
                                     <ProductCard key={p.id} product={p} />
                                 ))
                             ) : (
-                                <Paragraph className="col-span-full text-center text-(--dark-blue)">
+                                <Paragraph className="col-span-full text-center text-(--orange)">
                                     No products found.
                                 </Paragraph>
                             )}
