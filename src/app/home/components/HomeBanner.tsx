@@ -71,7 +71,7 @@ const BANNER_ITEMS: BannerItemData[] = [
         src: "/home/contact.png",
         alt: "24/7 Support",
         label: "Contact",
-        href: "tel:+971502767535",
+        href: "tel:+971508540011",
         external: true,
     },
     {

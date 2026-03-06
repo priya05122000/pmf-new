@@ -173,7 +173,7 @@ const ProjectFilterClient: FC<{
                                 ))
                             ) : (
                                 <Paragraph className="col-span-full text-center text-(--dark-blue)" >
-                                    No projects found.
+                                    Process Undergoing
                                 </Paragraph>
                             )}
                         </div>
