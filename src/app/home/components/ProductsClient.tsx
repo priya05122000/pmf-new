@@ -109,7 +109,7 @@ const ProductsClient: FC<{ products: Product[] }> = ({ products }) => {
                     ) : (
                         <div className="pb-10 text-center">
                             <Paragraph size="base" className="text-(--dark-blue)">
-                                No data found
+                                No Products found
                             </Paragraph>
                         </div>
                     )}

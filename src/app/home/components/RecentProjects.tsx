@@ -143,10 +143,18 @@ const RecentProject: FC<RecentProjectProps> = ({ projects, projectCategories }) 
                         handrails, designed for demanding commercial use.
                     </Paragraph>
                 </div>
-                <ProjectGrid
-                    projects={latestProjects}
-                    categoryMap={categoryMap}
-                />
+                {latestProjects.length > 0 ? (
+                    <ProjectGrid
+                        projects={latestProjects}
+                        categoryMap={categoryMap}
+                    />
+                ) : (
+                    <div className="flex justify-center items-center mt-16">
+                        <Paragraph size="base" className="text-(--dark-blue)">
+                            Projects are currently under process. Please check back soon.
+                        </Paragraph>
+                    </div>
+                )}
             </div>
         </Section>
     );
