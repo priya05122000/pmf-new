@@ -1,31 +1,39 @@
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function getAllProjects() {
-    const res = await fetch(`${API_BASE_URL}/api/project/all`, {
-        // choose ONE:
-        cache: "no-store", // always fresh
-        // next: { revalidate: 3600 }, // OR ISR (1 hour)
-    });
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/project/all`, {
+            cache: "no-store",
+        });
 
-    if (!res.ok) {
-        throw new Error("Failed to fetch projects");
+        if (!res.ok) {
+            console.error("Projects API failed:", res.status);
+            return [];
+        }
+
+        const json = await res.json();
+        return json?.data || [];
+    } catch (error) {
+        console.error("Fetch projects error:", error);
+        return []; // prevent SSR crash
     }
-
-    const json = await res.json();
-
-    // ✅ return only the array
-    return json.data;
 }
 
 export async function getProjectBySlug(slug: string) {
-    const res = await fetch(`${API_BASE_URL}/api/project/slug/${slug}`, {
-        // choose ONE:
-        cache: "no-store", // always fresh
-        // next: { revalidate: 3600 }, // OR ISR (1 hour)
-    });
-    if (!res.ok) {
-        throw new Error("Failed to fetch project");
+    try {
+        const res = await fetch(`${API_BASE_URL}/api/project/slug/${slug}`, {
+            cache: "no-store",
+        });
+
+        if (!res.ok) {
+            console.error("Project API failed:", res.status);
+            return null;
+        }
+
+        const json = await res.json();
+        return json?.data || null;
+    } catch (error) {
+        console.error("Fetch project error:", error);
+        return null;
     }
-    const json = await res.json();
-    return json.data;;
 }

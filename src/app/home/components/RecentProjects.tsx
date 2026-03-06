@@ -149,8 +149,8 @@ const RecentProject: FC<RecentProjectProps> = ({ projects, projectCategories }) 
                         categoryMap={categoryMap}
                     />
                 ) : (
-                    <div className="flex justify-center items-center mt-16">
-                        <Paragraph size="base" className="text-(--dark-blue)">
+                    <div className="flex justify-center items-center mt-10">
+                        <Paragraph size="base" className="text-(--orange)">
                             Projects are currently under process. Please check back soon.
                         </Paragraph>
                     </div>

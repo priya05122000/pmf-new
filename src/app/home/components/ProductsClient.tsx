@@ -108,7 +108,7 @@ const ProductsClient: FC<{ products: Product[] }> = ({ products }) => {
                         </Swiper>
                     ) : (
                         <div className="pb-10 text-center">
-                            <Paragraph size="base" className="text-(--dark-blue)">
+                            <Paragraph size="base" className="text-(--orange)">
                                 No Products found
                             </Paragraph>
                         </div>

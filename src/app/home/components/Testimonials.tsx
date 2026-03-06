@@ -77,12 +77,14 @@ NavButton.displayName = 'NavButton';
 
 const Testimonials: FC<{ testimonials: TestimonialData[] }> = ({ testimonials }) => {
 
-    if (!testimonials || testimonials.length === 0) {
-        return null;
-    }
+    // if (!testimonials || testimonials.length === 0) {
+    //     return null;
+    // }
+
+    const activeTestimonials = testimonials?.filter(t => t.status === true) || [];
 
     // Filter only active testimonials
-    const activeTestimonials = testimonials.filter(t => t.status === true);
+    // const activeTestimonials = testimonials.filter(t => t.status === true);
     const [navigation, setNavigation] = useState<{ prevEl: null | HTMLElement; nextEl: null | HTMLElement; }>({ prevEl: null, nextEl: null });
     const eventsRef = useRef<HTMLDivElement | null>(null);
 
@@ -98,7 +100,7 @@ const Testimonials: FC<{ testimonials: TestimonialData[] }> = ({ testimonials })
                     </div>
                     <div className="sm:flex-1 lg:flex-2 min-w-0 w-full max-w-full">
                         {activeTestimonials.length === 0 ? (
-                            <Paragraph className="text-center text-white ">No testimonials found.</Paragraph>
+                            <Paragraph size='base' className="text-center text-(--orange) ">No testimonials found.</Paragraph>
                         ) : (
                             <div className="w-full h-full bg-(--light-gray) my-6 sm:my-10 py-6 sm:py-10 rounded-md">
                                 <Swiper

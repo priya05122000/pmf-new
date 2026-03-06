@@ -6,6 +6,7 @@ import "swiper/css";
 import Image from "next/image";
 import type { FC } from "react";
 import { memo } from "react";
+import Paragraph from "@/components/common/Paragraph";
 
 // Types
 interface Partner {
@@ -20,11 +21,11 @@ interface LogoItemProps {
     name: string;
 }
 
-// Utility to get logo src
+// Utility
 const getLogoSrc = (logoUrl: string) =>
     `${process.env.NEXT_PUBLIC_API_BASE_URL}/${logoUrl}`;
 
-// Reusable LogoItem component
+// Logo item
 const LogoItem: FC<LogoItemProps> = memo(({ src, name }) => (
     <div className="flex justify-center items-center h-full w-full">
         <Image
@@ -63,23 +64,37 @@ interface LogoSliderClientProps {
     partners: Partner[];
 }
 
-const LogoSliderClient: FC<LogoSliderClientProps> = ({ partners }) => (
-    <div className="w-full relative py-10">
-        <Swiper {...swiperSettings} aria-label="Partner Logos" role="list">
-            {partners
-                .filter((p) => p.status && p.logo_url)
-                .map((partner) => (
-                    <SwiperSlide
-                        key={partner.id}
-                        className="flex justify-center items-center"
-                        role="listitem"
-                        aria-label={partner.name}
-                    >
-                        <LogoItem src={getLogoSrc(partner.logo_url)} name={partner.name} />
-                    </SwiperSlide>
-                ))}
-        </Swiper>
-    </div>
-);
+const LogoSliderClient: FC<LogoSliderClientProps> = ({ partners }) => {
+
+    const activePartners = partners?.filter(p => p.status && p.logo_url) || [];
+
+    return (
+        <div className="w-full relative py-10">
+
+            {activePartners.length === 0 ? (
+                <Paragraph size="base" className="text-center text-(--orange) ">
+                    Partner logos will appear here once available.
+                </Paragraph>
+            ) : (
+                <Swiper {...swiperSettings} aria-label="Partner Logos" role="list">
+                    {activePartners.map((partner) => (
+                        <SwiperSlide
+                            key={partner.id}
+                            className="flex justify-center items-center"
+                            role="listitem"
+                            aria-label={partner.name}
+                        >
+                            <LogoItem
+                                src={getLogoSrc(partner.logo_url)}
+                                name={partner.name}
+                            />
+                        </SwiperSlide>
+                    ))}
+                </Swiper>
+            )}
+
+        </div>
+    );
+};
 
 export default LogoSliderClient;
