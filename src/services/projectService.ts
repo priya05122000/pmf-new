@@ -3,7 +3,8 @@ const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 export async function getAllProjects() {
     try {
         const res = await fetch(`${API_BASE_URL}/api/project/all`, {
-            cache: "no-store",
+            // cache: "no-store",
+            next: { revalidate: 60 },
         });
 
         if (!res.ok) {
@@ -22,7 +23,8 @@ export async function getAllProjects() {
 export async function getProjectBySlug(slug: string) {
     try {
         const res = await fetch(`${API_BASE_URL}/api/project/slug/${slug}`, {
-            cache: "no-store",
+            // cache: "no-store",
+            next: { revalidate: 60 },
         });
 
         if (!res.ok) {
