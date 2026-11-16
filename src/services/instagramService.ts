@@ -1,3 +1,5 @@
+import { unstable_rethrow } from "next/navigation";
+
 const API_BASE_URL = process.env.NEXT_PUBLIC_API_BASE_URL;
 
 export async function getInstagramPosts() {
@@ -16,6 +18,8 @@ export async function getInstagramPosts() {
         const json = await res.json();
         return Array.isArray(json) ? json : [];
     } catch (error) {
+        // Let Next.js internal signals (e.g. DYNAMIC_SERVER_USAGE during build) propagate
+        unstable_rethrow(error);
         console.error("Fetch Instagram posts error:", error);
         return []; // prevent SSR crash
     }
