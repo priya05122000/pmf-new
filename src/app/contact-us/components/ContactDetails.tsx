@@ -25,7 +25,7 @@ interface ContactItem {
 const CONTACTS: ContactItem[] = [
     { icon: <MdOutlinePhoneInTalk />, label: 'Phone', value: '+971508540011' },
     { icon: <MdOutlineWhatsapp />, label: 'Whatsapp', value: '+971509002987' },
-    { icon: <MdOutlineMail />, label: 'Email', value: 'info@pmfworld.com' },
+    { icon: <MdOutlineMail />, label: 'Email', value: 'info@pmfworld.com, sujith@pmfworld.com' },
     { icon: <BsShop />, label: 'Address', value: 'Meydan Grandstand, 6th floor, Meydan Road, Nad Al Sheba, Dubai, U.A.E' },
 ];
 
@@ -44,14 +44,20 @@ const ContactCard: FC<ContactItem> = memo(({ icon, label, value }) => {
             </Link>
         );
     } else if (label === 'Email') {
+        const emails = value.split(',').map((e) => e.trim()).filter(Boolean);
         valueNode = (
-            <Link
-                href={`mailto:${value}`}
-                className={`hover:underline ${focusClass}`}
-                aria-label={`Email ${value}`}
-            >
-                {value}
-            </Link>
+            <span className="flex flex-col items-center gap-1">
+                {emails.map((email) => (
+                    <Link
+                        key={email}
+                        href={`mailto:${email}`}
+                        className={`hover:underline ${focusClass}`}
+                        aria-label={`Email ${email}`}
+                    >
+                        {email}
+                    </Link>
+                ))}
+            </span>
         );
     } else if (label === 'Whatsapp') {
         const waNum = value.replace(/\D/g, '');
